@@ -9,6 +9,7 @@ const Account = () =>{
 	const [lastName, setLastName]= useState('')
 	const [firstName, setFirstName]= useState('')
 	const[email, setEmail] = useState('')
+	const [imageProfile, setImageProfile ]= useState('')
 	
 
 	const[profilModal, setProfilModal]= useState(false);
@@ -34,10 +35,11 @@ const Account = () =>{
             console.log(res);
 			if (res.data.lastName)
 				setLastName(res.data.lastName);
-			if (res.data.firstName)
+			if (res.data.firstName )
 				setFirstName(res.data.firstName);
 			if (res.data.email)
 				setEmail(res.data.email);
+			setImageProfile(res.data.imageprofile)
             
             if (res.data.error) {
                 console.log("ici",res.data.errors)
@@ -64,6 +66,7 @@ const Account = () =>{
 					<div className='user-prentation'>
 					<p >nom: {lastName}</p>
 					<p> Prenom {firstName}:</p>
+					<p>Contact : {email}</p>
 					<li onClick={handleProfil} id="showProfil" className="active-btn">Modifier</li>
 					{profilModal && <ChangeProfil />}
 					</div>
@@ -72,8 +75,9 @@ const Account = () =>{
                  
                 ) : (
                     <div className='user-prentation'>
-					<p> nom: </p>
-					<p> Prenom :</p>
+					<p> nom: {lastName}</p>
+					<p> Prenom: {firstName}</p>
+					<p>Contact: {email}</p>
 					</div>
                 )}
 				

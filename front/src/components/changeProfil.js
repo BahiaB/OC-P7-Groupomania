@@ -8,6 +8,7 @@ function ChangeProfil() {
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [imageProfileUpload, setImageProfileUpload] = useState();
 
     let { id } = useParams();
     const token = JSON.parse(localStorage.token)
@@ -19,9 +20,11 @@ function ChangeProfil() {
             method: "PUT",
             url: `${process.env.REACT_APP_API_URL}api/auth/${id} `,
             data: {
+                
                 email: email,
                 firstName: firstName,
                 lastName: lastName,
+                imageProfile: imageProfileUpload,
             },
             headers:{
                 authorization:`Bearer ${token}`

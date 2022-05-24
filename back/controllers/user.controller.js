@@ -10,7 +10,7 @@ const db = dbc.getDB();
 
 
 exports.signup = (req, res, next) => {
-	console.log("req body",req.body);
+	console.log("req body", req.body);
 	const pwd = req.body.password;
 	const email = req.body.email;
 	const sql = `SELECT email FROM user WHERE email=?`;
@@ -71,7 +71,8 @@ exports.login = (req, res, next) => {
 					return res.status(401).json(
 						{ error: "Nom d'utilisateur ou Mot de passe incorrect !" });
 				}
-				res.status(200).json({userId: result[0].UID,
+				res.status(200).json({
+					userId: result[0].UID,
 					token: jwt.sign({ userId: result[0].UID }, 'RANDOM_TOKEN_SECRET', { expiresIn: "24h" }),
 				})
 
@@ -82,21 +83,20 @@ exports.login = (req, res, next) => {
 }
 
 exports.userInfo = (req, res, next) => {
-	const userId= req.params.id;
+	const userId = req.params.id;
 
-	console.log("userid:",userId);
-	const sql = `SELECT * FROM user WHERE UID='${userId}'	 ` ;
-	//console.log(req.body.UID);
-	//console.log(email)
-	//console.log("result0:", result[0])
+	console.log("userid:", userId);
+	const sql = `SELECT * FROM user WHERE UID='${userId}'	 `;
+
 	/*if (userId !== result[0].UID) {
 		console.log(userId, result[0].UID)
 		return res.status(401).json({ error: " TOKEN invalide, requête non autorisé !" });
 	  }else{*/
-		db.query(sql, userId, async (err, result) => {
+
+	db.query(sql, userId, async (err, result) => {
 		console.log(result[0])
 		if (err) {
-			console.log("error:",err)
+			console.log("error:", err)
 			throw err;
 		}
 		if (result.length === 0)
@@ -107,29 +107,57 @@ exports.userInfo = (req, res, next) => {
 
 }
 
-exports.updateUser = (req, res, next) =>{
-	//console.log(req.header);
-
-	const userId = req.params.id;
+exports.updateUser = (req, res, next) => {
+	//console.log(req.auth);
+	const userId = req.auth.userId
+	//console.log("ici2",userId)
+	const pageId = req.params.id;
 	const lastName = req.body.lastName;
 	const firstName = req.body.firstName;
 	const email = req.body.email;
+	const file = req.body.file;
+	const sqlAdminInfos = `SELECT admin FROM user WHERE UID='${userId}'`;
+	const checkAdmin = null;
 
 	//console.log(userId);
-	
-	const newInfoUser ={
-		firstName : firstName,
-		lastName: lastName,
-		email: email,
-	}
-	const sql = `UPDATE user SET ? WHERE UID= '${userId}' `
-	db.query(sql, newInfoUser,(err, result) =>{
+	db.query(sqlAdminInfos, (err, result) => {
+		admin = result.admin;
+		//console.log(result)
 		if (err) {
-			res.status(500).json({error: "erreur lors de la modifiation de l'utilisateur"})
+			console.log("error:", err)
 			throw err;
 		}
-		res.status(200).json({ message: "Utilisateur modifié!" });
-		console.log("utilisateur modifié");
 	})
-	
+
+	if (userId === pageId || admin === 1) {
+		if (file) {
+			const new_profil_image_url = `${req.protocol}://${req.get(
+				"host"
+			)}/images/profils/${req.file.filename}`;
+			oldFileName = result[0].imageProfile.split("/images/profils/")[1];
+			if (oldFileName !== "avatar.png") {
+				fs.unlink(`images/profils/${oldFileName}`, () => {
+					if (err) console.log(err);
+					else {
+						console.log("Ancienne image de profile supprimée");
+					}
+				});
+			}
+		}
+		const newInfoUser = {
+			firstName: firstName,
+			lastName: lastName,
+			email: email,
+		}
+		const sql = `UPDATE user SET ? WHERE UID= '${userId}' `
+		db.query(sql, newInfoUser, (err, result) => {
+			if (err) {
+				res.status(500).json({ error: "erreur lors de la modifiation de l'utilisateur" })
+				throw err;
+			}
+			res.status(200).json({ message: "Utilisateur modifié!" });
+			console.log("utilisateur modifié");
+		})
+
+	}
 }

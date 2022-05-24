@@ -14,8 +14,8 @@ function Navbar() {
             <div className='nav-container'>
                 <div className='logo'>
                     <NavLink exact to="/">
-                        <div className='logo'>
-                            <img src="./icon-left-font.png" alt='logo groupomania' />
+                        <div className='logo' >
+                            <img src="icon-left-font-monochrome-white.png " alt='logo groupomania' />
                         </div>
                     </NavLink>
                 </div>
@@ -53,3 +53,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
+//icon-left-font.png

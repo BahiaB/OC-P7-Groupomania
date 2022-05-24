@@ -2,7 +2,7 @@ const express = require('express');
 //const postsRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user.route');
 const postRoutes = require('./routes/post.route');
-//const path = require('path');
+const path = require('path');
 
 //const dbc = require("./db");
 //const db = dbc.getDB();
@@ -25,6 +25,8 @@ app.use((req, res, next) => {
 
 //app.use('/images', express.static(path.join(__dirname, 'images')))
 //app.use('/api/posts', postsRoutes);
+
+app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use('/api/auth', userRoutes);
 app.use('/api/post', postRoutes);
 
