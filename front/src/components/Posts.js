@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import axios from 'axios';
 import avatar from "../image/avatar.png";
 import InfiniteScroll from "react-infinite-scroll-component"
+//import { post } from '../../../back/routes/post.route';
 
 function Posts() {
 
@@ -21,25 +22,6 @@ function Posts() {
     const [posts, setPosts] = useState([]);
 
 
-
-    const filterPosts = (posts, query) => {
-        if (!query) {
-            return posts;
-        }
-
-        return posts.filter((post, id) => {
-            const postName = post.lastName.toLowerCase();
-            const postPrenom = post.firstName.toLowerCase();
-            const postMessage = post.message.toLowerCase();
-
-            return (
-                postName.includes(query) ||
-                postPrenom.includes(query) ||
-                postMessage.includes(query)
-            );
-
-        });
-    };
 
     const getAllPosts = async () => {
         // setIsLoading(true);
@@ -88,6 +70,10 @@ function Posts() {
                                 {posts.message}
                                 <br />
                                 <p> {posts.datecreation}</p>
+                                <p>{posts.comment}</p>
+                                <br />
+                                
+                                <br />
                             </div>
 
                         </React.Fragment>

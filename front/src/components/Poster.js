@@ -4,6 +4,11 @@ import axios from 'axios';
 import avatar from "../image/avatar.png"
 
 function Poster(){
+
+    useEffect(() => {
+        getUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     const [lastName, setLastName]= useState('');
     const [firstName, setFirstName] = useState('');
     const [message, setMessage] = useState('')
@@ -65,7 +70,7 @@ function Poster(){
 
     }
 
-    useEffect(getUser);
+    
     return(
         <section>
         <div className='poster-container'>

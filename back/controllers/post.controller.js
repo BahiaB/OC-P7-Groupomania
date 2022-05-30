@@ -26,16 +26,20 @@ exports.createPost = (req, res, next) =>{
 };
 
 exports.getAllPosts = (req, res, next) =>{
-     const sql =
-     "SELECT * FROM post " ;//LEFT JOIN comments ON comments.post_id = post.id ";
-  db.query(sql, (err, result) => {
-    if (err) {
-      res.status(404).json({ err });
-      throw err;
-    }
-    res.status(200).json(result);
-  });
-};
+     
+     const sql =  "SELECT user.id AS user_id, user.UID, user.lastName, user.firstName, user.email, user.imageProfile, post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id as post_user_id, comments.id AS comment_id, comments.comment, comments.user_id AS comment_user_id, comments.post_id AS comment_post_id, comments.datecreation_comm FROM post LEFT JOIN comments ON comments.post_id = post.id LEFT JOIN user ON user.UID = comments.user_id ";
+   
+     db.query(sql, (err, result) => {
+       if (err) {
+         res.status(404).json({ err });
+         throw err;
+       }
+       res.status(200).json(result);
+     });
+   };
+   
+ 
+
 
 exports.updatePost = (req, res, next) =>{
     const postId = req.params.id;

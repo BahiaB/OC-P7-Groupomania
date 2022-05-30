@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import getUser from "../pages/Account"
 
 
 
 function ChangeProfil() {
+    useEffect(() => {
+        getUser();
+        handleProfile()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
