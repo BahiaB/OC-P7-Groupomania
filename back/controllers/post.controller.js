@@ -27,7 +27,7 @@ exports.createPost = (req, res, next) =>{
 
 exports.getAllPosts = (req, res, next) =>{
      const sql =
-    "SELECT ";
+     "SELECT * FROM post " ;//LEFT JOIN comments ON comments.post_id = post.id ";
   db.query(sql, (err, result) => {
     if (err) {
       res.status(404).json({ err });

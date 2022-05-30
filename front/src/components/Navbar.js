@@ -1,8 +1,9 @@
 
 import React from 'react';
 import { NavLink } from "react-router-dom";
-import Logout from"./login/logout"
-
+import Logout from"./login/logout";
+import logo from "../image/logo/icon-left-font-monochrome-white.png";
+import logout from "../image/icons/arrow-right-to-bracket-solid.svg"
 
 function Navbar() {
     console.log(localStorage);
@@ -14,8 +15,8 @@ function Navbar() {
             <div className='nav-container'>
                 <div className='logo'>
                     <NavLink exact to="/">
-                        <div className='logo' >
-                            <img src="icon-left-font-monochrome-white.png " alt='logo groupomania' />
+                        <div className='logo' id="logo-Nav">
+                             <img src={logo} alt='logo groupomania' />
                         </div>
                     </NavLink>
                 </div>
@@ -31,7 +32,7 @@ function Navbar() {
                         </li>
                         <li onClick={Logout}>
                             <NavLink exact to="/login">
-                            <img src="./arrow-right-to-bracket-solid.svg" alt='img log out'/>
+                            <img src={logout} id="logout-icon" alt='img log out'/>
                             </NavLink>
                         </li>
                         

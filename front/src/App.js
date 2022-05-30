@@ -22,9 +22,9 @@ import './styles/index.css';
 
 function App() {
   //console.log("app")
-  //const [isLoggedIn, setIsLoggedIn] = useState(isLogged())
+  const [isLoggedIn, setIsLoggedIn] = useState(isLogged())
  // console.log(isLoggedIn)
-
+  
   return (
    
     <div className="Router">
@@ -36,9 +36,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/account/:id" element={<Account />} />
-        <Route path="/" exact> 
-     
-      </Route>
+       
        
       </Routes>}
      

@@ -3,7 +3,9 @@
 
 function isLogged() {
    // const [loggedIn, setLoggedIn] = useState(false);
-    if (localStorage.token != null){
+   const token = localStorage.getItem("token")
+   console.log(`token de utils ${token}`)
+    if (token !== null){
       //  setLoggedIn(true);
         return (true)
     }

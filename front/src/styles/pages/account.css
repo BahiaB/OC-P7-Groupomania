@@ -1,0 +1,10 @@
+.image-container {
+  width: auto;
+  height: auto;
+  border-radius: 50px;
+}
+
+.image-container img {
+  border-radius: 25px;
+}
+/*# sourceMappingURL=account.css.map */

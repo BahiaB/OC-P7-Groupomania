@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS`like_post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
+source file_name
 --
 -- Structure de la table `post`
 --
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `UID` varchar(36) DEFAULT NULL,
   `lastName` varchar(100) DEFAULT NULL,
   `firstName` varchar(100) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `admin` tinyint(1) DEFAULT 0,
   `imageProfile` varchar(255) DEFAULT 'http://localhost:3500/images/profils/avatar.png'

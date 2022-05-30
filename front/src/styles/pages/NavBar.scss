@@ -23,15 +23,17 @@ $Third: #720026;
         font-size: 2rem;
         margin-right: 10%;
     }
-    img{
-        height: 2rem;
-        width: 2rem;
+   
+   
+    .logo{
+        height: 8rem;
+        display: flex;
+        justify-content: flex-start;
+        align-self: flex-start;
+        padding-left: 3%;
     }
 }
-.logo{
-    height: 8rem;
-    display: flex;
-    justify-content: flex-start;
-    align-self: flex-start;
-    padding-left: 3%;
+#logout-icon{
+    width: 2rem;
+    height: 1.8rem;
 }

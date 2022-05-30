@@ -32,7 +32,7 @@ function SignInForm() {
                 localStorage.token = JSON.stringify(res.data.token);
                 localStorage.userId = JSON.stringify(res.data.userId)
                 console.log(localStorage)
-                window.location = "/home"
+                window.location = "/home" //useNavigate
             }
           })
           .catch((err) => {

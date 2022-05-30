@@ -22,6 +22,12 @@
   margin-bottom: 3rem;
 }
 
+.nav-container h5 {
+  color: black;
+  font-size: 2rem;
+  margin-right: 10%;
+}
+
 .nav-container .logo {
   height: 8rem;
   display: -webkit-box;
@@ -35,14 +41,8 @@
   padding-left: 3%;
 }
 
-.nav-container h5 {
-  color: black;
-  font-size: 2rem;
-  margin-right: 10%;
-}
-
-.nav-container img {
-  height: 2rem;
+#logout-icon {
   width: 2rem;
+  height: 1.8rem;
 }
 /*# sourceMappingURL=NavBar.css.map */
