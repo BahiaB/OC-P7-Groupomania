@@ -68,6 +68,10 @@ ul li {
           align-items: center;
 }
 
+#comment {
+  background-color: red;
+}
+
 .connexion-form {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -7,6 +7,10 @@ import avatar from "../image/avatar.png"
 
 const Account = () =>{
 	//console.log(localStorage)
+	useEffect(() => {
+        getUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, );
 	const [lastName, setLastName]= useState('')
 	const [firstName, setFirstName]= useState('')
 	const[email, setEmail] = useState('')
@@ -53,7 +57,7 @@ const Account = () =>{
 
       };
 	
-	useEffect(getUser);
+	//useEffect(getUser);
   
 
 	return(

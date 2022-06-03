@@ -7,10 +7,10 @@ import getUser from "../pages/Account"
 
 function ChangeProfil() {
     useEffect(() => {
-        getUser();
+        //getUser();
         handleProfile()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        
+    }, );
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -21,7 +21,7 @@ function ChangeProfil() {
 
    const handleProfile= (e) => {
        
-        e.preventDefault();
+       // e.preventDefault();
         axios({
             method: "PUT",
             url: `${process.env.REACT_APP_API_URL}api/auth/${id} `,

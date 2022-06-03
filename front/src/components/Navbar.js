@@ -14,7 +14,7 @@ function Navbar() {
         <nav>
             <div className='nav-container'>
                 <div className='logo'>
-                    <NavLink exact to="/">
+                    <NavLink exact to="/home">
                         <div className='logo' id="logo-Nav">
                              <img src={logo} alt='logo groupomania' />
                         </div>
