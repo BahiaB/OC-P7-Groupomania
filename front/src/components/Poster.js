@@ -3,12 +3,9 @@ import { NavLink } from "react-router-dom";
 import axios from 'axios';
 import avatar from "../image/avatar.png"
 
-function Poster(){
-
-    useEffect(() => {
-        getUser();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+function Poster(info){
+    console.log("info",info)
+    
     const [lastName, setLastName]= useState('');
     const [firstName, setFirstName] = useState('');
     const [message, setMessage] = useState('')
@@ -16,10 +13,11 @@ function Poster(){
     const userId = JSON.parse(localStorage.userId)
 	const token = JSON.parse(localStorage.token)
 
-    
+   
 
-    const getUser = () =>{
-		axios ({
+
+    const getUser =  () =>{
+		 axios ({
             method: "GET",
             url: `${process.env.REACT_APP_API_URL}api/auth/${userId} `,
             
@@ -69,7 +67,12 @@ function Poster(){
 
 
     }
-
+    useEffect(() => {
+        getUser();
+   
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [createPost]);
+    
     
     return(
         <section>
@@ -77,7 +80,11 @@ function Poster(){
 
             <div>
                 <img src={avatar} alt="avatar"></img>
-                username:{firstName}
+                <div>
+                {firstName}
+                <br />
+                {lastName}
+                </div>
                 <form>
                 <input type="text" name="post" id='post' placeholder="Que souhaitez vous partager" onChange={(e) => setMessage
                 (e.target.value)} value={message}></input>

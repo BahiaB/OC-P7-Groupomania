@@ -1,82 +1,93 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import {emailValidation, nameValidation, firstNameValidation} from "../../Utils/utils"
+import { NavLink } from 'react-router-dom';
 
 const SignUpForm = () => {
 
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [firstName, setFirstName] = useState("");
-    //const [showPassword, setShowPassword] = useState(false);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [firstName, setFirstName] = useState("");
+	const [emailError, setEmailError] = useState("")
+	const [lastNameError, setLastNameError] = useState("")
+	const [firstNameError, setFirstNameError] = useState("")
 
-    const handleSignUp = async (e) =>{
-        e.preventDefault();
-        const emailError = document.querySelector(".email.error");
-        const passwordError = document.querySelector(".password.error");
-        const lastNameError = document.querySelector(".last-name.error");
-        const firstNameError = document.querySelector(".first-name.error");
 
-        await axios({
-            method: "post",
-            url: `${process.env.REACT_APP_API_URL}api/auth/signup`,
-            data: {
-              firstName: firstName,
-              lastName: lastName,
-              email: email,
-              password: password,
-            },
-          })
-            .then((res) => {
-              console.log(res.data);
-              if (res.data.errors) {
-                firstNameError.innerHTML = res.data.errors.firstName;
-                lastNameError.innerHTML = res.data.errors.lastName;
-                emailError.innerHTML = res.data.errors.email;
-                passwordError.innerHTML = res.data.errors.password;
-              } else {
-                console.log(localStorage)
-                //window.location = "/login"
-              }
-            })
-            .catch((err) => console.log(err));
-        }
-     
+	const handleSignUp = async (e) => {
+		e.preventDefault();
+		
+		if (emailValidation(email) === false) {
+			setEmailError("Veuillez entrez un email valide")
+		}
+		if (nameValidation(lastName) === false) {
+			setLastNameError("Veuillez entrez un nom valide")
+		}
 
-    
-    return (
-        <form action="" onSubmit={handleSignUp} id="sign-up-form">
-            
-            <label htmlFor='first-name'>Nom</label>
-            <br />
-            <input type="text" name="first-name" id='first-name' onChange={(e) => setFirstName
-                (e.target.value)} value={firstName}></input>
-            <div className='first-name error'></div>
-            <br />
+		if (firstNameValidation(firstName) === false) {
+			setFirstNameError("Veuillez entrez un nom valide")
+		}
 
-            <label htmlFor='last-name'> Prenom</label>
-            <br />
-            <input type="text" name="last-name" id='last-name' onChange={(e) => setLastName
-                (e.target.value)} value={lastName}></input>
-            <div className='last-name error'></div>
-            <br />
-            
-            <label htmlFor="email">Email</label>
-            <br />
-            <input type="text" name="email" id='email' onChange={(e) => setEmail
-                (e.target.value)} value={email}></input>
-            <div className='email error'></div>
-            <br />
-            
-            <label htmlFor='password'>Mot de passe</label>
-            <br />
-            <input type="password" name='password' id='password' onChange={(e) => setPassword
-                (e.target.value)} value={password}></input>
-            <div className='password error'></div>
-            <br />
-            <input type="submit" value="S'inscrire"></input>
-        </form>
-    )
+
+		if (emailValidation(email) && nameValidation(lastName) && firstNameValidation(firstName) ) {
+
+			await axios({
+				method: "post",
+				url: `${process.env.REACT_APP_API_URL}api/auth/signup`,
+				data: {
+					firstName: firstName,
+					lastName: lastName,
+					email: email,
+					password: password,
+				},
+			})
+				.then((res) => {
+					console.log(res.data);
+					console.log(localStorage)
+					window.location = "/login"
+						
+					}
+				)
+				.catch((err) => console.log(err));
+		}
+	}
+
+
+
+	return (
+		<form action="" onSubmit={handleSignUp} id="sign-up-form">
+
+			<label htmlFor='first-name'>Nom</label>
+			<br />
+			<input type="text" name="first-name" id='first-name' onChange={(e) => setFirstName
+				(e.target.value)} value={firstName}></input>
+			<div className='first-name error'>{firstNameError}</div>
+			<br />
+
+			<label htmlFor='last-name'> Prenom</label>
+			<br />
+			<input type="text" name="last-name" id='last-name' onChange={(e) => setLastName
+				(e.target.value)} value={lastName}></input>
+			<div className='last-name error'>{lastNameError}</div>
+			<br />
+
+			<label htmlFor="email">Email</label>
+			<br />
+			<input type="text" name="email" id='email' onChange={(e) => setEmail
+				(e.target.value)} value={email}></input>
+			<div className='emailError'>{emailError}</div>
+			<br />
+
+			<label htmlFor='password'>Mot de passe</label>
+			<br />
+			<input type="password" name='password' id='password' onChange={(e) => setPassword
+				(e.target.value)} value={password}></input>
+			<div className='password error'></div>
+			<br />
+			<input type="submit" value="S'inscrire"></input>
+		</form>
+	)
 }
 
 

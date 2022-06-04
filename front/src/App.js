@@ -14,7 +14,7 @@ import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Account from "./pages/Account.js";
 import Navbar from "./components/Navbar.js";
-import isLogged from "./utils/utils.js";
+//import isLogged from "./utils/utils.js";
 
 //import Messages from "./pages/Messages.js";
 import './styles/index.css';
@@ -22,7 +22,7 @@ import './styles/index.css';
 
 function App() {
   //console.log("app")
-  const [isLoggedIn, setIsLoggedIn] = useState(isLogged())
+  //ßconst [isLoggedIn, setIsLoggedIn] = useState(isLogged())
  // console.log(isLoggedIn)
   
   return (
