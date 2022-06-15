@@ -1,8 +1,7 @@
-
-$Primary: #ce4257;
-$Primary-light:#e2d6d7;
-$Secondary: #ff7f51;
-$Third: #720026;
+$Primary: #FD2D01;
+$Primary-light:#FFD7D7;
+$Secondary: #FFD7D7;
+$Third: #a5a6aa;
 
 *{margin: 0px;
 }
@@ -13,27 +12,89 @@ $Third: #720026;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    background-color: $Secondary;
+    background-color: $Primary;
     height: 8rem;
     width: 100%;
     margin-bottom: 3rem;
     
-    h5{
-        color: black;
-        font-size: 2rem;
-        margin-right: 10%;
-    }
+    
    
    
     .logo{
-        height: 8rem;
+        height: 10rem;
         display: flex;
-        justify-content: flex-start;
-        align-self: flex-start;
+        justify-content: center;
+        align-self: center;
         padding-left: 3%;
     }
 }
-#logout-icon{
+.logout-icon{
+    color: #FFD7D7;
     width: 2rem;
     height: 1.8rem;
+    margin-top: -30px ;
+    
 }
+#profil-icon{
+    color: #FFD7D7;
+    width: 2rem;
+    height: 1.8rem;
+    
+}
+
+.account-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20%;
+    background-color: #FFD7D7;
+    width:60%;
+    height: 15rem;
+    border-radius: 20px;
+    border: $Third 1px solid;
+
+
+
+   .image-container{
+    border-radius: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    img{
+        border-radius: 25px;
+        
+
+    }
+    
+   }
+  
+}
+
+#showProfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width:7rem;
+    height: 2rem;
+    margin-top: 3rem;
+    border-radius: 20px;
+    background-color: #FFD7D7;
+    cursor: pointer;
+    list-style: none;
+    box-shadow: 5px 5px 15px 5px $Third;
+
+
+    &:hover{
+     
+        transform: scale(1.1);
+       
+    }
+    
+
+
+}
+
+

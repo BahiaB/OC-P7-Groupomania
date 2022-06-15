@@ -78,18 +78,15 @@ function Poster(info){
         <section>
         <div className='poster-container'>
 
-            <div>
-                <img src={avatar} alt="avatar"></img>
-                <div>
-                {firstName}
-                <br />
-                {lastName}
-                </div>
+            <div >
+                <img src={avatar}  alt="avatar"></img>
+               
                 <form>
                 <input type="text" name="post" id='post' placeholder="Que souhaitez vous partager" onChange={(e) => setMessage
                 (e.target.value)} value={message}></input>
                 <li onClick={createPost} id="create-post" className="active-btn">Poster</li>
                 </form>
+                
             </div>
         </div>
         </section>

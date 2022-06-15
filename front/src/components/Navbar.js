@@ -3,7 +3,8 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import Logout from"./login/logout";
 import logo from "../image/logo/icon-left-font-monochrome-white.png";
-import logout from "../image/icons/arrow-right-to-bracket-solid.svg"
+import logout from "../image/icons/arrow-right-to-bracket-solid.svg";
+import profil from "../image/user-solid.svg";
 
 function Navbar() {
     console.log(localStorage);
@@ -26,13 +27,13 @@ function Navbar() {
                         <li></li>
                         <li className='welcome'>
                             <NavLink exact to={`/account/${ JSON.parse(localStorage.userId) } `}>
-                                <h5>Profile </h5>
+                                <img src={profil} id="profil-icon" alt="Profil icon"/>
                             </NavLink>
 
                         </li>
                         <li onClick={Logout}>
                             <NavLink exact to="/login">
-                            <img src={logout} id="logout-icon" alt='img log out'/>
+                            <img src={logout} class="logout-icon" alt='img log out'/>
                             </NavLink>
                         </li>
                         
@@ -42,7 +43,7 @@ function Navbar() {
                         <li></li>
                         <li >
                         <NavLink exact to="/login">
-                            <img src="./arrow-right-to-bracket-solid.svg" alt='img log out'/>
+                            <img src={logout} class="logout-icon" alt='img log out'/>
                         </NavLink>
                         </li>
                     </ul>

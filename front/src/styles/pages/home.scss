@@ -1,0 +1,75 @@
+$Primary: #fd2d01;
+$Primary-light: #ffd7d7;
+$Secondary: #ffd7d7;
+$Third: #a5a6aa;
+
+.home-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: center;
+  padding-left: 2rem;
+  margin-left: 7%;
+
+  background-color: #ffd7d7;
+  width: 80%;
+  height: 19rem;
+  border-radius: 20px;
+  h3 {
+    width: 100%;
+  }
+  img {
+    border-radius: 25px;
+  }
+}
+
+.poster-container {
+  display: flex;
+
+  width: 400px;
+}
+#create-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 7rem;
+  height: 2rem;
+  margin-top: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px 5px $Third;
+  background-color: $Secondary;
+  cursor: pointer;
+  list-style: none;
+
+  &:hover {
+ 
+    transform: scale(1.1);
+  }
+}
+#post{
+    margin-top:1rem;
+    border: #a5a6aa 1px solid;
+    box-shadow:2px 2px 8px 2px $Third;
+}
+
+#change-profil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    border: none;
+    width: 12rem;
+    height: 2.5rem;
+    margin-top: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px 5px $Third;
+    background-color: $Secondary;
+    cursor: pointer;
+    list-style: none;
+  
+    &:hover {
+   
+      transform: scale(1.1);
+    }
+  }

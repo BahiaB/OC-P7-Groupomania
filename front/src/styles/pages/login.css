@@ -3,6 +3,7 @@ body {
 }
 
 .log-container {
+  margin: 2%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -15,10 +16,10 @@ body {
           justify-content: space-between;
   height: auto;
   width: auto;
-  background-color: #e2d6d7;
+  background-color: #FFD7D7;
   border-radius: 20px;
   padding: 1rem;
-  border: #ce4257 2px solid;
+  border: #4E5166 2px solid;
 }
 
 .form-container {
@@ -90,13 +91,20 @@ ul li {
 }
 
 .active-btn {
-  background: #ce4257;
+  background: #FFD7D7;
+  border: #4E5166 1px solid;
+  -webkit-box-shadow: 2px 2px 8px 2px #4E5166;
+          box-shadow: 2px 2px 8px 2px #4E5166;
 }
 
 li:not(.active-btn):hover {
+  -webkit-transform: translateX(3px);
+          transform: translateX(3px);
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
-  background: #ce4257;
+  border: #4E5166;
+  -webkit-box-shadow: 2px 2px 8px 2px #4E5166;
+          box-shadow: 2px 2px 8px 2px #4E5166;
 }
 
 input {
@@ -104,24 +112,28 @@ input {
   height: 2rem;
   width: 12rem;
   border-radius: 20px;
-  border: #ce4257 2px solid;
+  border: #4E5166 2px solid;
 }
 
 input[type="submit"] {
-  background: #ce4257;
+  background: #FFD7D7;
   margin-right: 14px;
   height: 2.5rem;
   width: 12.5rem;
-  border: #ce4257 2px solid;
+  border: #4E5166 2px solid;
   cursor: pointer;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 20px;
+  -webkit-box-shadow: 2px 2px 8px 2px #4E5166;
+          box-shadow: 2px 2px 8px 2px #4E5166;
 }
 
 input[type="submit"]:hover {
+  -webkit-transform: translateX(3px);
+          transform: translateX(3px);
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }

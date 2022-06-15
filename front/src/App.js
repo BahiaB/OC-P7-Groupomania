@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-import React from "react";
+import React, {useState} from "react";
 //import { Switch, Route,  Redirect } from "react-router-dom";
 import {
   BrowserRouter,
@@ -8,7 +8,7 @@ import {
   Routes,
   NavLink,
 } from "react-router-dom";
-import { useState } from "react";
+
 //import Account from "./pages/Account.js";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
@@ -22,7 +22,7 @@ import './styles/index.css';
 
 function App() {
   //console.log("app")
-  //ßconst [isLoggedIn, setIsLoggedIn] = useState(isLogged())
+  //const [isLoggedIn, setIsLoggedIn] = useState(isLogged())
  // console.log(isLoggedIn)
   
   return (

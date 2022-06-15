@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS`like_post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
---source file_name
+
 --
 -- Structure de la table `post`
 --

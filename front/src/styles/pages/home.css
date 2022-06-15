@@ -1,0 +1,94 @@
+.home-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  padding-left: 2rem;
+  margin-left: 7%;
+  background-color: #ffd7d7;
+  width: 80%;
+  height: 19rem;
+  border-radius: 20px;
+}
+
+.home-container h3 {
+  width: 100%;
+}
+
+.home-container img {
+  border-radius: 25px;
+}
+
+.poster-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 400px;
+}
+
+#create-post {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 7rem;
+  height: 2rem;
+  margin-top: 1.5rem;
+  border-radius: 20px;
+  -webkit-box-shadow: 5px 5px 15px 5px #a5a6aa;
+          box-shadow: 5px 5px 15px 5px #a5a6aa;
+  background-color: #ffd7d7;
+  cursor: pointer;
+  list-style: none;
+}
+
+#create-post:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+#post {
+  margin-top: 1rem;
+  border: #a5a6aa 1px solid;
+  -webkit-box-shadow: 2px 2px 8px 2px #a5a6aa;
+          box-shadow: 2px 2px 8px 2px #a5a6aa;
+}
+
+#change-profil {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  width: 12rem;
+  height: 2.5rem;
+  margin-top: 1.5rem;
+  border-radius: 20px;
+  -webkit-box-shadow: 5px 5px 15px 5px #a5a6aa;
+          box-shadow: 5px 5px 15px 5px #a5a6aa;
+  background-color: #ffd7d7;
+  cursor: pointer;
+  list-style: none;
+}
+
+#change-profil:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+/*# sourceMappingURL=home.css.map */

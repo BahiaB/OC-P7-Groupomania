@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 //import axios from "axios";
 import Log from "../components/login/index.log";
-/*import { Helmet } from "react-helmet";
-import {
-  emailValidation,
-  lettersAndNumbersCheck,
-  lettersAndSpaceCheck,
-} from "../utils";*/
+//import { Helmet } from "react-helmet";
 
 
 

@@ -1,13 +1,14 @@
-$Primary: #ce4257;
-$Primary-light:#e2d6d7;
-$Secondary: #ff7f51;
-$Third: #720026;
+$Primary: #FD2D01;
+$Primary-light:#FFD7D7;
+$Secondary: #FFD7D7;
+$Third: #4E5166;
 body {
   background-color: white;
 }
 
 
 .log-container {
+  margin: 2%;
   display: flex;
   flex-direction:row;
   justify-content: space-between;
@@ -16,7 +17,7 @@ body {
   background-color:$Primary-light;
   border-radius: 20px;
   padding: 1rem;
-  border: $Primary 2px solid;
+  border: $Third 2px solid;
  
 }
 .form-container{
@@ -34,7 +35,7 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  
   width: auto;
   height: 100%;
   gap: 1rem;
@@ -49,6 +50,7 @@ ul {
     transition: 0.2s;
     //justify-content: center;
     align-items: center;
+    
 	
   }
 }
@@ -65,15 +67,19 @@ ul {
   
 }
 .active-btn {
-  background: $Primary;
+  background: $Secondary;
+  border: $Third 1px solid;
+  box-shadow:2px 2px 8px 2px $Third;
 
   
 }
 li:not(.active-btn) {
   &:hover {
-    //transform: translateX(3px);
+    transform: translateX(3px);
 	transform: scale(1.1);
-	background: $Primary;
+  border: $Third;
+  box-shadow:2px 2px 8px 2px $Third;
+	//background: $Primary;
   }
 }
 
@@ -85,22 +91,25 @@ input{
 	height: 2rem;
 	width: 12rem;
 	border-radius: 20px;
-	border: $Primary 2px solid;
+	border: $Third 2px solid;
 }
 
 input[type="submit"] {
-	background: $Primary;
+	background: $Secondary;
   margin-right: 14px;
 	height: 2.5rem;
 	width: 12.5rem;
-	border: $Primary 2px solid;
+	border: $Third 2px solid;
 	cursor: pointer;
 	transition: 0.2s;
 	//margin: 0;
 	padding: 10px 20px;
 	font-size: 1rem;
 	border-radius: 20px;
+  box-shadow:2px 2px 8px 2px $Third;
+
 	&:hover{
+    transform: translateX(3px);
 		transform: scale(1.1);
 	}
   }

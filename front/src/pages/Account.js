@@ -64,13 +64,13 @@ const Account = () =>{
 		<section>
             <div className='account-container'>
 				<div className='image-container'>
-                	<img src={avatar} alt='avatar' ></img>
+                	<img src={avatar} className="profil-avatar" alt='avatar' ></img>
 				</div>
             
                 {userId === id ? (
 					<div className='user-prentation'>
 					<p >nom: {lastName}</p>
-					<p> Prenom {firstName}:</p>
+					<p> Prenom: {firstName}</p>
 					<p>Contact : {email}</p>
 					<li onClick={handleProfil} id="showProfil" className="active-btn">Modifier</li>
 					{profilModal && <ChangeProfil />}
