@@ -98,14 +98,7 @@ const Posts = ({key, message, date, firstName, postId,  postUserId})=>{
 }
 
 
-    const handleDelete = () =>{
-        if (postUserId === userId ) {
-        
-          SetActivUser(true);
-         }
-     
 
-    }
    
 
     return (
@@ -116,7 +109,7 @@ const Posts = ({key, message, date, firstName, postId,  postUserId})=>{
                 <p> {message}</p>
                 <br />
                { `${postUserId}`=== `${userId}` ? (
-                <li onClick={handleDelete} id="delete_post" className='active-btn'>Supprimer</li>)
+                <li onClick={deletePost} id="delete_post" className='active-btn'>Supprimer</li>)
                 :("")
                }
                 </div>
