@@ -3,9 +3,7 @@ import axios from 'axios';
 import Poster from '../components/Poster';
 import Posts from '../components/Posts'
 import Comments from '../components/Comments';
-//import { post } from '../../../back/routes/post.route';
 
-//import { post } from '../../../back/routes/post.route';
 
 
 
@@ -85,9 +83,6 @@ const Home = () =>{
       });
 
   };
-
-  
-    
     
     return(
         <main>

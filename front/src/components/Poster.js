@@ -13,9 +13,6 @@ function Poster(info){
     const userId = JSON.parse(localStorage.userId)
 	const token = JSON.parse(localStorage.token)
 
-   
-
-
     const getUser =  () =>{
 		 axios ({
             method: "GET",
@@ -28,7 +25,6 @@ function Poster(info){
             console.log(res);
 			setLastName(res.data.lastName);
 			setFirstName(res.data.firstName);
-			
             
             if (res.data.error) {
                 console.log("ici222",res.data.errors)
@@ -38,10 +34,14 @@ function Poster(info){
           .catch((err) => {
             console.log(err);
           });
-
       };
 
-      const createPost = () =>{
+      const createPost = (e) =>{
+        e.preventDefault();
+        if(!message ){
+            console.log("No message!")
+            return
+        }else{
         axios ({
             method: "POST",
             url: `${process.env.REACT_APP_API_URL}api/post/`,
@@ -49,7 +49,6 @@ function Poster(info){
                 userId : userId,
                 message: message
             },
-            
             headers:{
                 authorization:`Bearer ${token}`
             }
@@ -58,21 +57,17 @@ function Poster(info){
 			setMessage(res.data.message)
             if (res.data.error) {
                 console.log("ici222",res.data.errors)
-               
             } 
           })
           .catch((err) => {
             console.log(err);
           });
-
-
+        }
     }
     useEffect(() => {
         getUser();
-   
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [createPost]);
-    
     
     return(
         <section>
