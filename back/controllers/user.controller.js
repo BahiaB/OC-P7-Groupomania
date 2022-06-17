@@ -10,7 +10,7 @@ const db = dbc.getDB();
 
 
 exports.signup = (req, res, next) => {
-	console.log("req body", req.body);
+	//console.log("req body", req.body);
 	const pwd = req.body.password;
 	const email = req.body.email;
 	const sql = `SELECT email FROM user WHERE email=?`;
@@ -39,7 +39,7 @@ exports.signup = (req, res, next) => {
 					let query = db.query(sql, newUser, (err, result) => {
 						if (err) throw err;
 
-						console.log(result);
+						//console.log(result);
 						res.status(201).json({ message: "Utilisateur créé!" });
 					});
 				})
@@ -50,7 +50,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
 	const email = req.body.email;
-	console.log(email)
+	//console.log(email)
 	const sql = `SELECT * FROM user WHERE email=?`;
 	db.query(sql, email, async (err, result) => {
 		if (err) {
@@ -61,10 +61,10 @@ exports.login = (req, res, next) => {
 			return res.status(401)
 				.json({ error: "Identifiant ou mot de passe incorrect" });
 		}
-		console.log(result);
+	//	console.log(result);
 		//console.log(result);
 		//console.log(req.body.password);
-		console.log(result[0].UID);
+	//	console.log(result[0].UID);
 		bcrypt.compare(req.body.password, result[0].password)
 			.then((valid) => {
 				if (!valid) {
@@ -101,7 +101,7 @@ exports.userInfo = (req, res, next) => {
 		}
 		if (result.length === 0)
 			return res.status(400).json('lol')
-		console.log(result[0])
+	//	console.log(result[0])
 		res.status(200).json(result[0])
 	})
 

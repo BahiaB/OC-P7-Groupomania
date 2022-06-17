@@ -15,9 +15,7 @@ const Home = () =>{
     useEffect(() =>{
         getAllPosts();
         getUser();
-        setPages((pages) => pages +1);
-    
-    
+       // setPages((pages) => pages +1);
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
@@ -33,7 +31,7 @@ const Home = () =>{
     
     const getAllPosts = async () => {
        
-      
+     // alert("alert!!!")
        await axios({
            method: "GET",
            url: `${process.env.REACT_APP_API_URL}api/post/ `,
@@ -46,7 +44,7 @@ const Home = () =>{
            setTotalItems(res.data.length);
            setPosts(res.data);
            console.log(posts.post_id)
-        console.log("postid", posts.post_id)
+           console.log("postid", posts.post_id)
 
            
            console.log(totalItems)
@@ -105,6 +103,7 @@ const Home = () =>{
 
                 
                 ))}
+                <Comments />
                     
                 </div>
             </section>

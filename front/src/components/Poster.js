@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
 import avatar from "../image/avatar.png"
+//import { getAllPosts } from "../pages/Home";
 
 function Poster(info){
     console.log("info",info)
     
     const [lastName, setLastName]= useState('');
     const [firstName, setFirstName] = useState('');
-    const [message, setMessage] = useState('')
-
+    const [message, setMessage] = useState('');
+    const [posts, setPosts] = useState('');
     const userId = JSON.parse(localStorage.userId)
 	const token = JSON.parse(localStorage.token)
 
@@ -36,6 +37,8 @@ function Poster(info){
           });
       };
 
+     
+
       const createPost = (e) =>{
         e.preventDefault();
         if(!message ){
@@ -55,6 +58,7 @@ function Poster(info){
         }).then((res) => {
             console.log(res);
 			setMessage(res.data.message)
+            info.getAllPosts();
             if (res.data.error) {
                 console.log("ici222",res.data.errors)
             } 
@@ -67,7 +71,7 @@ function Poster(info){
     useEffect(() => {
         getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [createPost]);
+    }, []);
     
     return(
         <section>

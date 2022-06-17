@@ -57,5 +57,6 @@ export function firstNameValidation(data){
 
 }
 
+
 //export default isLogged();
 //export default emailValidation;

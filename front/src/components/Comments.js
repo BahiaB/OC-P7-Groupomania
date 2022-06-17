@@ -4,75 +4,54 @@ import axios from 'axios';
 import avatar from "../image/avatar.png";
 //import InfiniteScroll from "react-infinite-scroll-component"
 
-function Comments() {
-    const [comment, setComment] = useState([]);
-    useState(()=>{
-        getComments()
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[comment])
-    
-   
-    const token = JSON.parse(localStorage.token)
-    const [totalComment, setTotalComment] = useState(0);
+function Comments({key, comment}) {
+//alert("!!!")
+const token = JSON.parse(localStorage.token);
+const userId = JSON.parse(localStorage.userId);
+const [newComment, setNewComment] = useState("");
 
-    const getComments = async () => {
-
-        await axios({
-            method: "GET",
-            url: `${process.env.REACT_APP_API_URL}api/post/comments `,
-
-            headers: {
-                authorization: `Bearer ${token}`
-            }
-        }).then((res) => {
-            console.log("res", res);
-            setComment(res.data);
-            console.log("comment", comment);
-            setTotalComment(res.data.length);
-            console.log(totalComment)
-
-            if (res.data.error) {
-                console.log("ici222", res.data.errors)
-
-            }
-        })
-            .catch((err) => {
+       const createComment = (e) =>{
+       
+            e.preventDefault();
+            if(!comment ){
+                console.log("No message!")
+                return
+            }else{
+            axios ({
+                method: "POST",
+                url: `${process.env.REACT_APP_API_URL}api/post/`,
+                data: {
+                    userId : userId,
+                    comment: comment,
+                },
+                headers:{
+                    authorization:`Bearer ${token}`
+                }
+            }).then((res) => {
+                console.log(res);
+                setNewComment(res.data.message)
+                //info.getAllPosts();
+                if (res.data.error) {
+                    console.log("ici222",res.data.errors)
+                } 
+              })
+              .catch((err) => {
                 console.log(err);
-            });
-
-    }
-   
+              });
+            }
+        }
+       
     return(
-        <div>
- <>
-            <div className="post-container">
-
-                <div className="flex flex-col">
-                    {comment.map(comment =>
-                    (
-                        <React.Fragment
-                            key={comment.id}>
-
-                            
-                                {comment.message}
-                                <br />
-                                
-
-
-                              {/*}  <p id='comment'>{posts.comment}</p>
-                                <br />
-                    */}
-                            
-
-                              </React.Fragment>
-                    )
-                    )}
-                    </div>
-        </div>
-        
-        
-            </>
-            </div>
+    <>
+       <p> {comment}</p>
+     
+     
+       <form>
+                <input type="text" name="post" id='post' placeholder="Commenter" onChange={(e) => setNewComment
+                (e.target.value)} value={newComment}></input>
+                <li onClick={createComment} id="create-post" className="active-btn">Commenter</li>
+        </form>
+    </>
        
     )
     
