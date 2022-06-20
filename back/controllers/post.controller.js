@@ -115,13 +115,13 @@ exports.createComment = (req, res, next) =>{
     
     const newComment = {
         user_id: `${req.auth.userId}`,
-        comment: req.body.message,
-        imageurl: null,
+        comment: req.body.comment,
+     
     };
-    const sql = "INSERT INTO post SET ?";
+    const sql = "INSERT INTO comments SET ?";
     db.query(sql, newComment, (err, result) => {
         if (err) {
-            //console.log(err);
+            console.log("error");
             throw (err);
         }
 

@@ -4,8 +4,8 @@ import axios from 'axios';
 import avatar from "../image/avatar.png"
 //import { getAllPosts } from "../pages/Home";
 
-function Poster(info){
-    console.log("info",info)
+function Poster({getAllPosts}){
+    //console.log("info",info)
     
     const [lastName, setLastName]= useState('');
     const [firstName, setFirstName] = useState('');
@@ -58,7 +58,7 @@ function Poster(info){
         }).then((res) => {
             console.log(res);
 			setMessage(res.data.message)
-            info.getAllPosts();
+            getAllPosts();
             if (res.data.error) {
                 console.log("ici222",res.data.errors)
             } 

@@ -28,6 +28,8 @@ const Home = () =>{
     //const [messages, setMessages] = useState([]);
    // const [isLoading, setIsLoading] = useState(false);
 
+
+   
     
     const getAllPosts = async () => {
        
@@ -45,7 +47,7 @@ const Home = () =>{
            setPosts(res.data);
            console.log(posts.post_id)
            console.log("postid", posts.post_id)
-
+        
            
            console.log(totalItems)
            if (res.data.error) {
@@ -87,7 +89,7 @@ const Home = () =>{
             <section>
                 <div className="home-container">
                 <h3>Bienvenue sur Groupomania</h3>
-                <Poster info={user}/>
+                <Poster getAllPosts = {getAllPosts}/>
                 </div>
                 <div className='post-container'>
                 {posts.map(posts => (

@@ -18,7 +18,38 @@ const Posts = ({ key, message, date, firstName, postId, postUserId }) => {
     const [activUser, SetActivUser] = useState(false);
     const [comments, setComments] = useState([]);
    
+    //const token = JSON.parse(localStorage.token);
+   // const userId = JSON.parse(localStorage.userId);
+    const [newComment, setNewComment] = useState("");
+   // const [comment, setComment] = useState([])
     
+   const createComment = (e) => {
+
+        e.preventDefault();
+       
+            axios({
+                method: "POST",
+                url: `${process.env.REACT_APP_API_URL}api/post/comment`,
+                data: {
+                    userId: userId,
+                    comment: newComment,
+                },
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            }).then((res) => {
+                console.log(res);
+                setNewComment(res.data.message)
+                //info.getAllPosts();
+                if (res.data.error) {
+                    console.log("ici222", res.data.errors)
+                }
+            })
+                .catch((err) => {
+                    console.log(err);
+                });
+        
+    }
 
     const deletePost = () => {
         axios({
@@ -84,7 +115,15 @@ const Posts = ({ key, message, date, firstName, postId, postUserId }) => {
                            /> 
                         ))}
                 </div>
-                
+
+                <div>
+                <form>
+                    <input type="text" name="post" id='post' placeholder="Commenter" onChange={(e) => setNewComment
+                        (e.target.value)} value={newComment}></input>
+                    <li onClick={createComment} id="create-comment" className="active-btn">Commenter</li>
+                </form>
+                    </div>
+               
                
                 {postUserId === userId ? (
                     <li onClick={deletePost} id="delete_post" className='active-btn'>Supprimer</li>
