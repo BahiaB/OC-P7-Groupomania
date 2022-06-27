@@ -30,7 +30,7 @@ export function emailValidation(data) {
 }
 
 export function nameValidation(data){
-  var nameRegex = /^[a-zA-Z\-]+$/;
+  var nameRegex = /^[a-zA-Z-]+$/;
   if (
     data.match(nameRegex)
   ) {
@@ -44,7 +44,7 @@ export function nameValidation(data){
 }
 
 export function firstNameValidation(data){
-  var firstNameRegex = /^[a-zA-Z\-]+$/;
+  var firstNameRegex = /^[a-zA-Z-]+$/;
   if (
     data.match(firstNameRegex)
   ) {

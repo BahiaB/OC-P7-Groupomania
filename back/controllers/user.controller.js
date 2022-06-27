@@ -128,26 +128,15 @@ exports.updateUser = (req, res, next) => {
 			throw err;
 		}
 	})
-
-	if (userId === pageId || admin === 1) {
-		if (file) {
-			const new_profil_image_url = `${req.protocol}://${req.get(
-				"host"
-			)}/images/profils/${req.file.filename}`;
-			oldFileName = result[0].imageProfile.split("/images/profils/")[1];
-			if (oldFileName !== "avatar.png") {
-				fs.unlink(`images/profils/${oldFileName}`, () => {
-					if (err) console.log(err);
-					else {
-						console.log("Ancienne image de profile supprimée");
-					}
-				});
-			}
-		}
+	console.log(req.body.imageProfile)
+		const new_profil_image_url = `${req.protocol}://${req.get("host")}/images${req.file.filename}`;
+			
+			
 		const newInfoUser = {
 			firstName: firstName,
 			lastName: lastName,
 			email: email,
+			imageProfile: new_profil_image_url
 		}
 		const sql = `UPDATE user SET ? WHERE UID= '${userId}' `
 		db.query(sql, newInfoUser, (err, result) => {
@@ -160,4 +149,4 @@ exports.updateUser = (req, res, next) => {
 		})
 
 	}
-}
+

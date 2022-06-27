@@ -72,7 +72,8 @@ const Account = () =>{
 					<p >nom: {lastName}</p>
 					<p> Prenom: {firstName}</p>
 					<p>Contact : {email}</p>
-					<li onClick={handleProfil} id="showProfil" className="active-btn">Modifier</li>
+					<li onClick= {handleProfil} id="showProfil" className="active-btn">Modifier</li>
+					
 					{profilModal && <ChangeProfil />}
 					</div>
 
@@ -93,3 +94,4 @@ const Account = () =>{
 
 export default Account;
 
+//{handleProfil}
