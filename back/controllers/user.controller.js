@@ -1,7 +1,7 @@
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-//const fs = require("fs");
+const fs = require("fs");
 const crypto = require('crypto');
 
 const dbc = require("../db");
@@ -94,7 +94,7 @@ exports.userInfo = (req, res, next) => {
 	  }else{*/
 
 	db.query(sql, userId, async (err, result) => {
-		console.log(result[0])
+		console.log("result0",result[0])
 		if (err) {
 			console.log("error:", err)
 			throw err;
@@ -115,38 +115,30 @@ exports.updateUser = (req, res, next) => {
 	const lastName = req.body.lastName;
 	const firstName = req.body.firstName;
 	const email = req.body.email;
-	const file = req.body.file;
-	const sqlAdminInfos = `SELECT admin FROM user WHERE UID='${userId}'`;
-	const checkAdmin = null;
+	//const file = req.body.file;
+	//const sqlAdminInfos = `SELECT admin FROM user WHERE UID='${userId}'`;
+	//const checkAdmin = null;
+	console.log("req body image", req.body)
+    console.log("req file", req.file)
 
-	//console.log(userId);
-	db.query(sqlAdminInfos, (err, result) => {
-		admin = result.admin;
-		//console.log(result)
-		if (err) {
-			console.log("error:", err)
-			throw err;
-		}
-	})
-	console.log(req.body.imageProfile)
-		const new_profil_image_url = `${req.protocol}://${req.get("host")}/images${req.file.filename}`;
-			
-			
+	console.log(req.file.filename)
+		
+		
+		const imageProfile = `${req.protocol}://${req.get('host')}/images/profils/${req.file.filename}`
 		const newInfoUser = {
 			firstName: firstName,
 			lastName: lastName,
 			email: email,
-			imageProfile: new_profil_image_url
+			imageProfile: imageProfile
 		}
-		const sql = `UPDATE user SET ? WHERE UID= '${userId}' `
-		db.query(sql, newInfoUser, (err, result) => {
-			if (err) {
-				res.status(500).json({ error: "erreur lors de la modifiation de l'utilisateur" })
-				throw err;
-			}
-			res.status(200).json({ message: "Utilisateur modifié!" });
-			console.log("utilisateur modifié");
+		const sql = `UPDATE user SET ? WHERE UID= ? `
+		db.query(sql, [newInfoUser, userId], (err, result) => {
+			if (err)
+            throw err
+        else
+            res.status(200).json(result)
+			
 		})
 
-	}
+}
 

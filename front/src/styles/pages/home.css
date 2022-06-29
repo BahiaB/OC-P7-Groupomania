@@ -19,17 +19,33 @@
 
 .home-container h3 {
   width: 100%;
+  display: none;
 }
 
 .home-container img {
   border-radius: 25px;
+  height: 5rem;
+  width: 5rem;
+  background-position: cover;
 }
 
 .poster-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 400px;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: auto;
+  width: 100%;
+  /* img{
+    height: 5rem;
+    width: 5rem;
+    background-position: cover;
+  }*/
 }
 
 #create-post {
@@ -60,6 +76,7 @@
 
 #post {
   margin-top: 1rem;
+  width: 17rem;
   border: #a5a6aa 1px solid;
   -webkit-box-shadow: 2px 2px 8px 2px #a5a6aa;
           box-shadow: 2px 2px 8px 2px #a5a6aa;
@@ -90,5 +107,29 @@
 #change-profil:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+.account-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 0 1rem 0;
+  height: auto;
+}
+
+.account-container img {
+  height: 5rem;
+  width: 5rem;
+  background-position: cover;
+}
+
+.account-container form {
+  margin-top: 2rem;
 }
 /*# sourceMappingURL=home.css.map */

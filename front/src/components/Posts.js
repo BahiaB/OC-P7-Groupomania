@@ -4,16 +4,17 @@ import axios from 'axios';
 import avatar from "../image/avatar.png";
 import Comments from './Comments';
 import Home from '../pages/Home'
-
+//import { getPostUser } from '../Utils/utils';
 import Poster from './Poster';
 
 
-const Posts = ({ key, message, date, firstName, postId, postUserId }) => {
+const Posts = ({ key, message, date, posterName, postId, postUserId }) => {
 
     
    // console.log(postUserId)
     const token = JSON.parse(localStorage.token)
     const userId = JSON.parse(localStorage.userId)
+
     const [posts, setPosts] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
     const [activUser, SetActivUser] = useState(false);
@@ -22,7 +23,14 @@ const Posts = ({ key, message, date, firstName, postId, postUserId }) => {
     //const token = JSON.parse(localStorage.token);
    // const userId = JSON.parse(localStorage.userId);
     const [newComment, setNewComment] = useState("");
+    const [postUser, setPostUser] = useState([]);
    // const [comment, setComment] = useState([])
+
+   //const postUserName= () =>{
+    //getPostUser(postUserId);
+   // setPostUser([getPostUser(postUserId)])
+
+  // }
 
    
     
@@ -68,10 +76,6 @@ const Posts = ({ key, message, date, firstName, postId, postUserId }) => {
             console.log("res", res);
             setPosts(res.data);
            
-            //console.log(res.data);
-           // setTotalItems(res.data.length);
-           
-            //console.log(totalItems)
             if (res.data.error) {
                 console.log("ici222", res.data.errors)
 
@@ -93,8 +97,6 @@ const Posts = ({ key, message, date, firstName, postId, postUserId }) => {
             setComments(res.data);
             console.log(res.data);
 
-            //setTotalItems(res.data.length);
-            //console.log(totalItems)
             if (res.data.error) {
                 console.log("ici222", res.data.errors)
 
@@ -109,9 +111,10 @@ const Posts = ({ key, message, date, firstName, postId, postUserId }) => {
 
     return (
         
+        
             <div className="post-container">
 
-                <p>{firstName}</p>
+                <p>{posterName}</p>
                 <p> {message}</p>
                 <li onClick={getComments} id="get-comment" className='active-btn'>afficher les commentaires</li>
                
@@ -121,6 +124,7 @@ const Posts = ({ key, message, date, firstName, postId, postUserId }) => {
                         <Comments
                             key ={comments.id}
                             comment = {comments.comment}
+                            firstName = {comments.firstName}
                             
 
                            /> 

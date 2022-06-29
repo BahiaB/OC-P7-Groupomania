@@ -1,5 +1,9 @@
-//import axios from "axios";
-//import { useState } from "react";
+import axios from "axios";
+import { useState } from "react";
+
+
+
+
 
 function isLogged() {
    // const [loggedIn, setLoggedIn] = useState(false);
@@ -57,6 +61,32 @@ export function firstNameValidation(data){
 
 }
 
+/*export function getPostUser(id){
+  //const [postUser, setPostUser]= useState()
+  console.log("id postuser",id)
+  axios ({
+    method: "GET",
+    url: `${process.env.REACT_APP_API_URL}api/auth/${id} `,
+    
+    headers:{
+        authorization:`Bearer ${token}`
+    }
+})
+
+.then(res) => {
+    console.log(res.data);
+    return(res.data)
+    //setPostUser(res.data);
+    
+    if (res.data.error) {
+        console.log("ici",res.data.errors)
+       
+    } 
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
 
 //export default isLogged();
-//export default emailValidation;
+//export default emailValidation;*/

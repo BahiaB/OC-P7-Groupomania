@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
-import avatar from "../image/avatar.png"
+//import avatar from "../image/avatar.png"
+//import { getPostUser } from '../Utils/utils';
 //import { getAllPosts } from "../pages/Home";
 
 function Poster({getAllPosts}){
@@ -11,8 +12,11 @@ function Poster({getAllPosts}){
     const [firstName, setFirstName] = useState('');
     const [message, setMessage] = useState('');
     const [posts, setPosts] = useState('');
+    const[userpost,setUserPost] = useState('')
     const userId = JSON.parse(localStorage.userId)
 	const token = JSON.parse(localStorage.token)
+    const [imageProfile, setImageProfile]= useState()
+
 
     const getUser =  () =>{
 		 axios ({
@@ -23,10 +27,11 @@ function Poster({getAllPosts}){
                 authorization:`Bearer ${token}`
             }
         }).then((res) => {
-            console.log(res);
+            console.log("poster",res.data);
 			setLastName(res.data.lastName);
 			setFirstName(res.data.firstName);
-            
+            setImageProfile(res.data.imageProfile)
+            console.log(firstName)
             if (res.data.error) {
                 console.log("ici222",res.data.errors)
                
@@ -37,10 +42,13 @@ function Poster({getAllPosts}){
           });
       };
 
+    
      
 
       const createPost = (e) =>{
         e.preventDefault();
+        
+        //getUserPost();
         if(!message ){
             console.log("No message!")
             return
@@ -50,13 +58,14 @@ function Poster({getAllPosts}){
             url: `${process.env.REACT_APP_API_URL}api/post/`,
             data: {
                 userId : userId,
-                message: message
+                message: message,
+           
             },
             headers:{
                 authorization:`Bearer ${token}`
             }
         }).then((res) => {
-            console.log(res);
+            console.log("poster res",res);
 			setMessage(res.data.message)
             getAllPosts();
             if (res.data.error) {
@@ -78,7 +87,7 @@ function Poster({getAllPosts}){
         <div className='poster-container'>
 
             <div >
-                <img src={avatar}  alt="avatar"></img>
+                <img src={imageProfile}   id="image-profile" alt="profile"></img>
                
                 <form>
                 <input type="text" name="post" id='post' placeholder="Que souhaitez vous partager" onChange={(e) => setMessage

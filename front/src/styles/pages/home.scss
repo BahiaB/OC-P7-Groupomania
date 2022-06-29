@@ -17,16 +17,28 @@ $Third: #a5a6aa;
   border-radius: 20px;
   h3 {
     width: 100%;
+    display:none
   }
   img {
     border-radius: 25px;
+    height: 5rem;
+    width: 5rem;
+    background-position: cover;
   }
 }
 
 .poster-container {
   display: flex;
-
-  width: 400px;
+  justify-content: flex-start;
+  align-items: center;
+  
+  height: auto;
+  width: 100%;
+ /* img{
+    height: 5rem;
+    width: 5rem;
+    background-position: cover;
+  }*/
 }
 #create-post {
   display: flex;
@@ -49,6 +61,7 @@ $Third: #a5a6aa;
 }
 #post{
     margin-top:1rem;
+    width: 17rem;
     border: #a5a6aa 1px solid;
     box-shadow:2px 2px 8px 2px $Third;
 }
@@ -67,9 +80,28 @@ $Third: #a5a6aa;
     background-color: $Secondary;
     cursor: pointer;
     list-style: none;
-  
+
+   
     &:hover {
    
       transform: scale(1.1);
+    }
+  }
+  
+  
+
+  .account-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0 1rem 0;
+    height: auto;
+    img{
+    height: 5rem;
+    width: 5rem;
+    background-position: cover;
+    }
+   form{
+      margin-top: 2rem;
     }
   }

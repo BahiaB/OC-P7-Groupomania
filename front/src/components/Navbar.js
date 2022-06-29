@@ -15,7 +15,7 @@ function Navbar() {
         <nav>
             <div className='nav-container'>
                 <div className='logo'>
-                    <NavLink exact to="/home">
+                    <NavLink to="/home">
                         <div className='logo' id="logo-Nav">
                              <img src={logo} alt='logo groupomania' />
                         </div>
@@ -26,13 +26,13 @@ function Navbar() {
                     <ul>
                         <li></li>
                         <li className='welcome'>
-                            <NavLink exact to={`/account/${ JSON.parse(localStorage.userId) } `}>
+                            <NavLink to={`/account/${ JSON.parse(localStorage.userId) } `}>
                                 <img src={profil} id="profil-icon" alt="Profil icon"/>
                             </NavLink>
 
                         </li>
                         <li onClick={Logout}>
-                            <NavLink exact to="/login">
+                            <NavLink to="/login">
                             <img src={logout} class="logout-icon" alt='img log out'/>
                             </NavLink>
                         </li>

@@ -1,6 +1,6 @@
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+/*SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";*/;
+/*START TRANSACTION;*/;
+/*SET time_zone = "+00:00";*/;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `comments`
 --
 
-CREATE TABLE IF NOT EXISTS`comments` (
+CREATE TABLE  IF NOT EXISTS `comments` (
  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `comment` varchar(255) DEFAULT NULL,
   `user_id` varchar(36) NOT NULL,
@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS `post` (
   `imageurl` varchar(100) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
   `datecreation` datetime NOT NULL DEFAULT current_timestamp(),
-  `user_id` varchar(36) NOT NULL
+  `user_id` varchar(36) NOT NULL,
+  `postUserName` varchar(36) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

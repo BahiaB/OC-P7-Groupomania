@@ -3,7 +3,7 @@ import axios from 'axios';
 import Poster from '../components/Poster';
 import Posts from '../components/Posts'
 import Comments from '../components/Comments';
-
+//import { getPostUser } from '../Utils/utils';
 
 
 
@@ -11,11 +11,10 @@ import Comments from '../components/Comments';
 const Home = () =>{
     const [pages, setPages] = useState(0);
     const [posts, setPosts] = useState([]);
-    
+    const [postUser, setPostUser]= useState("");
     useEffect(() =>{
         getAllPosts();
         getUser();
-       // setPages((pages) => pages +1);
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
@@ -25,8 +24,7 @@ const Home = () =>{
     const token = JSON.parse(localStorage.token)
    // const [pages, setPages] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
-    //const [messages, setMessages] = useState([]);
-   // const [isLoading, setIsLoading] = useState(false);
+   
 
 
    
@@ -45,10 +43,10 @@ const Home = () =>{
            console.log("res", res.data);
            setTotalItems(res.data.length);
            setPosts(res.data);
-           console.log(posts.post_id)
-           console.log("postid", posts.post_id)
-        
-           
+           //getPostUser(posts.post_user_id)
+          console.log(posts.post_id)
+          console.log(posts)
+
            console.log(totalItems)
            if (res.data.error) {
                console.log("ici222", res.data.errors)
@@ -60,6 +58,7 @@ const Home = () =>{
            });
 
    };
+
 
    const getUser = () =>{
     axios ({
@@ -83,6 +82,8 @@ const Home = () =>{
       });
 
   };
+
+ 
     
     return(
         <main>
@@ -95,11 +96,11 @@ const Home = () =>{
                 {posts.map(posts => (
                     <Posts 
                     key ={posts.id}
-                    firstName ={user.firstName}
+                    posterName ={posts.firstName}
                     message ={posts.message}
                     date = {posts.dateCreation}
                     postId = {posts.post_id}
-                    postUserId = {posts.post_user_id}
+                   postUserId = {posts.post_user_id}
 
                     />
 

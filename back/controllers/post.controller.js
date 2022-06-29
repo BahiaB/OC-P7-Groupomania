@@ -7,11 +7,12 @@ const db = dbc.getDB();
 
 exports.createPost = (req, res, next) => {
 
-   // console.log(req.body);
+    console.log(req.body);
    // console.log(req.auth.userId);
     const newPost = {
         user_id: `${req.auth.userId}`,
         message: req.body.message,
+        postUserName: req.body.postUserName,
         imageurl: null,
     };
     const sql = "INSERT INTO post SET ?";
@@ -28,7 +29,7 @@ exports.createPost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
 
     const sql =// "SELECT * FROM  post";
-        "SELECT  post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id as post_user_id FROM post  ORDER BY datecreation DESC;";
+        "SELECT  post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id as post_user_id, user.firstName  FROM post JOIN user ON post.user_id = user.UID  ORDER BY datecreation DESC;";
 
     db.query(sql, (err, result) => {
 
@@ -98,7 +99,7 @@ exports.deletePost = (req, res, next) => {
 
 
 exports.getComments = (req, res, next) =>{
-    const sql = `SELECT *  FROM comments WHERE post_id = ${req.params.id} ;`;
+    const sql = `SELECT *, user.firstName FROM comments JOIN user on comments.user_id = user.UID WHERE post_id = ${req.params.id} ;`;
     db.query(sql, (err, result) => {
         if (err) {
             res.status(404).json({ err });
