@@ -101,6 +101,8 @@ const Home = () =>{
                     date = {posts.dateCreation}
                     postId = {posts.post_id}
                    postUserId = {posts.post_user_id}
+                   getAllPosts= {getAllPosts}
+                   like={posts.total_like}
 
                     />
 

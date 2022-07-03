@@ -29,8 +29,8 @@ exports.createPost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
 
     const sql =// "SELECT * FROM  post";
-        "SELECT  post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id as post_user_id, user.firstName  FROM post JOIN user ON post.user_id = user.UID  ORDER BY datecreation DESC;";
-
+       `SELECT post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id`;
+      //"SELECT  post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id as post_user_id, user.firstName  FROM post JOIN user ON post.user_id = user.UID  ORDER BY datecreation DESC;";
     db.query(sql, (err, result) => {
 
         // console.log("result:", result)
@@ -132,3 +132,38 @@ exports.createComment = (req, res, next) =>{
     });
 }
     
+
+exports.addLike = (req, res, next) => {
+    console.log("req body addlike", req.body)
+    let a = 0
+    const sql = ` SELECT * FROM likes WHERE user_id = '${req.body.user_id}' AND post_id = ${req.body.post_id}`
+    db.query(sql, async (err, result) => {
+        if (err)
+        {
+            console.log("err addlike",err)
+            throw err
+        }
+        else if (result.length === 0) {
+            console.log("ici")
+            const sql = `INSERT INTO likes SET ?`
+            const newLike = {
+                user_id: req.body.user_id,
+                post_id: req.body.post_id
+            }
+            db.query(sql, newLike, (err, result) => {
+                if (err)
+                    throw err
+                else
+                    return res.status(200).json(result)
+            })
+        }
+        else {
+            const sql = `DELETE FROM likes WHERE user_id = '${req.body.user_id}' AND post_id = ${req.body.post_id}`
+            db.query(sql, async (err, result) => {
+                if (err)
+                    throw err
+                res.status(200).json()
+            })
+        }
+    })
+}

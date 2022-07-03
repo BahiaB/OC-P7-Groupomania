@@ -24,6 +24,7 @@ $Third: #a5a6aa;
     height: 5rem;
     width: 5rem;
     background-position: cover;
+    margin-bottom: 1rem;
   }
 }
 
@@ -59,13 +60,13 @@ $Third: #a5a6aa;
     transform: scale(1.1);
   }
 }
-#post{
+/*#post{
     margin-top:1rem;
     width: 17rem;
     border: #a5a6aa 1px solid;
     box-shadow:2px 2px 8px 2px $Third;
 }
-
+*/
 #change-profil{
     display: flex;
     justify-content: center;
@@ -100,8 +101,30 @@ $Third: #a5a6aa;
     height: 5rem;
     width: 5rem;
     background-position: cover;
+    
     }
    form{
       margin-top: 2rem;
     }
+  }
+
+  .post-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: center;
+    width: 80%;
+    margin-left: 10%;
+    
+    border-radius: 20px;
+    
+    .post-container{
+      margin: 2rem;
+      padding: 1rem;
+      background-color: $Primary-light;
+      border: 1px solid $Third
+    }
+   
+    
   }

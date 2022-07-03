@@ -12,7 +12,7 @@ function Comments({ key, comment, firstName }) {
 
  
     return (
-        <div>
+        <div className='comment'>
             <p>{firstName}</p>
             <p> {comment}</p>
         

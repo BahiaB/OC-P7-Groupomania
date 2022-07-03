@@ -44,6 +44,10 @@ const Account = () => {
 				setFirstName(res.data.firstName);
 			if (res.data.email)
 				setEmail(res.data.email);
+			if (res.data.imageProfile === "")
+				{
+					
+				}
 			setImageProfile(res.data.imageProfile)
 
 			if (res.data.error) {
@@ -69,7 +73,7 @@ const Account = () => {
 
 				{userId === id ? (
 					<div className='user-prentation'>
-						<p >nom: {lastName}</p>
+						<p>nom: {lastName}</p>
 						<p> Prenom: {firstName}</p>
 						<p>Contact : {email}</p>
 						<li onClick={handleProfil} id="showProfil" className="active-btn">Modifier</li>

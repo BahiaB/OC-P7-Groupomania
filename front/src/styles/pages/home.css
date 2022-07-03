@@ -27,6 +27,7 @@
   height: 5rem;
   width: 5rem;
   background-position: cover;
+  margin-bottom: 1rem;
 }
 
 .poster-container {
@@ -74,14 +75,13 @@
           transform: scale(1.1);
 }
 
-#post {
-  margin-top: 1rem;
-  width: 17rem;
-  border: #a5a6aa 1px solid;
-  -webkit-box-shadow: 2px 2px 8px 2px #a5a6aa;
-          box-shadow: 2px 2px 8px 2px #a5a6aa;
+/*#post{
+    margin-top:1rem;
+    width: 17rem;
+    border: #a5a6aa 1px solid;
+    box-shadow:2px 2px 8px 2px $Third;
 }
-
+*/
 #change-profil {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -131,5 +131,33 @@
 
 .account-container form {
   margin-top: 2rem;
+}
+
+.post-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 80%;
+  margin-left: 10%;
+  border-radius: 20px;
+}
+
+.post-container .post-container {
+  margin: 2rem;
+  padding: 1rem;
+  background-color: #ffd7d7;
+  border: 1px solid #a5a6aa;
 }
 /*# sourceMappingURL=home.css.map */

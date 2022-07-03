@@ -1,6 +1,7 @@
-/*SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";*/;
-/*START TRANSACTION;*/;
-/*SET time_zone = "+00:00";*/;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";;
+
+START TRANSACTION;;
+SET time_zone = "+00:00";;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -32,10 +33,10 @@ CREATE TABLE  IF NOT EXISTS `comments` (
 -- Structure de la table `like_post`
 --
 
-CREATE TABLE IF NOT EXISTS`like_post` (
-  `like_post_id` int(11) NOT NULL,
-  `like_utilisateur_id` varchar(36) NOT NULL,
-  `id` int(11) NOT NULL
+CREATE TABLE IF NOT EXISTS`likes` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `user_id` varchar(36) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
