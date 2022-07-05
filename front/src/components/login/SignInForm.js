@@ -10,6 +10,7 @@ function SignInForm() {
     const[emailError, setEmailError] = useState("");
 
 
+
     const handleLogin = (e) => {
        
         e.preventDefault();
@@ -34,9 +35,11 @@ function SignInForm() {
                 console.log("ici",res.data.errors)
                
             } else {
+                console.log("login data", res.data)
                 localStorage.token = JSON.stringify(res.data.token);
                 localStorage.userId = JSON.stringify(res.data.userId)
-                console.log(localStorage)
+                //localStorage.admin = (res.data.admin)
+                console.log("tetdeydtweuydtew", localStorage)
                 window.location = "/home" //useNavigate
             }
           })

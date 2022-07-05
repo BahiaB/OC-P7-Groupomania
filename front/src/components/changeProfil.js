@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {emailValidation, nameValidation, firstNameValidation} from "../Utils/utils"
-import getUser from "../pages/Account"
+//import getUser from "../pages/Account"
 
 
 
-function ChangeProfil() {
-  /*  useEffect(() => {
+function ChangeProfil(userId, admin) {
+   /* useEffect(() => {
        // getUser();
         handleProfile()
         
    
-    }, );*/
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);*/
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -27,9 +30,10 @@ function ChangeProfil() {
     const token = JSON.parse(localStorage.token)
 
   
+  
    const handleProfile= (e) => {
        
-   // e.preventDefault();
+    e.preventDefault();
     if (emailValidation(email) === false) {
         setEmailError("Veuillez entrez un email valide")
     }
@@ -56,14 +60,30 @@ function ChangeProfil() {
                     "Content-Type": "multipart/form-data",
                 },
             })
-            .then((res) => console.log(res))
+            .then((res) => {
+                console.log("poster res",res);
+                //setMessage(res.data.message)
+                //getUser();
+                window.location = `/account/${id}`
+                if (res.data.error) {
+                    console.log("ici222",res.data.errors)
+                } 
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+
+            
       
 }
    // };
+ 
+
 
 
 
     return(
+        <>
         <form action="" onSubmit={handleProfile} id="profil-form">
             <label htmlFor="email">Email</label>
             <br />
@@ -93,7 +113,11 @@ function ChangeProfil() {
            
 
         </form>
+                
+        
+        </>
     )
+    
 
 }
 

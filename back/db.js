@@ -1,8 +1,15 @@
 
 const mysql = require('mysql2');
 require('dotenv').config();
+//const HOST = process.env.HOST;
+//const USER = process.env.USER;
+////const PORT = process.env.PORT;
 const PASSWORD = process.env.PASSWORD;
-// console.log(process.env)
+//const DATABASE = process.env.DATABASE;
+/*console.log(HOST)
+console.log(PASSWORD)
+console.log(DATABASE)
+console.log(PORT)*/
     
    
 
@@ -13,6 +20,7 @@ const PASSWORD = process.env.PASSWORD;
         port: '3306',
         password : PASSWORD,  
         database: "Groupomania"
+        
         
     }
     );

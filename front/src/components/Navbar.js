@@ -24,7 +24,7 @@ function Navbar() {
                 
                 {localStorage.token ? (
                     <ul>
-                        <li></li>
+                        
                         <li className='welcome'>
                             <NavLink to={`/account/${ JSON.parse(localStorage.userId) } `}>
                                 <img src={profil} id="profil-icon" alt="Profil icon"/>

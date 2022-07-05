@@ -1,25 +1,42 @@
+@-webkit-keyframes border1 {
+  from {
+    border-top: 1px transparent #a5a6aa;
+  }
+  to {
+    border-top: 1px solid #a5a6aa;
+  }
+}
+
+@keyframes border1 {
+  from {
+    border-top: 1px transparent #a5a6aa;
+  }
+  to {
+    border-top: 1px solid #a5a6aa;
+  }
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .home-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-line-pack: center;
       align-content: center;
-  padding-left: 2rem;
-  margin-left: 7%;
-  background-color: #ffd7d7;
   width: 80%;
+  padding: 1.5rem;
+  margin-left: 5%;
   height: 19rem;
   border-radius: 20px;
-}
-
-.home-container h3 {
-  width: 100%;
-  display: none;
+  border: 2px solid #fd2d01;
 }
 
 .home-container img {
@@ -28,15 +45,16 @@
   width: 5rem;
   background-position: cover;
   margin-bottom: 1rem;
+  margin-left: 30%;
 }
 
 .poster-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -59,13 +77,16 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  color: #4E5166;
   width: 7rem;
   height: 2rem;
   margin-top: 1.5rem;
   border-radius: 20px;
   -webkit-box-shadow: 5px 5px 15px 5px #a5a6aa;
           box-shadow: 5px 5px 15px 5px #a5a6aa;
-  background-color: #ffd7d7;
+  background-color: white;
+  margin-left: 25%;
+  border: none;
   cursor: pointer;
   list-style: none;
 }
@@ -75,14 +96,22 @@
           transform: scale(1.1);
 }
 
-/*#post{
-    margin-top:1rem;
-    width: 17rem;
-    border: #a5a6aa 1px solid;
-    box-shadow:2px 2px 8px 2px $Third;
+#comment-input, #post {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.5rem;
+  overflow-wrap: break-word;
+  height: 80px;
+  margin-top: 1rem;
+  width: 100%;
+  border: #a5a6aa 1px solid;
+  -webkit-box-shadow: 2px 2px 8px 2px #a5a6aa;
+          box-shadow: 2px 2px 8px 2px #a5a6aa;
+  border-radius: 20px;
 }
-*/
-#change-profil {
+
+#change-profil, #show-profil {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -99,12 +128,12 @@
   border-radius: 20px;
   -webkit-box-shadow: 5px 5px 15px 5px #a5a6aa;
           box-shadow: 5px 5px 15px 5px #a5a6aa;
-  background-color: #ffd7d7;
+  background-color: white;
   cursor: pointer;
   list-style: none;
 }
 
-#change-profil:hover {
+#change-profil:hover, #show-profil:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
@@ -121,15 +150,16 @@
           align-items: center;
   padding: 1rem 0 1rem 0;
   height: auto;
+  background-color: white;
+  border: 2px solid #fd2d01;
 }
 
 .account-container img {
   height: 5rem;
   width: 5rem;
-  background-position: cover;
 }
 
-.account-container form {
+form {
   margin-top: 2rem;
 }
 
@@ -144,9 +174,9 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -ms-flex-item-align: center;
       align-self: center;
   width: 80%;
@@ -155,9 +185,140 @@
 }
 
 .post-container .post-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   margin: 2rem;
   padding: 1rem;
-  background-color: #ffd7d7;
+  background-color: white;
+  border: 2px solid #fd2d01;
+}
+
+.post-container #poster-name {
+  color: #4E5166;
+}
+
+.post-container #image-post {
+  height: 3rem;
+  width: 3rem;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  padding-left: 2rem;
+}
+
+.post {
+  margin-top: 1rem;
+  border: 1px solid #fd2d01;
+  border-radius: 18px;
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1rem;
+}
+
+.post-option {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 4rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin: 1rem 0 1rem 0;
+  border-bottom: 1px solid #a5a6aa;
+}
+
+.post-option img {
+  height: 0.9rem;
+  width: 0.9rem;
+}
+
+.post-option #add-like {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  text-decoration: none;
+  color: #4E5166;
+}
+
+.post-option #add-like:hover {
+  cursor: pointer;
+  -webkit-animation: border1 2s forwards;
+          animation: border1 2s forwards;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.post-option #get-comment {
+  font-size: 0.8rem;
+  background-color: white;
+  padding: 0.3rem;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  list-style: none;
+}
+
+.post-option #get-comment:hover {
+  cursor: pointer;
+  -webkit-animation: border1 2s forwards;
+          animation: border1 2s forwards;
+}
+
+#create-comment, #delete_post {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-self: center;
+  -ms-flex-item-align: center;
+      align-self: center;
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  background-color: white;
+  padding: 0.3rem;
+  border: none;
+  border-bottom: 1px solid #a5a6aa;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#create-comment:hover, #delete_post:hover {
+  cursor: pointer;
+  -webkit-animation: border1 2s forwards;
+          animation: border1 2s forwards;
+}
+
+.comment {
   border: 1px solid #a5a6aa;
+  margin-bottom: 10px;
+  width: 15rem;
+  border-radius: 20px;
+  padding: 2%;
+  word-wrap: break-word;
+}
+
+.name {
+  color: #4E5166;
+  font-size: 1.1rem;
+}
+
+.text {
+  font-size: 0.9rem;
 }
 /*# sourceMappingURL=home.css.map */

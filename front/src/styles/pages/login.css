@@ -16,10 +16,9 @@ body {
           justify-content: space-between;
   height: auto;
   width: auto;
-  background-color: #FFD7D7;
   border-radius: 20px;
   padding: 1rem;
-  border: #4E5166 2px solid;
+  border: #FD2D01 2px solid;
 }
 
 .form-container {
@@ -69,10 +68,6 @@ ul li {
           align-items: center;
 }
 
-#comment {
-  background-color: red;
-}
-
 .connexion-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -91,7 +86,7 @@ ul li {
 }
 
 .active-btn {
-  background: #FFD7D7;
+  background: white;
   border: #4E5166 1px solid;
   -webkit-box-shadow: 2px 2px 8px 2px #4E5166;
           box-shadow: 2px 2px 8px 2px #4E5166;
@@ -116,11 +111,10 @@ input {
 }
 
 input[type="submit"] {
-  background: #FFD7D7;
   margin-right: 14px;
   height: 2.5rem;
   width: 12.5rem;
-  border: #4E5166 2px solid;
+  border: #4E5166 1px solid;
   cursor: pointer;
   -webkit-transition: 0.2s;
   transition: 0.2s;

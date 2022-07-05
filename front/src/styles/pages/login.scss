@@ -14,10 +14,10 @@ body {
   justify-content: space-between;
   height: auto;
   width: auto;
-  background-color:$Primary-light;
+  //background-color:$Primary-light;
   border-radius: 20px;
   padding: 1rem;
-  border: $Third 2px solid;
+  border: $Primary 2px solid;
  
 }
 .form-container{
@@ -54,9 +54,7 @@ ul {
 	
   }
 }
-#comment{
-  background-color: red;
-}
+
 .connexion-form {
 	display: flex;
 	flex-direction: column;
@@ -67,7 +65,7 @@ ul {
   
 }
 .active-btn {
-  background: $Secondary;
+  background: white;
   border: $Third 1px solid;
   box-shadow:2px 2px 8px 2px $Third;
 
@@ -95,11 +93,11 @@ input{
 }
 
 input[type="submit"] {
-	background: $Secondary;
+//	background: $Secondary;
   margin-right: 14px;
 	height: 2.5rem;
 	width: 12.5rem;
-	border: $Third 2px solid;
+	border: $Third 1px solid;
 	cursor: pointer;
 	transition: 0.2s;
 	//margin: 0;

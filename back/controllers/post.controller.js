@@ -29,7 +29,7 @@ exports.createPost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
 
     const sql =// "SELECT * FROM  post";
-       `SELECT post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id`;
+       `SELECT post.id AS post_id, user.imageProfile AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id ORDER BY datecreation DESC;`;
       //"SELECT  post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id as post_user_id, user.firstName  FROM post JOIN user ON post.user_id = user.UID  ORDER BY datecreation DESC;";
     db.query(sql, (err, result) => {
 
@@ -99,7 +99,7 @@ exports.deletePost = (req, res, next) => {
 
 
 exports.getComments = (req, res, next) =>{
-    const sql = `SELECT *, user.firstName FROM comments JOIN user on comments.user_id = user.UID WHERE post_id = ${req.params.id} ;`;
+    const sql = `SELECT comments.id, comments.user_id, comments.post_id, comments.comment, user.firstName FROM comments JOIN user ON comments.user_id = user.UID WHERE post_id = ${req.params.id} ;`;
     db.query(sql, (err, result) => {
         if (err) {
             res.status(404).json({ err });
@@ -131,6 +131,25 @@ exports.createComment = (req, res, next) =>{
         res.status(200).json({ message: "Le post a été crée" })
     });
 }
+
+
+exports.deleteComment = (req, res, next) => {
+    const commentId = req.params.id;
+    const userId = req.auth.userId;
+    console.log("par ici")
+        const sql = `DELETE  FROM comments WHERE comments.id = ${commentId};`;
+        db.query(sql, (err, result) => {
+            if (err) {
+                res.status(404).json({ err });
+                throw err;
+            }
+            else {
+                return res.status(200).json("commentaire suprimé");
+            }
+
+        }
+        )
+    }
     
 
 exports.addLike = (req, res, next) => {

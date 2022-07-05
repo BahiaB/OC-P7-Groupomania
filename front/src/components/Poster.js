@@ -5,7 +5,7 @@ import axios from 'axios';
 //import { getPostUser } from '../Utils/utils';
 //import { getAllPosts } from "../pages/Home";
 
-function Poster({getAllPosts}){
+function Poster({getAllPosts}, posterName){
     //console.log("info",info)
     
     const [lastName, setLastName]= useState('');
@@ -59,6 +59,7 @@ function Poster({getAllPosts}){
             data: {
                 userId : userId,
                 message: message,
+                postUserName: posterName
            
             },
             headers:{
@@ -90,8 +91,8 @@ function Poster({getAllPosts}){
                 <img src={imageProfile}   id="image-profile" alt="profile"></img>
                
                 <form>
-                <input type="text" name="post" id='post' placeholder="Que souhaitez vous partager" onChange={(e) => setMessage
-                (e.target.value)} value={message}></input>
+                <textarea type="text" name="post" id='post' placeholder="Que souhaitez vous partager?" onChange={(e) => setMessage
+                (e.target.value)} value={message}></textarea>
                 <li onClick={createPost} id="create-post" className="active-btn">Poster</li>
                 </form>
                 

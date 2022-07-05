@@ -45,6 +45,7 @@ const Home = () =>{
            setPosts(res.data);
            //getPostUser(posts.post_user_id)
           console.log(posts.post_id)
+          console.log(posts.imageProfile)
           console.log(posts)
 
            console.log(totalItems)
@@ -89,8 +90,9 @@ const Home = () =>{
         <main>
             <section>
                 <div className="home-container">
-                <h3>Bienvenue sur Groupomania</h3>
-                <Poster getAllPosts = {getAllPosts}/>
+                <Poster 
+                posterName = {posts.firstName} 
+                getAllPosts = {getAllPosts}/>
                 </div>
                 <div className='post-container'>
                 {posts.map(posts => (
@@ -103,6 +105,8 @@ const Home = () =>{
                    postUserId = {posts.post_user_id}
                    getAllPosts= {getAllPosts}
                    like={posts.total_like}
+                   imageProfile = {posts.post_imageurl}
+                   admin ={user.admin}
 
                     />
 

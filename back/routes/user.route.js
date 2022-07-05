@@ -9,4 +9,5 @@ router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/:id', auth ,userCtrl.userInfo);
 router.put('/:id', auth, multer, userCtrl.updateUser)
+router.delete('/:id', auth, userCtrl.deleteUser)
 module.exports = router; 

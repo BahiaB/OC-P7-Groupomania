@@ -58,6 +58,7 @@ exports.login = (req, res, next) => {
 			throw err;
 		}
 		if (result.length === 0) {
+			console.log(result)
 			return res.status(401)
 				.json({ error: "Identifiant ou mot de passe incorrect" });
 		}
@@ -94,7 +95,7 @@ exports.userInfo = (req, res, next) => {
 	  }else{*/
 
 	db.query(sql, userId, async (err, result) => {
-		console.log("result0",result[0])
+		//console.log("result0",result[0])
 		if (err) {
 			console.log("error:", err)
 			throw err;
@@ -115,7 +116,7 @@ exports.updateUser = (req, res, next) => {
 	const lastName = req.body.lastName;
 	const firstName = req.body.firstName;
 	const email = req.body.email;
-	//const file = req.body.file;
+	const file = req.body.file;
 	//const sqlAdminInfos = `SELECT admin FROM user WHERE UID='${userId}'`;
 	//const checkAdmin = null;
 	console.log("req body image", req.body)
@@ -125,12 +126,14 @@ exports.updateUser = (req, res, next) => {
 		
 		
 		const imageProfile = `${req.protocol}://${req.get('host')}/images/profils/${req.file.filename}`
+		
 		const newInfoUser = {
 			firstName: firstName,
 			lastName: lastName,
 			email: email,
 			imageProfile: imageProfile
 		}
+		console.log("new info user", newInfoUser)
 		const sql = `UPDATE user SET ? WHERE UID= ? `
 		db.query(sql, [newInfoUser, userId], (err, result) => {
 			if (err)
@@ -142,3 +145,22 @@ exports.updateUser = (req, res, next) => {
 
 }
 
+exports.deleteUser = (req, res, next) => {
+	//const postId = req.params.id;
+    const userId = req.auth.userId;
+	console.log("userid", userId)
+    
+        const sql = `DELETE  FROM user WHERE user.UID = "${userId}";`;
+        db.query(sql, (err, result) => {
+            if (err) {
+                res.status(404).json({ err });
+                throw err;
+            }
+            else {
+                return res.status(200).json("compte suprimé");
+            }
+
+        }
+        )
+}
+//207000aa-0640-4f7a-96d9-724c1c75e05a

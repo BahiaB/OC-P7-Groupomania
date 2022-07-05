@@ -8,7 +8,7 @@ import Home from '../pages/Home'
 import Poster from './Poster';
 import heart from "../image/icons/heart.svg";
 
-const Posts = ({ key, message, date, posterName, postId, postUserId, like ,getAllPosts }) => {
+const Posts = ({ key, message, date, posterName, postId, postUserId, like ,getAllPosts, imageProfile, admin }) => {
 
     
    // console.log(postUserId)
@@ -19,9 +19,12 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like ,getAl
     const [totalItems, setTotalItems] = useState(0);
     const [activUser, SetActivUser] = useState(false);
     const [comments, setComments] = useState([]);
+    const[user, setUser]= useState([])
+    const admin2 = admin
    
     //const token = JSON.parse(localStorage.token);
    // const userId = JSON.parse(localStorage.userId);
+   //console.log("adminnn", admin)
     const [newComment, setNewComment] = useState("");
     const [postUser, setPostUser] = useState([]);
    // const [comment, setComment] = useState([])
@@ -131,29 +134,65 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like ,getAl
         console.log("ici5")
     }
 
+    const getUser2 = () =>{
+        console.log("admin2", admin2)
+        axios ({
+            method: "GET",
+            url: `${process.env.REACT_APP_API_URL}api/auth/${postUserId} `,
+            
+            headers:{
+                authorization:`Bearer ${token}`
+            }
+        }).then((res) => {
+            console.log(res);
+            console.log("adin", admin)
+            //setUser(res.data);
+            window.location= `/account/${postUserId}`
+            
+            if (res.data.error) {
+                console.log("ici",res.data.errors)
+               
+            } 
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    
+      };
+    
     
 
     return (
         
         
             <div className="post-container">
-                <div >
-                <p id='poster-name'>{posterName}</p>
-                <p> {message}</p>
-                </div>
-                <li onClick={addLike}>
-                    <img src={heart} id="heart" alt="heart" />
-                </li>
-                <p> {like}</p>
-                <li onClick={getComments} id="get-comment" className='active-btn'>afficher les commentaires</li>
+                
+                <img src={imageProfile}   id="image-post" alt="profile"></img>
+                <div className='post'>
+                <li onClick={getUser2} id="get-user-account" className='active-btn'>{posterName}:</li>
+                
+                <p  className='text'> {message}</p>
                
-                <div className='comment-container'>
+                </div>
+                <div className='post-option' >
+                <li onClick={addLike} id="add-like">
+                    <img src={heart} id="heart" alt="heart" />
+                    <p> {like}</p>
+                </li>
+                
+                <li onClick={getComments} id="get-comment" className='active-btn'>afficher les commentaires</li>
+                </div>
+                <div >
                 
                     {comments.map((comments) =>(
                         <Comments
                             key ={comments.id}
+                            commentId= {comments.id}
+                            commentUserId = {comments.user_id}
                             comment = {comments.comment}
                             firstName = {comments.firstName}
+                            admin = {admin}
+                            getComments={getComments}
                             
 
                            /> 
@@ -161,16 +200,16 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like ,getAl
                 </div>
 
                 <div>
-                <form>
-                    <input type="text" name="post" id='post' placeholder="Commenter" onChange={(e) => setNewComment
-                        (e.target.value)} value={newComment}></input>
+                <form className=''>
+                    <textarea type="text" name="post" id='comment-input' placeholder="Commenter" onChange={(e) => setNewComment
+                        (e.target.value)} value={newComment}></textarea>
                     <li onClick={createComment} id="create-comment" className="active-btn">Commenter</li>
                 </form>
                     </div>
                
                
-                {postUserId === userId ? (
-                    <li onClick={deletePost} id="delete_post" className='active-btn'>Supprimer</li>
+                {postUserId === userId  || admin2 === 1 ? (
+                    <li onClick={deletePost} id="delete_post" className='active-btn'>Supprimer ce post</li>
                 )
                     : ("")
                 }
