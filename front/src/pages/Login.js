@@ -1,9 +1,5 @@
-import React, { useState } from "react";
-//import axios from "axios";
+
 import Log from "../components/login/index.log";
-//import { Helmet } from "react-helmet";
-
-
 
 function Login() {
     return(

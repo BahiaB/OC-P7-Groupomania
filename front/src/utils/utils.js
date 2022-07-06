@@ -1,11 +1,5 @@
-import axios from "axios";
-import { useState } from "react";
 
-
-
-
-
-function isLogged() {
+/*function isLogged() {
    // const [loggedIn, setLoggedIn] = useState(false);
    const token = localStorage.getItem("token")
    console.log(`token de utils ${token}`)
@@ -18,7 +12,7 @@ function isLogged() {
         return(false);
 }
 }
-
+*/
 
 export function emailValidation(data) {
   const regex =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;

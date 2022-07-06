@@ -33,7 +33,7 @@ function Navbar() {
                         </li>
                         <li onClick={Logout}>
                             <NavLink to="/login">
-                            <img src={logout} class="logout-icon" alt='img log out'/>
+                            <img src={logout} className="logout-icon" alt='img log out'/>
                             </NavLink>
                         </li>
                         
@@ -43,7 +43,7 @@ function Navbar() {
                         <li></li>
                         <li >
                         <NavLink exact to="/login">
-                            <img src={logout} class="logout-icon" alt='img log out'/>
+                            <img src={logout} className="logout-icon" alt='img log out'/>
                         </NavLink>
                         </li>
                     </ul>

@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import {emailValidation, nameValidation, firstNameValidation} from "../Utils/utils"
 //import getUser from "../pages/Account"
 
 
 
 function ChangeProfil(userId, admin) {
-   /* useEffect(() => {
-       // getUser();
-        handleProfile()
-        
-   
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);*/
+  
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -24,7 +17,7 @@ function ChangeProfil(userId, admin) {
 	const [lastNameError, setLastNameError] = useState("")
 	const [firstNameError, setFirstNameError] = useState("")
     
-    const [newFile, SetNewFile]= useState()
+   // const [newFile, SetNewFile]= useState()
 
     let { id } = useParams();
     const token = JSON.parse(localStorage.token)
@@ -76,12 +69,7 @@ function ChangeProfil(userId, admin) {
             
       
 }
-   // };
- 
-
-
-
-
+  
     return(
         <>
         <form action="" onSubmit={handleProfile} id="profil-form">

@@ -281,7 +281,7 @@ form {
           animation: border1 2s forwards;
 }
 
-#create-comment, #delete_post {
+#create-comment, #delete_post, #delete_comment, #delete_profile {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -298,7 +298,49 @@ form {
           box-shadow: none;
 }
 
-#create-comment:hover, #delete_post:hover {
+#create-comment:hover, #delete_post:hover, #delete_comment:hover, #delete_profile:hover {
+  cursor: pointer;
+  -webkit-animation: border1 2s forwards;
+          animation: border1 2s forwards;
+}
+
+#delete_comment {
+  margin-bottom: 2rem;
+  max-width: 65%;
+}
+
+#delete_comment:hover {
+  color: #fd2d01;
+}
+
+#delete_post:hover, #delete_profile:hover {
+  color: #fd2d01;
+}
+
+#create-comment {
+  max-width: 35%;
+  margin-top: 1rem;
+  margin-left: 30%;
+}
+
+#get-user-account {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-self: center;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  background-color: white;
+  padding: 0.3rem;
+  border: none;
+  border-bottom: 1px solid #a5a6aa;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+#get-user-account:hover {
   cursor: pointer;
   -webkit-animation: border1 2s forwards;
           animation: border1 2s forwards;

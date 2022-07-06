@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {emailValidation, nameValidation, firstNameValidation} from "../../Utils/utils"
-import { NavLink } from 'react-router-dom';
+//import { NavLink } from 'react-router-dom';
 
 const SignUpForm = () => {
 

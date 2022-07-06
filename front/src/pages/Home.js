@@ -3,117 +3,95 @@ import axios from 'axios';
 import Poster from '../components/Poster';
 import Posts from '../components/Posts'
 import Comments from '../components/Comments';
-//import { getPostUser } from '../Utils/utils';
 
 
+const Home = () => {
 
-
-const Home = () =>{
-    const [pages, setPages] = useState(0);
     const [posts, setPosts] = useState([]);
-    const [postUser, setPostUser]= useState("");
-    useEffect(() =>{
+
+    useEffect(() => {
         getAllPosts();
         getUser();
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const [user, setUser] = useState([]);
-    const userId = JSON.parse(localStorage.userId); // Utiliser getItem
+    const userId = JSON.parse(localStorage.userId);
     const token = JSON.parse(localStorage.token)
-   // const [pages, setPages] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
-   
 
-
-   
-    
     const getAllPosts = async () => {
-       
-     // alert("alert!!!")
-       await axios({
-           method: "GET",
-           url: `${process.env.REACT_APP_API_URL}api/post/ `,
 
-           headers: {
-               authorization: `Bearer ${token}`
-           }
-       }).then((res) => {
-           console.log("res", res.data);
-           setTotalItems(res.data.length);
-           setPosts(res.data);
-           //getPostUser(posts.post_user_id)
-          console.log(posts.post_id)
-          console.log(posts.imageProfile)
-          console.log(posts)
+        await axios({
+            method: "GET",
+            url: `${process.env.REACT_APP_API_URL}api/post/ `,
 
-           console.log(totalItems)
-           if (res.data.error) {
-               console.log("ici222", res.data.errors)
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        }).then((res) => {
+            console.log("res", res.data);
+            setTotalItems(res.data.length);
+            setPosts(res.data);
+            console.log("posts", posts)
+            if (res.data.error) {
+            }
+        })
+            .catch((err) => {
+                console.log(err);
+            });
 
-           }
-       })
-           .catch((err) => {
-               console.log(err);
-           });
-
-   };
+    };
 
 
-   const getUser = () =>{
-    axios ({
-        method: "GET",
-        url: `${process.env.REACT_APP_API_URL}api/auth/${userId} `,
-        
-        headers:{
-            authorization:`Bearer ${token}`
-        }
-    }).then((res) => {
-        console.log(res);
-        setUser(res.data);
-        
-        if (res.data.error) {
-            console.log("ici",res.data.errors)
-           
-        } 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const getUser = () => {
+        axios({
+            method: "GET",
+            url: `${process.env.REACT_APP_API_URL}api/auth/${userId} `,
 
-  };
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        }).then((res) => {
+            console.log(res);
+            setUser(res.data);
 
- 
-    
-    return(
+            if (res.data.error) {
+                console.log("ici", res.data.errors)
+            }
+        })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    return (
         <main>
             <section>
                 <div className="home-container">
-                <Poster 
-                posterName = {posts.firstName} 
-                getAllPosts = {getAllPosts}/>
+                    <Poster
+                        posterName={posts.firstName}
+                        getAllPosts={getAllPosts} />
                 </div>
                 <div className='post-container'>
-                {posts.map(posts => (
-                    <Posts 
-                    key ={posts.id}
-                    posterName ={posts.firstName}
-                    message ={posts.message}
-                    date = {posts.dateCreation}
-                    postId = {posts.post_id}
-                   postUserId = {posts.post_user_id}
-                   getAllPosts= {getAllPosts}
-                   like={posts.total_like}
-                   imageProfile = {posts.post_imageurl}
-                   admin ={user.admin}
+                    {posts.map( posts => (
+                        <Posts
+                            key={posts.id}
+                            posterName={posts.firstName}
+                            message={posts.message}
+                            date={posts.dateCreation}
+                            postId={posts.post_id}
+                            postUserId={posts.post_user_id}
+                            getAllPosts={getAllPosts}
+                            like={posts.total_like}
+                            imageProfile={posts.post_imageurl}
+                            imagePost={posts.imageurl}
+                            admin={user.admin}
+                        />
+))}
+                    <Comments />
 
-                    />
-
-                
-                ))}
-                <Comments />
-                    
                 </div>
             </section>
         </main>

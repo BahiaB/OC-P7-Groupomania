@@ -239,11 +239,51 @@ body{
 
     }
   }
-  #create-comment, #delete_post {
+  #create-comment, #delete_post, #delete_comment, #delete_profile {
     display: flex;
     justify-self: center;
     align-self: center;
     margin-top: 2rem;
+    font-size: 0.8rem;
+    background-color: white;
+    padding: 0.3rem;
+    border:none;
+    border-bottom:  1px  solid $Third;
+    box-shadow: none;
+    
+    
+   
+    &:hover{
+     cursor: pointer;
+     animation: border1 2s forwards;
+    }
+
+  }
+  #delete_comment{
+    margin-bottom: 2rem;
+    max-width: 65% ;
+    &:hover{
+      color:$Primary
+    }
+  }
+
+  #delete_post, #delete_profile{
+    &:hover{
+      color:$Primary
+    }
+  }
+
+  #create-comment{
+    max-width: 35%;
+    margin-top: 1rem;
+    margin-left: 30%;
+  }
+  
+  #get-user-account {
+    display: flex;
+    justify-self: center;
+    align-self: flex-start;
+    margin-bottom: 1rem;
     font-size: 0.8rem;
     background-color: white;
     padding: 0.3rem;

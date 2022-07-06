@@ -11,8 +11,9 @@ function Poster({getAllPosts}, posterName){
     const [lastName, setLastName]= useState('');
     const [firstName, setFirstName] = useState('');
     const [message, setMessage] = useState('');
-    const [posts, setPosts] = useState('');
-    const[userpost,setUserPost] = useState('')
+   // const [posts, setPosts] = useState('');
+   // const[userpost,setUserPost] = useState('')
+   const [imagePost, setImagePost]= useState();
     const userId = JSON.parse(localStorage.userId)
 	const token = JSON.parse(localStorage.token)
     const [imageProfile, setImageProfile]= useState()
@@ -53,19 +54,23 @@ function Poster({getAllPosts}, posterName){
             console.log("No message!")
             return
         }else{
-        axios ({
-            method: "POST",
-            url: `${process.env.REACT_APP_API_URL}api/post/`,
-            data: {
-                userId : userId,
-                message: message,
-                postUserName: posterName
-           
-            },
-            headers:{
-                authorization:`Bearer ${token}`
-            }
-        }).then((res) => {
+
+            const form = new FormData()
+            form.append('user_id', userId)
+            form.append('message', message)
+            
+            form.append('image', imagePost[0])
+            form.append('postUserName', posterName)
+            console.log("dewfdw", userId)
+            console.log(form.get('user_id'))
+            console.log("image", imagePost)
+            axios
+                .post(`${process.env.REACT_APP_API_URL}api/post/ `, form, {
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data",
+                    },
+                }).then((res) => {
             console.log("poster res",res);
 			setMessage(res.data.message)
             getAllPosts();
@@ -93,6 +98,7 @@ function Poster({getAllPosts}, posterName){
                 <form>
                 <textarea type="text" name="post" id='post' placeholder="Que souhaitez vous partager?" onChange={(e) => setMessage
                 (e.target.value)} value={message}></textarea>
+                <input type="file" name="post-picture" id='post-picture' onChange={(e) => setImagePost(e.target.files)} filename={imagePost}></input>
                 <li onClick={createPost} id="create-post" className="active-btn">Poster</li>
                 </form>
                 
@@ -103,3 +109,4 @@ function Poster({getAllPosts}, posterName){
 }
 
 export default Poster;
+

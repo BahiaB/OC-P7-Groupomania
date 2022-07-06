@@ -13,7 +13,7 @@ exports.createPost = (req, res, next) => {
         user_id: `${req.auth.userId}`,
         message: req.body.message,
         postUserName: req.body.postUserName,
-        imageurl: null,
+        imageurl:`${req.protocol}://${req.get('host')}/images/posts/${req.file.filename}`,
     };
     const sql = "INSERT INTO post SET ?";
     db.query(sql, newPost, (err, result) => {
@@ -29,7 +29,7 @@ exports.createPost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
 
     const sql =// "SELECT * FROM  post";
-       `SELECT post.id AS post_id, user.imageProfile AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id ORDER BY datecreation DESC;`;
+       `SELECT post.id AS post_id, post.imageurl, user.imageProfile AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id ORDER BY datecreation DESC;`;
       //"SELECT  post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id as post_user_id, user.firstName  FROM post JOIN user ON post.user_id = user.UID  ORDER BY datecreation DESC;";
     db.query(sql, (err, result) => {
 
