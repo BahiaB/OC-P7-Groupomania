@@ -86,12 +86,12 @@ exports.getPostsFromUser = (req, res, next) => {
     const user = req.params.id
 
     //`SELECT post.id AS post_id, post.imageurl, user.imageProfile AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id ORDER BY datecreation DESC;`;
-    const sql = `SELECT post.id AS post_id, post.imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.imageProfile AS post_imageurl, user.firstName, COUNT(likes.post_id) AS total_like FROM post LEFT JOIN user ON post.user_id = ? LEFT JOIN likes ON post.id = likes.post_id WHERE post.user_id = ? GROUP BY post.id`
+    const sql = `SELECT post.id AS post_id, post.imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.imageProfile AS post_imageurl, user.firstName, COUNT(likes.post_id) AS total_like FROM post LEFT JOIN user ON UID = ? LEFT JOIN likes ON post.id = likes.post_id WHERE post.user_id = ? GROUP BY post.id`
     db.query(sql, [user, user], async (err, result) => {
         if (err)
             throw err
         else {
-            //console.log("All user post", result)
+            console.log(" user post", result)
             return res.status(200).json(result)
         }
     })

@@ -1,3 +1,5 @@
+import axios from "axios";
+import  { useState }  from "react";
 
 /*function isLogged() {
    // const [loggedIn, setLoggedIn] = useState(false);
@@ -13,6 +15,33 @@
 }
 }
 */
+
+/*export function getAllPosts(){
+const token = localStorage.token;
+const [getPosts, setGetPosts] = useState([]);
+   axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_API_URL}api/post/ `,
+
+      headers: {
+          authorization: `Bearer ${token}`
+      }
+  }).then((res) => {
+      console.log("res", res.data);
+      setGetPosts(res.data)
+      //setTotalItems(res.data.length);
+      //setPosts(res.data);
+     // console.log("posts", posts)
+      if (res.data.error) {
+      }
+  })
+      .catch((err) => {
+          console.log(err);
+      });
+
+};*/
+
+
 
 export function emailValidation(data) {
   const regex =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, } from 'react';
 import { useParams } from "react-router-dom";
+
 import ChangeProfil from '../components/changeProfil';
 import Posts from '../components/Posts';
 
@@ -18,6 +19,7 @@ const Account = () => {
 	const [admin, setAdmin] = useState(0);
 	const [profile, setProfile] = useState([]);
 	const[post, setPost]= useState([]);
+	const[allPosts, setAllPosts]= useState([])
 	const [profilModal, setProfilModal] = useState(false);
 	let { id } = useParams();
 	const userId = JSON.parse(localStorage.userId);
@@ -126,6 +128,7 @@ const Account = () => {
                 setPost(res.data)
             }
 	})}
+	
 
 	return (
 		<section>
@@ -143,6 +146,7 @@ const Account = () => {
 
 						{profilModal && <ChangeProfil userId={userId}
 							admin={admin}
+						//	getAllPosts={getPostsFromUser}
 							 />}
 
 						{userId === id || admin === 1 ? (
@@ -167,15 +171,16 @@ const Account = () => {
                     {post.map( post => (
                         <Posts
                             key={post.id}
-                            posterName={firstName}
+                            posterName={post.firstName}
                             message={post.message}
                             date={post.dateCreation}
                             postId={post.post_id}
                             postUserId={post.post_user_id}
                             like={post.total_like}
-                            imageProfile={imageProfile}
+                            imageProfile={post.post_imageurl}
                             imagePost={post.imageurl}
                             admin={admin}
+							getAllPosts={getPostsFromUser}
                         />
 ))}
 </div>
