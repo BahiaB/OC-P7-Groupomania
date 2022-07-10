@@ -50,7 +50,7 @@ function SignInForm() {
             }
           })
           .catch((err) => {
-            alert(err.response.data.error);
+            window.confirm(err.response.data.error);
             console.log(err.response.data.error);
           });
 

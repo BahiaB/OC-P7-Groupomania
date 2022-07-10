@@ -53,6 +53,8 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
     }
 
     const deletePost = () => {
+        if (window.confirm("atention cette action est ireversible"))
+		{
         axios({
             method: "DELETE",
             url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
@@ -63,6 +65,7 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
         }).then((res) => {
             console.log("res", res);
             setPosts(res.data);
+            window.location="/home"
 
             if (res.data.error) {
                 console.log(res.data.errors)
@@ -72,6 +75,7 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
             .catch((err) => {
                 console.log(err);
             });
+        }
     }
 
 
@@ -154,8 +158,10 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
                 <li onClick={getPoster} id="get-user-account" className='active-btn'>{posterName}: à partagé:</li>
             </div>
             <div className='post'>
-               
+               {imagePost ? (
                 <img src= {imagePost} id="image-post2" alt="imagepost"/>
+               ) : ('')
+               }
                 <p className='text'> {message}</p>
 
             </div>
@@ -164,12 +170,10 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
                     <img src={heart} id="heart" alt="heart" />
                     <p> {like}</p>
                 </li>
-                {postUserId === userId || admin === 1 ? (
-                        <li onClick={handlePost} id="update-post" className="active-btn">Modifier ce post</li>)
-                        : ("")}
-                    {postModal && <UpdatePost postId={postId} getAllPosts={getAllPosts} />}
+                
                 <li onClick={getComments} id="get-comment" className='active-btn'>afficher les commentaires</li>
             </div>
+            
             <div >
 
                 {comments.map((comments) => (
@@ -191,13 +195,20 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
                     <li onClick={createComment} id="create-comment" className="active-btn">Commenter</li>
                 </form>
             </div>
+            <div className='modify-delete-line'>
+            {postUserId === userId || admin === 1 ? (
+                        <li onClick={handlePost} id="update-post" className="active-btn">Modifier ce post</li>)
+                        : ("")}
+                    {postModal && <UpdatePost postId={postId} getAllPosts={getAllPosts} />}
 
             {postUserId === userId || admin === 1 ? (
                 <li onClick={deletePost} id="delete_post" className='active-btn'>Supprimer ce post</li>
             )
                 : ("")
             }
+            </div>
             <br />
+
         </div>
 
 

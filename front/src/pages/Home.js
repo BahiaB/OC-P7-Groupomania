@@ -109,7 +109,6 @@ const Home = () => {
                             admin={user.admin}
                         />
 ))}
-                    <Comments />
 
                 </div>
             </section>

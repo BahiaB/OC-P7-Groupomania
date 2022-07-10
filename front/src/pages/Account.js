@@ -82,6 +82,8 @@ const Account = () => {
 	};
 
 	const deleteProfile = () => {
+		if (window.confirm("atention cette action est ireversible"))
+		{
 		axios({
 			method: "DELETE",
 			url: `${process.env.REACT_APP_API_URL}api/auth/${id}`,
@@ -91,7 +93,9 @@ const Account = () => {
 			}
 		}).then((res) => {
 			console.log("res delete profile", res);
+			//window.confirm("atention cette action est ireversible")
 			setProfile(res.data);
+			
 			window.location = "/login";
 			if (res.data.error) {
 				console.log("ici222", res.data.errors)
@@ -101,6 +105,10 @@ const Account = () => {
 			.catch((err) => {
 				console.log(err);
 			});
+		}
+		else{
+			return;
+		}
 	}
 
 	const getPostsFromUser = () => {
@@ -134,7 +142,8 @@ const Account = () => {
 						<li onClick={handleProfil} id="show-profil" className="active-btn">Modifier</li>
 
 						{profilModal && <ChangeProfil userId={userId}
-							admin={admin} />}
+							admin={admin}
+							 />}
 
 						{userId === id || admin === 1 ? (
 							<li onClick={deleteProfile} id="delete_profile" className='active-btn'>Supprimer ce profile</li>

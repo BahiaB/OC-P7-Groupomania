@@ -27,6 +27,7 @@ function ChangeProfil(userId, admin) {
    const handleProfile= (e) => {
        
     e.preventDefault();
+    
     if (emailValidation(email) === false) {
         setEmailError("Veuillez entrez un email valide")
     }
@@ -38,7 +39,7 @@ function ChangeProfil(userId, admin) {
         setFirstNameError("Veuillez entrez un nom valide")
     }
     //if(emailValidation(email) && nameValidation(firstName) && firstNameValidation(firstName))
-   // {
+    //{
         let form = new FormData()
         form.append('email', email)
         form.append('lastName', lastName);
@@ -72,24 +73,24 @@ function ChangeProfil(userId, admin) {
   
     return(
         <>
-        <form action="" onSubmit={handleProfile} id="profil-form">
+        <form action="" onSubmit={handleProfile} id="profil-form ">
             <label htmlFor="email">Email</label>
             <br />
-            <input type="text" name="email" id='email' onChange={(e) => setEmail
+            <input type="text" name="email" id='email' placeholder="Email"onChange={(e) => setEmail
                 (e.target.value)} value={email}></input>
             <div className='email-error'>{emailError}</div>
             <br />
 
             <label htmlFor='firstName'>Prenom</label>
             <br />
-            <input type="text" name='firstName' id='firstName' onChange={(e) => setFirstName
+            <input type="text" name='firstName' id='firstName' placeholder="Prenom" onChange={(e) => setFirstName
                 (e.target.value)} value={firstName}></input>
             <div className='password error'>{firstNameError}</div>
             <br />
 
             <label htmlFor="text">Nom de famille</label>
             <br />
-            <input type="text" name="lastName" id='lastName' onChange={(e) => setLastName
+            <input type="text" name="lastName" id='lastName' placeholder="Nom" onChange={(e) => setLastName
                 (e.target.value)} value={lastName}></input>
             <div className='email-error'>{lastNameError}</div>
             <br />

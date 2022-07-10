@@ -49,7 +49,11 @@ const SignUpForm = () => {
 						
 					}
 				)
-				.catch((err) => console.log(err.message));
+				.catch((err) => {
+					alert(err.response.data.error);
+					console.log(err.response.data.error);
+				  });
+		
 		}
 	}
 

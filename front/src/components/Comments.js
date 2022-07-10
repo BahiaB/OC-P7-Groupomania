@@ -36,21 +36,21 @@ function Comments({key, commentId, commentUserId, comment, firstName , admin, ge
 
  
     return (
-        <>
+        
         <div className='comment'>
             <p className='name'>{firstName}</p>
             <p className='text'> {comment}</p>
         
-            
-        {commentUserId === userId  || admin === 1 ? (
-            <li onClick={deleteComment} id="delete_comment" className='active-btn'><img src={trash} alt="poubelle"/></li>
-        )
-            : ("")
-        }
+            {commentUserId === userId  || admin === 1 ? (
+    <li onClick={deleteComment} id="delete_comment" className='active-btn'><img src={trash} alt="poubelle"/></li>
+)
+    : ("")
+}
+       
         </div>
-        </>
+        
     )
 
 }
 
-export default Comments;
+export default Comments; 

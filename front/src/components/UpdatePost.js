@@ -35,17 +35,19 @@ function UpdatePost({postId, getAllPosts}) {
     
 
     return (
+        <div classename="post-form">
         <form onSubmit={handlePost} id="post-form">
             <label htmlFor='message'>message</label>
             <br />
-            <input type="text" name='message' id='message' onChange={(e) => setMessage
-                (e.target.value)} value={message}></input>
+            <textarea type="text" name='message' id='message' onChange={(e) => setMessage
+                (e.target.value)} value={message}></textarea>
             <div className='password error'></div>
             <br />
             <input type="file" name="post-picture" id='post-picture' onChange={(e) => setImagePost(e.target.files)} filename={imagePost}></input>
             <br />
-            <input type="submit" classename="active-btn" id="change-post" value="modifier mon post"></input>
+            <input type="submit" classename="active-btn" id="change-post" value="modifier"></input>
         </form>
+        </div>
     )
 }
 

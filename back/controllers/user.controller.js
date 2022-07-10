@@ -103,16 +103,13 @@ exports.userInfo = (req, res, next) => {
 }
 
 exports.updateUser = (req, res, next) => {
-	//console.log(req.auth);
+
 	const userId = req.auth.userId
-	//console.log("ici2",userId)
 	const pageId = req.params.id;
 	const lastName = req.body.lastName;
 	const firstName = req.body.firstName;
 	const email = req.body.email;
 	const file = req.body.file;
-	//const sqlAdminInfos = `SELECT admin FROM user WHERE UID='${userId}'`;
-	//const checkAdmin = null;
 	console.log("req body image", req.body)
     console.log("req file", req.file)
 
@@ -131,7 +128,11 @@ exports.updateUser = (req, res, next) => {
 		const sql = `UPDATE user SET ? WHERE UID= ? `
 		db.query(sql, [newInfoUser, userId], (err, result) => {
 			if (err)
+			{res.status(500).json({
+                error: "Erreur lors de la modification de l'utilisateur",
+              });
             throw err
+			}
         else
             res.status(200).json(result)
 			

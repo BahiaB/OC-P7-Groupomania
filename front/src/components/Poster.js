@@ -31,6 +31,7 @@ function Poster({getAllPosts}, posterName){
             console.log("poster",res.data);
 			setLastName(res.data.lastName);
 			setFirstName(res.data.firstName);
+            
             setImageProfile(res.data.imageProfile)
             console.log(firstName)
             if (res.data.error) {
@@ -58,12 +59,14 @@ function Poster({getAllPosts}, posterName){
             const form = new FormData()
             form.append('user_id', userId)
             form.append('message', message)
-            
-            form.append('image', imagePost[0])
             form.append('postUserName', posterName)
+            if(imagePost)
+            {
+                form.append('image', imagePost[0])
+            }
             console.log("dewfdw", userId)
             console.log(form.get('user_id'))
-            console.log("image", imagePost)
+           // console.log("image", imagePost)
             axios
                 .post(`${process.env.REACT_APP_API_URL}api/post/ `, form, {
                     headers: {
@@ -81,7 +84,7 @@ function Poster({getAllPosts}, posterName){
           .catch((err) => {
             console.log(err);
           });
-        }
+       }
     }
     useEffect(() => {
         getUser();
