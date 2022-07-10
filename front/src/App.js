@@ -14,6 +14,8 @@ import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Account from "./pages/Account.js";
 import Navbar from "./components/Navbar.js";
+import UserSearch from "./pages/UserSearch"
+
 //import isLogged from "./utils/utils.js";
 
 //import Messages from "./pages/Messages.js";
@@ -34,6 +36,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/account/:id" element={<Account />} />
+        <Route path="/UserSearch/:id" element={<UserSearch />} />
        
        
       </Routes>}

@@ -1,25 +1,18 @@
 
 const mysql = require('mysql2');
 require('dotenv').config();
-//const HOST = process.env.HOST;
-//const USER = process.env.USER;
-////const PORT = process.env.PORT;
-const PASSWORD = process.env.PASSWORD;
-//const DATABASE = process.env.DATABASE;
-/*console.log(HOST)
-console.log(PASSWORD)
-console.log(DATABASE)
-console.log(PORT)*/
-    
-   
-
+const DB_HOST = process.env.DB_HOST;
+const DB_USER = process.env.DB_USER;
+const DB_PORT = process.env.DB_PORT;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_DATABASE = process.env.DB_DATABASE;
 
     const db = mysql.createConnection({
-        host     : "127.0.0.1",
-        user     :  "root",
-        port: '3306',
-        password : PASSWORD,  
-        database: "Groupomania"
+        host     : DB_HOST,
+        user     :  DB_USER,
+        port: DB_PORT,
+        password : DB_PASSWORD,  
+        database: "groupomania"
         
         
     }

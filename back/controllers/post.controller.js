@@ -78,6 +78,21 @@ exports.updatePost = (req, res, next) => {
 
 };
 
+exports.getPostsFromUser = (req, res, next) => {
+    const user = req.params.id
+ 
+                //`SELECT post.id AS post_id, post.imageurl, user.imageProfile AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id ORDER BY datecreation DESC;`;
+    const sql = `SELECT post.id AS post_id, post.imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.imageProfile AS post_imageurl, user.firstName, COUNT(likes.post_id) AS total_like FROM post LEFT JOIN user ON post.user_id = ? LEFT JOIN likes ON post.id = likes.post_id WHERE post.user_id = ? GROUP BY post.id`
+    db.query(sql, [user,user], async (err, result) => {
+        if (err)
+            throw err
+        else {
+            //console.log("All user post", result)
+            return res.status(200).json(result)
+        }
+    })
+}
+
 exports.deletePost = (req, res, next) => {
     const postId = req.params.id;
     const userId = req.auth.userId;
@@ -185,4 +200,25 @@ exports.addLike = (req, res, next) => {
             })
         }
     })
+}
+
+exports.modifyPost = (req, res, next) => {
+
+    console.log("req param: ",req.params)
+    let updated = {}
+    if (req.body.message) {
+        updated = {...updated, message: req.body.message}
+    }
+    if (req.file) {
+        updated = { ...updated, imageurl: `${req.protocol}://${req.get('host')}/images/posts/${req.file.filename}` }
+       
+    }
+    const sql = `UPDATE post SET ? WHERE ID=?`
+    db.query(sql, [updated, req.params.id], async (err, result) => {
+        if (err)
+            throw err
+        else
+            res.status(200).json(result)
+    })
+   
 }

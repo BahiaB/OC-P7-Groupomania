@@ -2,25 +2,26 @@ import axios from 'axios';
 import React, { useEffect, useState, } from 'react';
 import { useParams } from "react-router-dom";
 import ChangeProfil from '../components/changeProfil';
+import Posts from '../components/Posts';
 
 const Account = () => {
 
 	useEffect(() => {
 		getUser();
+		//getPostsFromUser();
 	});
 
-	const [lastName, setLastName] = useState('')
-	const [firstName, setFirstName] = useState('')
-	const [email, setEmail] = useState('')
-	const [imageProfile, setImageProfile] = useState()
+	const [lastName, setLastName] = useState('');
+	const [firstName, setFirstName] = useState('');
+	const [email, setEmail] = useState('');
+	const [imageProfile, setImageProfile] = useState();
 	const [admin, setAdmin] = useState(0);
 	const [profile, setProfile] = useState([]);
+	const[post, setPost]= useState([]);
 	const [profilModal, setProfilModal] = useState(false);
 	let { id } = useParams();
-	const userId = JSON.parse(localStorage.userId)
-	const token = JSON.parse(localStorage.token)
-	//console.log(userId)
-	//console.log(id)
+	const userId = JSON.parse(localStorage.userId);
+	const token = JSON.parse(localStorage.token);
 
 	const handleProfil = (e) => {
 		setProfilModal(true)
@@ -45,6 +46,7 @@ const Account = () => {
 				setEmail(res.data.email);
 			setImageProfile(res.data.imageProfile)
 			getAdmin();
+			
 			if (res.data.error) {
 				console.log(res.data.errors)
 
@@ -101,6 +103,21 @@ const Account = () => {
 			});
 	}
 
+	const getPostsFromUser = () => {
+		axios.get(`${process.env.REACT_APP_API_URL}api/post/user-posts/${id}`, {
+            headers: {
+                authorization: `Bearer ${token}`
+            }
+        }).then((res) => {
+            if (res.data.error) {
+                console.log("ici", res.data.errors)
+
+            }
+            else {
+				console.log("test1", res.data)
+                setPost(res.data)
+            }
+	})}
 
 	return (
 		<section>
@@ -132,9 +149,28 @@ const Account = () => {
 						<p> Prenom: {firstName}</p>
 						<p>Contact: {email}</p>
 					</div>
-				)}
 
+				)}
 			</div>
+
+					<li  onClick={getPostsFromUser} id="show-post"className='active-btn'> Afficher les posts</li>
+			<div className='post-container' >
+                    {post.map( post => (
+                        <Posts
+                            key={post.id}
+                            posterName={firstName}
+                            message={post.message}
+                            date={post.dateCreation}
+                            postId={post.post_id}
+                            postUserId={post.post_user_id}
+                            like={post.total_like}
+                            imageProfile={imageProfile}
+                            imagePost={post.imageurl}
+                            admin={admin}
+                        />
+))}
+</div>
+
 		</section>
 	)
 }

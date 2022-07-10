@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
+
 import axios from 'axios';
 import Poster from '../components/Poster';
 import Posts from '../components/Posts'
 import Comments from '../components/Comments';
+import Search from'../image/icons/search.svg';
+
+import UserSearch from'../pages/UserSearch';
+import { NavLink } from 'react-router-dom';
 
 
 const Home = () => {
@@ -20,6 +25,9 @@ const Home = () => {
     const userId = JSON.parse(localStorage.userId);
     const token = JSON.parse(localStorage.token)
     const [totalItems, setTotalItems] = useState(0);
+    const [search, setSearch] = useState('')
+    const[userSearch, setUserSearch]= useState([]);
+    //const userSearch = [];
 
     const getAllPosts = async () => {
 
@@ -66,8 +74,19 @@ const Home = () => {
             });
     };
 
+    const searchUser = async (e) => {
+        window.location = `/UserSearch/${search}`
+    }
+  
     return (
         <main>
+           
+           <div className='search-bar' >
+                <input type="text" name="search-bar" id='search-bar' placeholder="recherche" onChange={(e) => setSearch
+                        (e.target.value)} value={search}></input>
+                <li onClick={searchUser} id="searchUser" className="active-btn"><img src={Search}id="search-button" alt="recherche"/></li>
+            </div>
+               
             <section>
                 <div className="home-container">
                     <Poster

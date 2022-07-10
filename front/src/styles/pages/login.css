@@ -105,7 +105,7 @@ li:not(.active-btn):hover {
 input {
   background: white;
   height: 2rem;
-  width: 12rem;
+  width: 100%;
   border-radius: 20px;
   border: #4E5166 2px solid;
 }
@@ -135,6 +135,16 @@ input[type="submit"]:hover {
 @media screen and (min-width: 768px) {
   .log-container {
     width: 50%;
+  }
+  #image-post2 {
+    -ms-grid-column-align: center;
+        justify-self: center;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    max-width: 50rem;
+    max-height: 50rem;
+    margin-bottom: 1rem;
   }
 }
 /*# sourceMappingURL=login.css.map */

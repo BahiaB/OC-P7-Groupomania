@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Comments from './Comments';
+import UpdatePost from './UpdatePost';
 import heart from "../image/icons/heart.svg";
 
 const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAllPosts, imageProfile, admin, imagePost }) => {
@@ -12,6 +13,14 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
+    const [postModal, setPostModal] = useState(false)
+
+   // console.log(admin)
+
+    const handlePost = (e) => {
+        setPostModal(true)
+    }
+
 
     const createComment = (e) => {
 
@@ -140,11 +149,13 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
 
 
         <div className="post-container">
-
-            <img src={imageProfile} id="image-post" alt="profile"></img>
+            <div>
+                <img src={imageProfile} id="image-post" alt="profile"></img>
+                <li onClick={getPoster} id="get-user-account" className='active-btn'>{posterName}: à partagé:</li>
+            </div>
             <div className='post'>
-                <li onClick={getPoster} id="get-user-account" className='active-btn'>{posterName}:</li>
-                <img src= {imagePost} alt="imagepost"/>
+               
+                <img src= {imagePost} id="image-post2" alt="imagepost"/>
                 <p className='text'> {message}</p>
 
             </div>
@@ -153,7 +164,10 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
                     <img src={heart} id="heart" alt="heart" />
                     <p> {like}</p>
                 </li>
-
+                {postUserId === userId || admin === 1 ? (
+                        <li onClick={handlePost} id="update-post" className="active-btn">Modifier ce post</li>)
+                        : ("")}
+                    {postModal && <UpdatePost postId={postId} getAllPosts={getAllPosts} />}
                 <li onClick={getComments} id="get-comment" className='active-btn'>afficher les commentaires</li>
             </div>
             <div >

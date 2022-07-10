@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
-//import avatar from "../image/avatar.png"
+import imageIcon from"../image/icons/img.svg"
 //import { getPostUser } from '../Utils/utils';
 //import { getAllPosts } from "../pages/Home";
 
@@ -98,7 +98,8 @@ function Poster({getAllPosts}, posterName){
                 <form>
                 <textarea type="text" name="post" id='post' placeholder="Que souhaitez vous partager?" onChange={(e) => setMessage
                 (e.target.value)} value={message}></textarea>
-                <input type="file" name="post-picture" id='post-picture' onChange={(e) => setImagePost(e.target.files)} filename={imagePost}></input>
+                <input type="file" name="post-picture" id='post-picture' className='input-file' onChange={(e) => setImagePost(e.target.files)} filename={imagePost}></input>
+                <label htmlFor="post-picture"><img src={imageIcon} id="image-icon" alt="icon poster"/></label>
                 <li onClick={createPost} id="create-post" className="active-btn">Poster</li>
                 </form>
                 

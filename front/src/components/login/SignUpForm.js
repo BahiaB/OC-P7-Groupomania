@@ -49,7 +49,7 @@ const SignUpForm = () => {
 						
 					}
 				)
-				.catch((err) => console.log(err));
+				.catch((err) => console.log(err.message));
 		}
 	}
 
@@ -58,30 +58,30 @@ const SignUpForm = () => {
 	return (
 		<form action="" onSubmit={handleSignUp} id="sign-up-form">
 
-			<label htmlFor='first-name'>Nom</label>
+			<label htmlFor='first-name'>Prenom</label>
 			<br />
-			<input type="text" name="first-name" id='first-name' onChange={(e) => setFirstName
+			<input type="text" name="first-name" id='first-name' placeholder="Prenom" onChange={(e) => setFirstName
 				(e.target.value)} value={firstName}></input>
 			<div className='first-name error'>{firstNameError}</div>
 			<br />
 
-			<label htmlFor='last-name'> Prenom</label>
+			<label htmlFor='last-name'> Nom</label>
 			<br />
-			<input type="text" name="last-name" id='last-name' onChange={(e) => setLastName
+			<input type="text" name="last-name" id='last-name' placeholder="Nom" onChange={(e) => setLastName
 				(e.target.value)} value={lastName}></input>
 			<div className='last-name error'>{lastNameError}</div>
 			<br />
 
 			<label htmlFor="email">Email</label>
 			<br />
-			<input type="text" name="email" id='email' onChange={(e) => setEmail
+			<input type="text" name="email" id='email' placeholder="Email"onChange={(e) => setEmail
 				(e.target.value)} value={email}></input>
 			<div className='emailError'>{emailError}</div>
 			<br />
 
 			<label htmlFor='password'>Mot de passe</label>
 			<br />
-			<input type="password" name='password' id='password' onChange={(e) => setPassword
+			<input type="password" name='password' id='password' placeholder="Mot de passe" onChange={(e) => setPassword
 				(e.target.value)} value={password}></input>
 			<div className='password error'></div>
 			<br />

@@ -58,14 +58,12 @@ exports.login = (req, res, next) => {
 			throw err;
 		}
 		if (result.length === 0) {
-			console.log(result)
+			console.log("ici")
+
 			return res.status(401)
 				.json({ error: "Identifiant ou mot de passe incorrect" });
 		}
-	//	console.log(result);
-		//console.log(result);
-		//console.log(req.body.password);
-	//	console.log(result[0].UID);
+
 		bcrypt.compare(req.body.password, result[0].password)
 			.then((valid) => {
 				if (!valid) {
@@ -89,10 +87,6 @@ exports.userInfo = (req, res, next) => {
 	console.log("userid:", userId);
 	const sql = `SELECT * FROM user WHERE UID='${userId}'	 `;
 
-	/*if (userId !== result[0].UID) {
-		console.log(userId, result[0].UID)
-		return res.status(401).json({ error: " TOKEN invalide, requête non autorisé !" });
-	  }else{*/
 
 	db.query(sql, userId, async (err, result) => {
 		//console.log("result0",result[0])
@@ -102,7 +96,7 @@ exports.userInfo = (req, res, next) => {
 		}
 		if (result.length === 0)
 			return res.status(400).json('lol')
-	//	console.log(result[0])
+		console.log(result[0])
 		res.status(200).json(result[0])
 	})
 
@@ -162,5 +156,21 @@ exports.deleteUser = (req, res, next) => {
 
         }
         )
+}
+
+exports.searchUser = (req, res, next) => {
+    console.log("par ici search user")
+    console.log("req params", req.query)
+    const sql = `SELECT lastName, firstName, email, imageProfile, UID FROM user WHERE lastName=? OR firstName=?`
+    db.query(sql, [req.query.user, req.query.user], async (err, result) => {
+        if (err)
+            throw err
+        if (result.length === 0)
+            return res.status(400).json({ error: "Utilisateur non trouvé" })
+        else {
+            console.log(result)
+            res.status(200).json(result)
+        }
+    })
 }
 //207000aa-0640-4f7a-96d9-724c1c75e05a

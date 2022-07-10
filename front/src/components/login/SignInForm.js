@@ -8,6 +8,7 @@ function SignInForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const[emailError, setEmailError] = useState("");
+    const [conectError, setConnectError ]= useState("")
 
 
 
@@ -29,10 +30,13 @@ function SignInForm() {
             },
         })
         .then((res) => {
-            console.log(res);
+            console.log("res data login",res.data);
             
             if (res.data.error) {
-                console.log("ici",res.data.errors)
+                console.log("ici")
+                //setConnectError(res.data.errors)
+                alert(res.data.error);
+                
                
             } else {
                 console.log("login data", res.data)
@@ -41,10 +45,13 @@ function SignInForm() {
                 //localStorage.admin = (res.data.admin)
                 console.log("tetdeydtweuydtew", localStorage)
                 window.location = "/home" //useNavigate
+                console.log("login data", res.data)
+                window.location = "/home" //useNavigate
             }
           })
           .catch((err) => {
-            console.log(err);
+            alert(err.response.data.error);
+            console.log(err.response.data.error);
           });
 
       };
@@ -55,13 +62,13 @@ function SignInForm() {
         <form action="" onSubmit={handleLogin} id="sign-in-form">
             <label htmlFor="email">Email</label>
             <br />
-            <input type="text" name="email" id='email' onChange={(e) => setEmail
+            <input type="text" name="email" id='email' placeholder='Email' onChange={(e) => setEmail
                 (e.target.value)} value={email}></input>
             <div className='email-error'>{emailError}</div>
             <br />
             <label htmlFor='password'>Mot de passe</label>
             <br />
-            <input type="password" name='password' id='password' onChange={(e) => setPassword
+            <input type="password" name='password' id='password' placeholder='Password' onChange={(e) => setPassword
                 (e.target.value)} value={password}></input>
             <div className='password error'></div>
             <br />

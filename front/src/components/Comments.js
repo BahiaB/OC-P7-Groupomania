@@ -3,7 +3,7 @@
 import axios from 'axios';
 //import avatar from "../image/avatar.png";
 //import InfiniteScroll from "react-infinite-scroll-component"
-
+import trash from"../image/icons/trash.svg"
 function Comments({key, commentId, commentUserId, comment, firstName , admin, getComments}) {
     //alert("!!!")
     const token = JSON.parse(localStorage.token);
@@ -43,7 +43,7 @@ function Comments({key, commentId, commentUserId, comment, firstName , admin, ge
         
             
         {commentUserId === userId  || admin === 1 ? (
-            <li onClick={deleteComment} id="delete_comment" className='active-btn'>Supprimer ce commentaire</li>
+            <li onClick={deleteComment} id="delete_comment" className='active-btn'><img src={trash} alt="poubelle"/></li>
         )
             : ("")
         }
