@@ -4,7 +4,7 @@ import axios from 'axios';
 //import avatar from "../image/avatar.png";
 //import InfiniteScroll from "react-infinite-scroll-component"
 import trash from"../image/icons/trash.svg"
-function Comments({key, commentId, commentUserId, comment, firstName , admin, getComments}) {
+function Comments({commentId, commentUserId, comment, firstName , admin, getComments}) {
     //alert("!!!")
     const token = JSON.parse(localStorage.token);
     const userId = JSON.parse(localStorage.userId);

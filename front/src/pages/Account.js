@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, } from 'react';
 import { useParams } from "react-router-dom";
-
 import ChangeProfil from '../components/changeProfil';
 import Posts from '../components/Posts';
 
@@ -21,6 +20,7 @@ const Account = () => {
 	const[post, setPost]= useState([]);
 	const[allPosts, setAllPosts]= useState([])
 	const [profilModal, setProfilModal] = useState(false);
+	//const [oldFileName, setOldFileName] = useState("")
 	let { id } = useParams();
 	const userId = JSON.parse(localStorage.userId);
 	const token = JSON.parse(localStorage.token);
@@ -30,6 +30,7 @@ const Account = () => {
 	}
 
 	const getUser = () => {
+		
 		console.log("edef")
 		axios({
 			method: "GET",
@@ -46,7 +47,9 @@ const Account = () => {
 				setFirstName(res.data.firstName);
 			if (res.data.email)
 				setEmail(res.data.email);
+			
 			setImageProfile(res.data.imageProfile)
+			
 			getAdmin();
 			
 			if (res.data.error) {
@@ -98,7 +101,7 @@ const Account = () => {
 			//window.confirm("atention cette action est ireversible")
 			setProfile(res.data);
 			
-			window.location = "/login";
+			window.location = "/";
 			if (res.data.error) {
 				console.log("ici222", res.data.errors)
 
@@ -170,7 +173,7 @@ const Account = () => {
 			<div className='post-container' >
                     {post.map( post => (
                         <Posts
-                            key={post.id}
+                            key={post.post_id}
                             posterName={post.firstName}
                             message={post.message}
                             date={post.dateCreation}

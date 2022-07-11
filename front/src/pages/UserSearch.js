@@ -44,7 +44,7 @@ const UserSearch = () => {
                 {result.map(result =>
                     (
                         <UserResult
-                            key={result.id}
+                            key={Math.random().toString(36).substr(2, 9)}
                             fname={result.firstName}
                             name={result.lastName}
                             mail={result.email}

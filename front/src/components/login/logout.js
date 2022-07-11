@@ -7,7 +7,7 @@ function Logout() {
   
   //console.log(localStorage);
   localStorage.clear();
-  window.location = "/login";
+  window.location = "/";
   console.log(localStorage);
 
   return (

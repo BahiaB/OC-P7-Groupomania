@@ -17,7 +17,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .home-container {
@@ -72,7 +72,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #4E5166;
+  color: #4e5166;
   width: 7rem;
   height: 2rem;
   margin-top: 0.8rem;
@@ -91,7 +91,8 @@ body {
           transform: scale(1.1);
 }
 
-#comment-input, #post {
+#comment-input,
+#post {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -106,7 +107,8 @@ body {
   border-radius: 20px;
 }
 
-#change-profil, #show-profil {
+#change-profil,
+#show-profil {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -128,7 +130,8 @@ body {
   list-style: none;
 }
 
-#change-profil:hover, #show-profil:hover {
+#change-profil:hover,
+#show-profil:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
@@ -220,7 +223,7 @@ form {
 }
 
 .post-container #poster-name {
-  color: #4E5166;
+  color: #4e5166;
 }
 
 .post-container #image-post {
@@ -289,7 +292,7 @@ form {
   gap: 0.5rem;
   list-style: none;
   text-decoration: none;
-  color: #4E5166;
+  color: #4e5166;
 }
 
 .post-option #add-like:hover {
@@ -317,7 +320,12 @@ form {
           animation: border1 2s forwards;
 }
 
-#create-comment, #delete_post, #delete_comment, #delete_profile, #update-post, #show-post {
+#create-comment,
+#delete_post,
+#delete_comment,
+#delete_profile,
+#update-post,
+#show-post {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -334,7 +342,12 @@ form {
           box-shadow: none;
 }
 
-#create-comment:hover, #delete_post:hover, #delete_comment:hover, #delete_profile:hover, #update-post:hover, #show-post:hover {
+#create-comment:hover,
+#delete_post:hover,
+#delete_comment:hover,
+#delete_profile:hover,
+#update-post:hover,
+#show-post:hover {
   cursor: pointer;
   -webkit-animation: border1 2s forwards;
           animation: border1 2s forwards;
@@ -355,7 +368,6 @@ form {
 }
 
 #update-post {
-  margin-bottom: 2rem;
   border-bottom: none;
 }
 
@@ -375,7 +387,8 @@ form {
   border-radius: 20px;
 }
 
-#delete_post:hover, #delete_profile:hover {
+#delete_post:hover,
+#delete_profile:hover {
   color: #fd2d01;
 }
 
@@ -464,7 +477,7 @@ form {
 
 .name {
   padding: 0.5rem;
-  color: #4E5166;
+  color: #4e5166;
   font-size: 0.9rem;
 }
 
@@ -513,9 +526,31 @@ form {
   border-radius: 17px;
 }
 
-/*#update-post{
+.modify-delete-line {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5%;
+  justify-self: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 
-  }*/
+.modify-delete-line textarea {
+  width: 80%;
+  height: auto;
+}
+
+.modify-delete-line #change-post {
+  margin-top: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   .log-container {
     width: 50%;

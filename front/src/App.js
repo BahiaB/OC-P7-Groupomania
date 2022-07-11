@@ -33,7 +33,7 @@ function App() {
     <BrowserRouter>
     <Navbar />
     {  <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/account/:id" element={<Account />} />
         <Route path="/UserSearch/:id" element={<UserSearch />} />

@@ -3,8 +3,9 @@ import axios from 'axios';
 import Comments from './Comments';
 import UpdatePost from './UpdatePost';
 import heart from "../image/icons/heart.svg";
+import { useNavigate } from 'react-router-dom';
 
-const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAllPosts, imageProfile, admin, imagePost }) => {
+const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPosts, imageProfile, admin, imagePost }) => {
 
 
     // console.log(postUserId)
@@ -14,6 +15,7 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const [postModal, setPostModal] = useState(false)
+    const navigate = useNavigate();
 
    // console.log(admin)
 
@@ -65,8 +67,9 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
         }).then((res) => {
             console.log("res", res);
             setPosts(res.data);
-            window.location="/home"
-
+            //window.location='/home'
+            //navigate({reloadDocument : true});
+            window.location.reload(false);
             if (res.data.error) {
                 console.log(res.data.errors)
 
@@ -134,8 +137,8 @@ const Posts = ({ key, message, date, posterName, postId, postUserId, like, getAl
             }
         }).then((res) => {
             console.log(res);
-            window.location = `/account/${postUserId}`
-
+            //window.location = `/account/${postUserId}`
+            navigate(`/account/${postUserId}`)
             if (res.data.error) {
                 console.log("ici", res.data.errors)
 

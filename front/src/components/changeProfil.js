@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 //import { useNavigate } from "react-router-dom";
 import {emailValidation, nameValidation, firstNameValidation} from "../Utils/utils"
 //import getUser from "../pages/Account"
@@ -16,7 +16,7 @@ function ChangeProfil(userId, admin) {
     const [emailError, setEmailError] = useState("")
 	const [lastNameError, setLastNameError] = useState("")
 	const [firstNameError, setFirstNameError] = useState("")
-    
+    const navigate = useNavigate();
    // const [newFile, SetNewFile]= useState()
 
     let { id } = useParams();
@@ -56,9 +56,9 @@ function ChangeProfil(userId, admin) {
             })
             .then((res) => {
                 console.log("poster res",res);
-                //setMessage(res.data.message)
-                //getUser();
-                window.location = `/account/${id}`
+                window.location.reload(false);
+              
+               
                 if (res.data.error) {
                     console.log("ici222",res.data.errors)
                 } 
@@ -66,9 +66,7 @@ function ChangeProfil(userId, admin) {
               .catch((err) => {
                 console.log(err);
               });
-
-            
-      
+ 
 }
   
     return(

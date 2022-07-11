@@ -96,7 +96,7 @@ const Home = () => {
                 <div className='post-container'>
                     {posts.map( posts => (
                         <Posts
-                            key={posts.id}
+                            key={posts.post_id}
                             posterName={posts.firstName}
                             message={posts.message}
                             date={posts.dateCreation}
