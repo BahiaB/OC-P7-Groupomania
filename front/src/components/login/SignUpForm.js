@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {emailValidation, nameValidation, firstNameValidation} from "../../Utils/utils"
+
 //import { NavLink } from 'react-router-dom';
+
 
 const SignUpForm = () => {
 
@@ -45,7 +47,8 @@ const SignUpForm = () => {
 				.then((res) => {
 					console.log(res.data);
 					console.log(localStorage)
-					window.location = "/login"
+					window.location.reload(false)
+					//navigate("/");
 						
 					}
 				)

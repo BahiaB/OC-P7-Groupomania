@@ -12,8 +12,7 @@ const DB_DATABASE = process.env.DB_DATABASE;
         user     :  DB_USER,
         port: DB_PORT,
         password : DB_PASSWORD,  
-        database: "groupomania"
-        
+        database: DB_DATABASE,
         
     }
     );

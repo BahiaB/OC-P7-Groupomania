@@ -85,7 +85,7 @@ exports.userInfo = (req, res, next) => {
 	const userId = req.params.id;
 
 	console.log("userid:", userId);
-	const sql = `SELECT * FROM user WHERE UID='${userId}'	 `;
+	const sql = `SELECT * FROM user WHERE UID=?;`;
 
 
 	db.query(sql, userId, async (err, result) => {
@@ -110,68 +110,96 @@ exports.updateUser = (req, res, next) => {
 	const firstName = req.body.firstName;
 	const email = req.body.email;
 	const file = req.body.file;
-	console.log("req body image", req.body)
-    console.log("req file", req.file)
+	const new_profil_image_url = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
 
-	console.log(req.file.filename)
-		
-		
-		const imageProfile = `${req.protocol}://${req.get('host')}/images/profils/${req.file.filename}`
-		
-		const newInfoUser = {
-			firstName: firstName,
-			lastName: lastName,
-			email: email,
-			imageProfile: imageProfile
-		}
-		console.log("new info user", newInfoUser)
-		const sql = `UPDATE user SET ? WHERE UID= ? `
-		db.query(sql, [newInfoUser, userId], (err, result) => {
-			if (err)
-			{res.status(500).json({
-                error: "Erreur lors de la modification de l'utilisateur",
-              });
-            throw err
+	const SqlOldFile = "SELECT imageProfile FROM user WHERE UID =?;"
+
+	console.log("req file", req.file)
+	if (req.file) {
+		console.log("req file", req.file)
+		db.query(SqlOldFile, userId, async (err, result) => {
+			const oldFileName = result[0].imageProfile.split("/images/")[1];
+			console.log("delete file result", oldFileName)
+			if (oldFileName !== "avatar.png") {
+				fs.unlink(`images/${oldFileName}`, () => {
+					if (err) console.log("err delete image ", err);
+					else {
+						console.log("Ancienne image de profile supprimée");
+					}
+				})
 			}
-        else
-            res.status(200).json(result)
-			
+			const newInfoUser = {
+				firstName: firstName,
+				lastName: lastName,
+				email: email,
+				imageProfile: new_profil_image_url
+			}
+			console.log("ufegfheirufhgref", new_profil_image_url)
+			//console.log("new info user", newInfoUser)
+			const sql = `UPDATE user SET ? WHERE UID= ? `
+			db.query(sql, [newInfoUser, userId], async (err, result) => {
+				if (err) {
+					res.status(500).json({
+						error: "Erreur lors de la modification de l'utilisateur",
+					});
+					throw err
+				}
+				else
+					res.status(200).json(result)
+			})
 		})
+	}
 
 }
 
 exports.deleteUser = (req, res, next) => {
 	//const postId = req.params.id;
-    const userId = req.auth.userId;
+	const sqlFile = "SELECT imageProfile FROM user WHERE user.UID =?"
+	const userId = req.auth.userId;
 	console.log("userid", userId)
-    
-        const sql = `DELETE  FROM user WHERE user.UID = "${userId}";`;
-        db.query(sql, (err, result) => {
-            if (err) {
-                res.status(404).json({ err });
-                throw err;
-            }
-            else {
-                return res.status(200).json("compte suprimé");
-            }
 
-        }
-        )
+	db.query(sqlFile, userId, async (err, result) => {
+		console.log("result:",result[0])
+		if (result[0].imageProfile) {
+			const file = result[0].imageProfile.split("/images/")[1];
+			if (file && file !== "avatar.png") {
+				fs.unlink(`images/${file}`, () => {
+					if (err) console.log("err delete image ", err);
+					else {
+						console.log("Ancienne image de posts supprimée");
+					}
+				})
+			}
+		}
+		const sql = `DELETE  FROM user WHERE user.UID = ?;`;
+		db.query(sql, userId, (err, result) => {
+			if (err) {
+				res.status(404).json({ err });
+				throw err;
+			}
+			else {
+				return res.status(200).json("compte suprimé");
+			}
+		}
+		)
+
+	})
+
 }
 
 exports.searchUser = (req, res, next) => {
-    console.log("par ici search user")
-    console.log("req params", req.query)
-    const sql = `SELECT lastName, firstName, email, imageProfile, UID FROM user WHERE lastName=? OR firstName=?`
-    db.query(sql, [req.query.user, req.query.user], async (err, result) => {
-        if (err)
-            throw err
-        if (result.length === 0)
-            return res.status(400).json({ error: "Utilisateur non trouvé" })
-        else {
-            console.log(result)
-            res.status(200).json(result)
-        }
-    })
+	console.log("par ici search user")
+	console.log("req params", req.query)
+	const sql = `SELECT lastName, firstName, email, imageProfile, UID FROM user WHERE lastName=? OR firstName=?`
+	db.query(sql, [req.query.user, req.query.user], async (err, result) => {
+		if (err)
+			throw err
+		if (result.length === 0)
+			return res.status(400).json({ error: "Utilisateur non trouvé" })
+		else {
+			console.log(result)
+			res.status(200).json(result)
+		}
+	})
 }
 //207000aa-0640-4f7a-96d9-724c1c75e05a

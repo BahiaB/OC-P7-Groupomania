@@ -36,7 +36,7 @@ function ChangeProfil(userId, admin) {
     }
 
     if (firstNameValidation(firstName) === false) {
-        setFirstNameError("Veuillez entrez un nom valide")
+        setFirstNameError("Veuillez entrez un prenom valide")
     }
     //if(emailValidation(email) && nameValidation(firstName) && firstNameValidation(firstName))
     //{

@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `admin` tinyint(1) DEFAULT 0,
-  `imageProfile` varchar(255) DEFAULT 'http://localhost:3500/images/profils/avatar.png'
+  `imageProfile` varchar(255) DEFAULT 'http://localhost:3500/images/avatar.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 COMMIT;
 
