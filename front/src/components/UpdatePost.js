@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
 import axios from "axios";
-import { useParams } from 'react-router-dom';
 
-
-
-function UpdatePost({postId, getAllPosts}) {
+function UpdatePost({ postId, getAllPosts }) {
 
     const [message, setMessage] = useState("");
     const [imagePost, setImagePost] = useState([]);
-    const [postModal, setPostModal] = useState(false)
-
     const token = JSON.parse(localStorage.token)
 
     const handlePost = (e) => {
@@ -18,7 +13,7 @@ function UpdatePost({postId, getAllPosts}) {
         form.append('message', message)
         form.append('image', imagePost[0])
         console.log(postId)
-       
+
         axios
             .put(`${process.env.REACT_APP_API_URL}api/post/modifypost/${postId} `, form, {
                 headers: {
@@ -27,26 +22,28 @@ function UpdatePost({postId, getAllPosts}) {
                 },
             })
             .then((res) => {
+                if (res.data.error)
+                    console.log("Aucune modification n'à été apporté")
                 getAllPosts()
                 window.location = 'http://localhost:3000/home'
                 console.log(res)
             })
     }
-    
+
 
     return (
         <div classename="post-form">
-        <form onSubmit={handlePost} id="post-form">
-            <label htmlFor='message'>message</label>
-            <br />
-            <textarea type="text" name='message' id='message' onChange={(e) => setMessage
-                (e.target.value)} value={message}></textarea>
-            <div className='password error'></div>
-            <br />
-            <input type="file" name="post-picture" id='post-picture' onChange={(e) => setImagePost(e.target.files)} filename={imagePost}></input>
-            <br />
-            <input type="submit" classename="active-btn" id="change-post" value="modifier"></input>
-        </form>
+            <form onSubmit={handlePost} id="post-form">
+                <label htmlFor='message'>message</label>
+                <br />
+                <textarea type="text" name='message' id='message' onChange={(e) => setMessage
+                    (e.target.value)} value={message}></textarea>
+                <div className='password error'></div>
+                <br />
+                <input type="file" name="post-picture" id='post-picture' onChange={(e) => setImagePost(e.target.files)} filename={imagePost}></input>
+                <br />
+                <input type="submit" classename="active-btn" id="change-post" value="modifier"></input>
+            </form>
         </div>
     )
 }

@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const crypto = require('crypto');
-
 const dbc = require("../db");
 const { userInfo } = require("os");
 const db = dbc.getDB();
@@ -15,7 +14,8 @@ exports.signup = (req, res, next) => {
 	const email = req.body.email;
 	const sql = `SELECT email FROM user WHERE email=?`;
 	let query = db.query(sql, email, async (err, result) => {
-		if (err) throw err;
+		if (err)
+			throw err;
 
 		if (result.length === 1) {
 			return res.status(400).json({ error: "Utilisateur déja existant !" });
@@ -37,9 +37,8 @@ exports.signup = (req, res, next) => {
 					};
 					let sql = "INSERT INTO user SET ?";
 					let query = db.query(sql, newUser, (err, result) => {
-						if (err) throw err;
-
-						//console.log(result);
+						if (err)
+							throw err;
 						res.status(201).json({ message: "Utilisateur créé!" });
 					});
 				})
@@ -50,7 +49,6 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
 	const email = req.body.email;
-	//console.log(email)
 	const sql = `SELECT * FROM user WHERE email=?`;
 	db.query(sql, email, async (err, result) => {
 		if (err) {
@@ -58,12 +56,9 @@ exports.login = (req, res, next) => {
 			throw err;
 		}
 		if (result.length === 0) {
-			console.log("ici")
-
 			return res.status(401)
 				.json({ error: "Identifiant ou mot de passe incorrect" });
 		}
-
 		bcrypt.compare(req.body.password, result[0].password)
 			.then((valid) => {
 				if (!valid) {
@@ -83,13 +78,9 @@ exports.login = (req, res, next) => {
 
 exports.userInfo = (req, res, next) => {
 	const userId = req.params.id;
-
-	console.log("userid:", userId);
 	const sql = `SELECT * FROM user WHERE UID=?;`;
 
-
 	db.query(sql, userId, async (err, result) => {
-		//console.log("result0",result[0])
 		if (err) {
 			console.log("error:", err)
 			throw err;
@@ -111,81 +102,91 @@ exports.updateUser = (req, res, next) => {
 	const email = req.body.email;
 	const file = req.body.file;
 	const new_profil_image_url = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+	//const sqlCheck = "SELECT admin, UID from user WHERE UID = ?"
+	const SqlOldFile = "SELECT imageProfile, admin, UID FROM user WHERE UID =?;"
 
-	const SqlOldFile = "SELECT imageProfile FROM user WHERE UID =?;"
-
-	console.log("req file", req.file)
+	//console.log("req file", req.file)
 	if (req.file) {
 		console.log("req file", req.file)
 		db.query(SqlOldFile, userId, async (err, result) => {
-			const oldFileName = result[0].imageProfile.split("/images/")[1];
-			console.log("delete file result", oldFileName)
-			if (oldFileName !== "avatar.png") {
-				fs.unlink(`images/${oldFileName}`, () => {
-					if (err) console.log("err delete image ", err);
-					else {
-						console.log("Ancienne image de profile supprimée");
+			if (userId === result[0].UID || result[0].admin === 1) {
+				const oldFileName = result[0].imageProfile.split("/images/")[1];
+				console.log("delete file result", oldFileName)
+				if (oldFileName !== "avatar.png") {
+					fs.unlink(`images/${oldFileName}`, () => {
+						if (err) console.log("err delete image ", err);
+						else {
+							console.log("Ancienne image de profile supprimée");
+						}
+					})
+				}
+				const newInfoUser = {
+					firstName: firstName,
+					lastName: lastName,
+					email: email,
+					imageProfile: new_profil_image_url
+				}
+				console.log("new profil img url", new_profil_image_url)
+				const sql = `UPDATE user SET ? WHERE UID= ? `
+				db.query(sql, [newInfoUser, userId], async (err, result) => {
+					if (err) {
+						res.status(500).json({
+							error: "Erreur lors de la modification de l'utilisateur",
+						});
+						throw err
 					}
+					else
+						res.status(200).json(result)
 				})
 			}
-			const newInfoUser = {
-				firstName: firstName,
-				lastName: lastName,
-				email: email,
-				imageProfile: new_profil_image_url
+			else{
+				return(res.status(400).json({error:"Utilisateur non autorisé"}))
 			}
-			console.log("ufegfheirufhgref", new_profil_image_url)
-			//console.log("new info user", newInfoUser)
-			const sql = `UPDATE user SET ? WHERE UID= ? `
-			db.query(sql, [newInfoUser, userId], async (err, result) => {
-				if (err) {
-					res.status(500).json({
-						error: "Erreur lors de la modification de l'utilisateur",
-					});
-					throw err
-				}
-				else
-					res.status(200).json(result)
-			})
 		})
+
 	}
 
 }
 
 exports.deleteUser = (req, res, next) => {
-	//const postId = req.params.id;
-	const sqlFile = "SELECT imageProfile FROM user WHERE user.UID =?"
+	const sqlFile = "SELECT imageProfile FROM user WHERE UID =?"
+	const sqlCheck = "SELECT admin, UID from user WHERE UID = ?"
 	const userId = req.auth.userId;
-	console.log("userid", userId)
 
-	db.query(sqlFile, userId, async (err, result) => {
-		console.log("result:",result[0])
-		if (result[0].imageProfile) {
-			const file = result[0].imageProfile.split("/images/")[1];
-			if (file && file !== "avatar.png") {
-				fs.unlink(`images/${file}`, () => {
-					if (err) console.log("err delete image ", err);
+	db.query(sqlCheck, userId, async (err, result) => {
+		if (result[0].UID === req.params.id || result[0].admin === 1) {
+			console.log("result admin:", result[0])
+			db.query(sqlFile, req.params.id, async (err, result) => {
+				if (result[0].imageProfile) {
+					const file = result[0].imageProfile.split("/images/")[1];
+					if (file && file !== "avatar.png") {
+						fs.unlink(`images/${file}`, () => {
+							if (err) console.log("err delete image ", err);
+							else {
+								console.log("Ancienne image de posts supprimée");
+							}
+						})
+					}
+				}
+				const sql = `DELETE  FROM user WHERE user.UID = ?;`;
+				db.query(sql, req.params.id, (err, result) => {
+					if (err) {
+						res.status(404).json({ err });
+						throw err;
+					}
 					else {
-						console.log("Ancienne image de posts supprimée");
+						return res.status(200).json("compte suprimé");
 					}
 				})
-			}
+			})
 		}
-		const sql = `DELETE  FROM user WHERE user.UID = ?;`;
-		db.query(sql, userId, (err, result) => {
-			if (err) {
-				res.status(404).json({ err });
-				throw err;
-			}
-			else {
-				return res.status(200).json("compte suprimé");
-			}
+		else {
+			res.status(400).json({ error: "Utilisateur non autorisé" })
 		}
-		)
-
 	})
-
 }
+
+
 
 exports.searchUser = (req, res, next) => {
 	console.log("par ici search user")
@@ -202,4 +203,3 @@ exports.searchUser = (req, res, next) => {
 		}
 	})
 }
-//207000aa-0640-4f7a-96d9-724c1c75e05a

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Comments from './Comments';
 import UpdatePost from './UpdatePost';
@@ -7,8 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPosts, imageProfile, admin, imagePost }) => {
 
-
-    // console.log(postUserId)
     const token = JSON.parse(localStorage.token)
     const userId = JSON.parse(localStorage.userId)
     const [posts, setPosts] = useState([]);
@@ -16,8 +14,6 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
     const [newComment, setNewComment] = useState("");
     const [postModal, setPostModal] = useState(false)
     const navigate = useNavigate();
-
-   // console.log(admin)
 
     const handlePost = (e) => {
         setPostModal(true)
@@ -27,7 +23,6 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
     const createComment = (e) => {
 
         e.preventDefault();
-
         axios({
             method: "POST",
             url: `${process.env.REACT_APP_API_URL}api/post/comment`,
@@ -43,7 +38,6 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
             console.log(res);
             setNewComment(res.data.message)
             getComments();
-            //info.getAllPosts();
             if (res.data.error) {
                 console.log(res.data.errors)
             }
@@ -51,7 +45,6 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
             .catch((err) => {
                 console.log(err);
             });
-
     }
 
     const deletePost = () => {
@@ -67,8 +60,6 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
         }).then((res) => {
             console.log("res", res);
             setPosts(res.data);
-            //window.location='/home'
-            //navigate({reloadDocument : true});
             window.location.reload(false);
             if (res.data.error) {
                 console.log(res.data.errors)
@@ -87,13 +78,13 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
             method: "GET",
             url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
         }).then((res) => {
-            console.log("res", res);
-            console.log("test", postId)
+            //console.log("res", res);
+            //console.log("test", postId)
             setComments(res.data);
-            console.log(res.data);
+           // console.log(res.data);
 
             if (res.data.error) {
-                console.log("ici222", res.data.errors)
+                //console.log("ici222", res.data.errors)
 
             }
         })
@@ -116,18 +107,12 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
             },
         })
             .then((res) => {
-
                 getAllPosts()
-
             }
             )
-        console.log("ici4")
-
-        console.log("ici5")
     }
 
     const getPoster = () => {
-        // console.log("admin2", admin2)
         axios({
             method: "GET",
             url: `${process.env.REACT_APP_API_URL}api/auth/${postUserId} `,
@@ -137,11 +122,9 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
             }
         }).then((res) => {
             console.log(res);
-            //window.location = `/account/${postUserId}`
             navigate(`/account/${postUserId}`)
             if (res.data.error) {
                 console.log("ici", res.data.errors)
-
             }
         })
             .catch((err) => {
@@ -193,7 +176,7 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
             </div>
             <div>
                 <form className=''>
-                    <textarea type="text" name="post" id='comment-input' placeholder="Commenter" onChange={(e) => setNewComment
+                    <textarea type="text" name="comment" id='comment-input' placeholder="Commenter" onChange={(e) => setNewComment
                         (e.target.value)} value={newComment}></textarea>
                     <li onClick={createComment} id="create-comment" className="active-btn">Commenter</li>
                 </form>

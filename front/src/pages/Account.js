@@ -17,10 +17,8 @@ const Account = () => {
 	const [imageProfile, setImageProfile] = useState();
 	const [admin, setAdmin] = useState(0);
 	const [profile, setProfile] = useState([]);
-	const[post, setPost]= useState([]);
-	const[allPosts, setAllPosts]= useState([])
+	const [post, setPost] = useState([]);
 	const [profilModal, setProfilModal] = useState(false);
-	//const [oldFileName, setOldFileName] = useState("")
 	let { id } = useParams();
 	const userId = JSON.parse(localStorage.userId);
 	const token = JSON.parse(localStorage.token);
@@ -30,7 +28,7 @@ const Account = () => {
 	}
 
 	const getUser = () => {
-		
+
 		console.log("edef")
 		axios({
 			method: "GET",
@@ -47,11 +45,10 @@ const Account = () => {
 				setFirstName(res.data.firstName);
 			if (res.data.email)
 				setEmail(res.data.email);
-			
+
 			setImageProfile(res.data.imageProfile)
-			
 			getAdmin();
-			
+
 			if (res.data.error) {
 				console.log(res.data.errors)
 
@@ -87,51 +84,42 @@ const Account = () => {
 	};
 
 	const deleteProfile = () => {
-		if (window.confirm("atention cette action est ireversible"))
-		{
-		axios({
-			method: "DELETE",
-			url: `${process.env.REACT_APP_API_URL}api/auth/${id}`,
+		if (window.confirm("atention cette action est ireversible")) {
+			axios({
+				method: "DELETE",
+				url: `${process.env.REACT_APP_API_URL}api/auth/${id}`,
 
-			headers: {
-				authorization: `Bearer ${token}`
-			}
-		}).then((res) => {
-			console.log("res delete profile", res);
-			//window.confirm("atention cette action est ireversible")
-			setProfile(res.data);
-			
-			window.location = "/";
-			if (res.data.error) {
-				console.log("ici222", res.data.errors)
-
-			}
-		})
-			.catch((err) => {
-				console.log(err);
-			});
+				headers: {
+					authorization: `Bearer ${token}`
+				}
+			}).then((res) => {
+				window.location = "/";
+			})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
-		else{
+		else {
 			return;
 		}
 	}
 
 	const getPostsFromUser = () => {
 		axios.get(`${process.env.REACT_APP_API_URL}api/post/user-posts/${id}`, {
-            headers: {
-                authorization: `Bearer ${token}`
-            }
-        }).then((res) => {
-            if (res.data.error) {
-                console.log("ici", res.data.errors)
+			headers: {
+				authorization: `Bearer ${token}`
+			}
+		}).then((res) => {
+			if (res.data.error) {
+				console.log("ici", res.data.errors)
 
-            }
-            else {
+			}
+			else {
 				console.log("test1", res.data)
-                setPost(res.data)
-            }
-	})}
-	
+				setPost(res.data)
+			}
+		})
+	}
 
 	return (
 		<section>
@@ -149,8 +137,7 @@ const Account = () => {
 
 						{profilModal && <ChangeProfil userId={userId}
 							admin={admin}
-						//	getAllPosts={getPostsFromUser}
-							 />}
+						/>}
 
 						{userId === id || admin === 1 ? (
 							<li onClick={deleteProfile} id="delete_profile" className='active-btn'>Supprimer ce profile</li>
@@ -169,25 +156,24 @@ const Account = () => {
 				)}
 			</div>
 
-					<li  onClick={getPostsFromUser} id="show-post"className='active-btn'> Afficher les posts</li>
+			<li onClick={getPostsFromUser} id="show-post" className='active-btn'> Afficher les posts</li>
 			<div className='post-container' >
-                    {post.map( post => (
-                        <Posts
-                            key={post.post_id}
-                            posterName={post.firstName}
-                            message={post.message}
-                            date={post.dateCreation}
-                            postId={post.post_id}
-                            postUserId={post.post_user_id}
-                            like={post.total_like}
-                            imageProfile={post.post_imageurl}
-                            imagePost={post.imageurl}
-                            admin={admin}
-							getAllPosts={getPostsFromUser}
-                        />
-))}
-</div>
-
+				{post.map(post => (
+					<Posts
+						key={post.post_id}
+						posterName={post.firstName}
+						message={post.message}
+						date={post.dateCreation}
+						postId={post.post_id}
+						postUserId={post.post_user_id}
+						like={post.total_like}
+						imageProfile={post.post_imageurl}
+						imagePost={post.imageurl}
+						admin={admin}
+						getAllPosts={getPostsFromUser}
+					/>
+				))}
+			</div>
 		</section>
 	)
 }

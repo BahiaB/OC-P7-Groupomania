@@ -3,12 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Poster from '../components/Poster';
 import Posts from '../components/Posts'
-import Comments from '../components/Comments';
-import Search from'../image/icons/search.svg';
-
-import UserSearch from'../pages/UserSearch';
-import { NavLink } from 'react-router-dom';
-
+import Search from '../image/icons/search.svg';
 
 const Home = () => {
 
@@ -17,17 +12,13 @@ const Home = () => {
     useEffect(() => {
         getAllPosts();
         getUser();
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const [user, setUser] = useState([]);
     const userId = JSON.parse(localStorage.userId);
     const token = JSON.parse(localStorage.token)
-    const [totalItems, setTotalItems] = useState(0);
     const [search, setSearch] = useState('')
-    const[userSearch, setUserSearch]= useState([]);
-    //const userSearch = [];
 
     const getAllPosts = async () => {
 
@@ -40,18 +31,16 @@ const Home = () => {
             }
         }).then((res) => {
             console.log("res", res.data);
-            setTotalItems(res.data.length);
             setPosts(res.data);
             console.log("posts", posts)
             if (res.data.error) {
+                console.log(res.data.error)
             }
         })
             .catch((err) => {
                 console.log(err);
             });
-
     };
-
 
     const getUser = () => {
         axios({
@@ -75,18 +64,20 @@ const Home = () => {
     };
 
     const searchUser = async (e) => {
-        window.location = `/UserSearch/${search}`
+        if (search !== '')
+            window.location = `/UserSearch/${search}`
+        else
+
+            window.location = '/UserSearch/'
     }
-  
+
     return (
         <main>
-           
-           <div className='search-bar' >
+            <div className='search-bar' >
                 <input type="text" name="search-bar" id='search-bar' placeholder="recherche" onChange={(e) => setSearch
-                        (e.target.value)} value={search}></input>
-                <li onClick={searchUser} id="searchUser" className="active-btn"><img src={Search}id="search-button" alt="recherche"/></li>
+                    (e.target.value)} value={search}></input>
+                <li onClick={searchUser} id="searchUser" className="active-btn"><img src={Search} id="search-button" alt="recherche" /></li>
             </div>
-               
             <section>
                 <div className="home-container">
                     <Poster
@@ -94,7 +85,7 @@ const Home = () => {
                         getAllPosts={getAllPosts} />
                 </div>
                 <div className='post-container'>
-                    {posts.map( posts => (
+                    {posts.map(posts => (
                         <Posts
                             key={posts.post_id}
                             posterName={posts.firstName}
@@ -108,7 +99,7 @@ const Home = () => {
                             imagePost={posts.imageurl}
                             admin={user.admin}
                         />
-))}
+                    ))}
 
                 </div>
             </section>

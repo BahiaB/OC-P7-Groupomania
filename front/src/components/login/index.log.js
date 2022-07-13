@@ -26,7 +26,7 @@ function Log() {
             <div className='form-container'>
                 <ul>
                     <li onClick={handleModals} id="sign-up" className={signUpModal ? "active-btn" : null}>Inscription</li>
-                    <li onClick={handleModals} id="login" className={signInModal ? "active-btn" : null}>Se connecter</li>
+                    <li onClick={handleModals} id="login" className={signInModal ? "active-btn" : null}>Connection</li>
                 </ul>
                 {signUpModal && <SignUpForm />}
                 {signInModal && <SignInForm />}

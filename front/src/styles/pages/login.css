@@ -95,30 +95,28 @@ ul li {
 li:not(.active-btn):hover {
   -webkit-transform: translateX(3px);
           transform: translateX(3px);
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  -webkit-transform: scale(1.04);
+          transform: scale(1.04);
   border: #4E5166;
   -webkit-box-shadow: 2px 2px 8px 2px #4E5166;
           box-shadow: 2px 2px 8px 2px #4E5166;
 }
 
 input {
-  background: white;
   height: 2rem;
-  width: 100%;
+  width: 75%;
   border-radius: 20px;
   border: #4E5166 2px solid;
 }
 
 input[type="submit"] {
-  margin-right: 14px;
+  background-color: white;
   height: 2.5rem;
-  width: 12.5rem;
+  width: 10rem;
   border: #4E5166 1px solid;
   cursor: pointer;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  padding: 10px 20px;
   font-size: 1rem;
   border-radius: 20px;
   -webkit-box-shadow: 2px 2px 8px 2px #4E5166;
@@ -128,13 +126,16 @@ input[type="submit"] {
 input[type="submit"]:hover {
   -webkit-transform: translateX(3px);
           transform: translateX(3px);
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  -webkit-transform: scale(1.04);
+          transform: scale(1.04);
 }
 
 @media screen and (min-width: 768px) {
   .log-container {
     width: 50%;
+  }
+  .log-container input, .log-container form {
+    width: 12rem;
   }
   #image-post2 {
     -ms-grid-column-align: center;

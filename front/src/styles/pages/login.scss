@@ -14,7 +14,6 @@ body {
   justify-content: space-between;
   height: auto;
   width: auto;
-  //background-color:$Primary-light;
   border-radius: 20px;
   padding: 1rem;
   border: $Primary 2px solid;
@@ -26,12 +25,9 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-
-	//gap:15rem
 	
 }
 ul {
-  //background-color: aqua;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,16 +38,11 @@ ul {
 
   li {
     display: flex;
-	
-    // flex-direction: row;
     cursor: pointer;
     border-radius: 20px;
     padding: 10px 20px;
     transition: 0.2s;
-    //justify-content: center;
     align-items: center;
-    
-	
   }
 }
 
@@ -74,49 +65,45 @@ ul {
 li:not(.active-btn) {
   &:hover {
     transform: translateX(3px);
-	transform: scale(1.1);
+	transform: scale(1.04);
   border: $Third;
   box-shadow:2px 2px 8px 2px $Third;
-	//background: $Primary;
   }
 }
 
-
-
 input{
-	
-	background: white;
 	height: 2rem;
-	width: 100%;
+	width: 75%;
 	border-radius: 20px;
 	border: $Third 2px solid;
 }
 
 input[type="submit"] {
-//	background: $Secondary;
-  margin-right: 14px;
+  background-color: white;
+  
 	height: 2.5rem;
-	width: 12.5rem;
+	width: 10rem;
 	border: $Third 1px solid;
 	cursor: pointer;
 	transition: 0.2s;
-	//margin: 0;
-	padding: 10px 20px;
 	font-size: 1rem;
 	border-radius: 20px;
   box-shadow:2px 2px 8px 2px $Third;
 
 	&:hover{
     transform: translateX(3px);
-		transform: scale(1.1);
+		transform: scale(1.04);
 	}
   }
 
   @media screen and (min-width: 768px) { // tablette et plus
 .log-container {
 	  width: 50%;
-   
+   input, form{
+    width:12rem;
+   }
   }
+
   #image-post2{
     justify-self: center;
     align-self: center;
@@ -124,6 +111,7 @@ input[type="submit"] {
     max-height: 50rem;
     margin-bottom:1rem ;
   }
+  
   
 }
 

@@ -1,6 +1,6 @@
 @-webkit-keyframes border1 {
   from {
-    border-top: 1px transparent #a5a6aa;
+    border-top: 1px transparent;
   }
   to {
     border-top: 1px solid #a5a6aa;
@@ -9,7 +9,7 @@
 
 @keyframes border1 {
   from {
-    border-top: 1px transparent #a5a6aa;
+    border-top: 1px transparent;
   }
   to {
     border-top: 1px solid #a5a6aa;
@@ -34,7 +34,7 @@ body {
   width: 80%;
   padding: 1.5rem;
   margin-left: 5%;
-  height: 22rem;
+  height: 20rem;
   border-radius: 20px;
   border: 2px solid #fd2d01;
 }
@@ -44,7 +44,6 @@ body {
   height: 5rem;
   width: 5rem;
   background-position: cover;
-  margin-bottom: 0.5rem;
   margin-left: 30%;
 }
 
@@ -75,12 +74,9 @@ body {
   color: #4e5166;
   width: 7rem;
   height: 2rem;
-  margin-top: 0.8rem;
   border-radius: 20px;
   -webkit-box-shadow: 5px 5px 12px 5px #a5a6aa;
           box-shadow: 5px 5px 12px 5px #a5a6aa;
-  background-color: white;
-  margin-left: 25%;
   border: none;
   cursor: pointer;
   list-style: none;
@@ -98,8 +94,8 @@ body {
   display: flex;
   padding: 0.5rem;
   overflow-wrap: break-word;
-  height: 80px;
-  margin-top: 1rem;
+  height: 60px;
+  margin-top: 0.5rem;
   width: 100%;
   border: #a5a6aa 1px solid;
   -webkit-box-shadow: 2px 2px 8px 2px #a5a6aa;
@@ -122,6 +118,7 @@ body {
   width: 12rem;
   height: 2.5rem;
   margin-top: 1.5rem;
+  margin-left: 5%;
   border-radius: 20px;
   -webkit-box-shadow: 5px 5px 15px 5px #a5a6aa;
           box-shadow: 5px 5px 15px 5px #a5a6aa;
@@ -170,9 +167,14 @@ label:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  justify-items: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -187,8 +189,31 @@ label:hover {
   width: 5rem;
 }
 
+.account-container p {
+  margin-left: 5%;
+}
+
 form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
   margin-top: 2rem;
+}
+
+form label {
+  width: auto;
+  padding-bottom: 0.5rem;
 }
 
 .post-container {
@@ -297,8 +322,8 @@ form {
 
 .post-option #add-like:hover {
   cursor: pointer;
-  -webkit-animation: border1 2s forwards;
-          animation: border1 2s forwards;
+  -webkit-animation: border1 1s forwards;
+          animation: border1 1s forwards;
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -316,8 +341,8 @@ form {
 
 .post-option #get-comment:hover {
   cursor: pointer;
-  -webkit-animation: border1 2s forwards;
-          animation: border1 2s forwards;
+  -webkit-animation: border1 1s forwards;
+          animation: border1 1s forwards;
 }
 
 #create-comment,
@@ -349,8 +374,8 @@ form {
 #update-post:hover,
 #show-post:hover {
   cursor: pointer;
-  -webkit-animation: border1 2s forwards;
-          animation: border1 2s forwards;
+  -webkit-animation: border1 1s forwards;
+          animation: border1 1s forwards;
 }
 
 #show-post {
@@ -395,7 +420,6 @@ form {
 #create-comment {
   max-width: 35%;
   margin-top: 1rem;
-  margin-left: 30%;
 }
 
 #get-user-account {
@@ -417,8 +441,8 @@ form {
 
 #get-user-account:hover {
   cursor: pointer;
-  -webkit-animation: border1 2s forwards;
-          animation: border1 2s forwards;
+  -webkit-animation: border1 1s forwards;
+          animation: border1 1s forwards;
 }
 
 .comment {
@@ -504,6 +528,11 @@ form {
   border-radius: 20px;
   margin-bottom: 2rem;
   text-decoration: none;
+  padding: 0.5rem;
+}
+
+.user-search p {
+  color: black;
 }
 
 .user-search:hover {
@@ -552,18 +581,12 @@ form {
 }
 
 @media screen and (min-width: 768px) {
-  .log-container {
-    width: 50%;
+  .home-container {
+    margin-left: 7%;
   }
-  #image-post2 {
-    -ms-grid-column-align: center;
-        justify-self: center;
-    -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center;
-    max-width: 25rem;
-    max-height: 25rem;
-    margin-bottom: 1rem;
+  .user-search {
+    margin-left: 32.5%;
+    width: 35%;
   }
 }
 /*# sourceMappingURL=home.css.map */

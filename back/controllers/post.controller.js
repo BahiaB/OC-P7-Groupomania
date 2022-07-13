@@ -5,15 +5,14 @@ const dbc = require("../db");
 
 const db = dbc.getDB();
 
+
+
 exports.createPost = (req, res, next) => {
 
-    //console.log(req.body);
-    // console.log(req.auth.userId);
     let newPost = {}
 
     newPost = {
         user_id: `${req.auth.userId}`,
-        //message: req.body.message,
         postUserName: req.body.postUserName,
     }
     if (req.body.message) {
@@ -28,19 +27,14 @@ exports.createPost = (req, res, next) => {
             //console.log(err);
             throw (err);
         }
-
-        res.status(200).json({ message: "Le post a été crée" })
+        res.status(200).json()
     });
 }
 
 exports.getAllPosts = (req, res, next) => {
 
-    const sql =// "SELECT * FROM  post";
-        `SELECT post.id AS post_id, post.imageurl, user.imageProfile AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id ORDER BY datecreation DESC;`;
-    //"SELECT  post.id AS post_id, post.imageurl AS post_imageurl, post.message, post.datecreation, post.user_id as post_user_id, user.firstName  FROM post JOIN user ON post.user_id = user.UID  ORDER BY datecreation DESC;";
+    const sql = `SELECT post.id AS post_id, post.imageurl, user.imageProfile AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id ORDER BY datecreation DESC;`;
     db.query(sql, (err, result) => {
-
-        // console.log("result:", result)
         if (err) {
             res.status(404).json({ err });
             throw err;
@@ -53,7 +47,6 @@ exports.getAllPosts = (req, res, next) => {
 exports.getPostsFromUser = (req, res, next) => {
     const user = req.params.id
 
-    //`SELECT post.id AS post_id, post.imageurl, user.imageProfile AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id ORDER BY datecreation DESC;`;
     const sql = `SELECT post.id AS post_id, post.imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.imageProfile AS post_imageurl, user.firstName, COUNT(likes.post_id) AS total_like FROM post LEFT JOIN user ON UID = ? LEFT JOIN likes ON post.id = likes.post_id WHERE post.user_id = ? GROUP BY post.id`
     db.query(sql, [user, user], async (err, result) => {
         if (err)
@@ -68,31 +61,43 @@ exports.getPostsFromUser = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
     const postId = req.params.id;
     const userId = req.auth.userId;
-    const sqlFile = "SELECT imageurl FROM post WHERE post.id =?"
-    db.query(sqlFile, postId, (err, result) => {
-        if (err) {
-            throw (err)
-        }
-        if (result[0].imageurl) {
-            const oldFileName = result[0].imageurl.split("/images/")[1];
-            if (oldFileName) {
-                fs.unlink(`images/${oldFileName}`, () => {
+    let admin = 0;
+    const sqlFile = "SELECT imageurl, user_id FROM post WHERE post.id =?"
+    const sqlAdmin = "SELECT admin FROM user WHERE UID = ?"
 
-                    if (err) console.log("err delete image ", err);
+    db.query(sqlAdmin, userId, (err, result) => {
+        if (err)
+            throw err;
+        if (result[0].admin === 1) {
+            admin = 1;
+        }
+        db.query(sqlFile, postId, (err, result) => {
+            if (err) {
+                throw (err)
+            }
+            if (userId === result[0].user_id || admin === 1) {
+                if (result[0].imageurl) {
+                    const oldFileName = result[0].imageurl.split("/images/")[1];
+                    if (oldFileName) {
+                        fs.unlink(`images/${oldFileName}`, () => {
+                            if (err) console.log("err delete image ", err);
+                            else {
+                                console.log("Ancienne image de posts supprimée");
+                            }
+                        })
+                    }
+                }
+                const sql = `DELETE  FROM post WHERE post.id = ?;`;
+                db.query(sql, postId, (err, result) => {
+
+                    if (err) {
+                        res.status(404).json({ err });
+                        throw err;
+                    }
                     else {
-                        console.log("Ancienne image de posts supprimée");
+                        return res.status(200).json("post suprimé");
                     }
                 })
-            }
-        }
-        const sql = `DELETE  FROM post WHERE post.id = ?;`;
-        db.query(sql, postId, (err, result) => {
-            if (err) {
-                res.status(404).json({ err });
-                throw err;
-            }
-            else {
-                return res.status(200).json("post suprimé");
             }
         })
     })
@@ -129,8 +134,7 @@ exports.createComment = (req, res, next) => {
             console.log("error");
             throw (err);
         }
-
-        res.status(200).json({ message: "Le post a été crée" })
+        res.status(200).json({ message: "Le commentaire a été crée" })
     });
 }
 
@@ -139,16 +143,24 @@ exports.deleteComment = (req, res, next) => {
     const commentId = req.params.id;
     const userId = req.auth.userId;
     console.log("par ici")
+    const sqlCheck = "SELECT admin, UID FROM user WHERE UID =?"
     const sql = `DELETE  FROM comments WHERE comments.id =?;`;
-    db.query(sql, commentId, (err, result) => {
-        if (err) {
-            res.status(404).json({ err });
-            throw err;
+    db.query(sqlCheck, userId, (err, result) => {
+        if (result[0].admin === 1 || result[0].UID === userId) {
+            db.query(sql, commentId, (err, result) => {
+                if (err) {
+                    res.status(404).json({ err });
+                    throw err;
+                }
+                else {
+                    return res.status(200).json("commentaire suprimé");
+                }
+            }
+            )
         }
         else {
-            return res.status(200).json("commentaire suprimé");
+            return (res.status(400).json({ error: "Utilisateur non autorisé" }))
         }
-
     }
     )
 }
@@ -193,10 +205,15 @@ exports.addLike = (req, res, next) => {
 exports.modifyPost = async (req, res, next) => {
     const userId = req.auth.userId
     const postId = req.params.id
-    const SqlOldFile = "SELECT imageurl FROM post WHERE post.id =?;"
-    console.log(req.file)
+    const SqlOldFile = "SELECT imageurl  FROM post WHERE post.id =?;"
+    const sqlCheck = "SELECT admin FROM  user WHERE UID =?;"
+    const sqlUser = "SELECT user_id FROM post WHERE post.id=?"
+
 
     let updated = {}
+    if (!req.body.message && !req.file) {
+        return (res.status(400).json({ error: "Aucune modification apporté" }))
+    }
     if (req.body.message) {
         updated = { ...updated, message: req.body.message }
     }
@@ -205,56 +222,49 @@ exports.modifyPost = async (req, res, next) => {
 
         updated = { ...updated, imageurl: new_post_image_url }
     }
+    db.query(sqlCheck, userId, async (err, result) => {
+        if (err)
+            throw err;
+        const admin = result[0].admin;
 
-    if (req.file) {
-        db.query(SqlOldFile, postId, async (err, result) => {
-            if (err) {
-                throw (err)
-
-            }
-            if (result[0].imageurl) {
-                const oldFileName = result[0].imageurl.split("/images/")[1];
-                if (oldFileName) {
-                    console.log("delete file result", oldFileName)
-                    fs.unlink(`images/${oldFileName}`, () => {
-                        if (err) console.log("err delete image ", err);
-                        else {
-                            console.log("Ancienne image de post supprimée");
-                        }
-                    })
+        console.log("admin", admin)
+        if (req.file) {
+            db.query(SqlOldFile, postId, async (err, result) => {
+                if (err) {
+                    throw (err)
                 }
+                if (result[0].imageurl) {
+                    const oldFileName = result[0].imageurl.split("/images/")[1];
+                    if (oldFileName) {
+                        console.log("delete file result", oldFileName)
+                        fs.unlink(`images/${oldFileName}`, () => {
+                            if (err)
+                                console.log("err delete image ", err);
+                            else {
+                                console.log("Ancienne image de post supprimée");
+                            }
+                        })
+                    }
+                }
+            })
+        }
+        db.query(sqlUser, req.params.id, async (err, result) => {
+            console.log("result 0 userid", result[0].user_id)
+            if (admin === 1 || userId === result[0].user_id) {
+                const sql = `UPDATE post SET ? WHERE ID=?`
+                db.query(sql, [updated, req.params.id], async (err, result) => {
+                    if (err)
+                        throw err
+                    else
+                        res.status(200).json(result)
+                })
+            }
+            else {
+                return (res.status(400).json({ error: " utilisateur non valide" }))
             }
 
         })
-        const sql = `UPDATE post SET ? WHERE ID=?`
-        db.query(sql, [updated, req.params.id], async (err, result) => {
-            if (err)
-                throw err
-            else
-                res.status(200).json(result)
-        })
-
-    }
-    else {
-        const sql = `UPDATE post SET ? WHERE ID=?`
-        db.query(sql, [updated, req.params.id], async (err, result) => {
-
-            if (err)
-                throw err
-            else
-                res.status(200).json(result)
-        })
-    }
-
-
-
-
+    })
 }
 
-/* const sql = `UPDATE post SET ? WHERE ID=?`
-   db.query(sql, [updated, req.params.id], async (err, result) => {
-       if (err)
-           throw err
-       else
-           res.status(200).json(result)
-   })*/
+

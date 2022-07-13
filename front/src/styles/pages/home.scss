@@ -1,16 +1,13 @@
 $Primary: #fd2d01;
-$Primary-light: #ffd7d7;
-$Secondary: #ffd7d7;
 $Third: #a5a6aa;
 $fourth: #4e5166;
 
 @keyframes border1 {
   from {
-    border-top: 1px transparent $Third;
+    border-top: 1px transparent;
   }
 
   to {
-    //background-color: #ffd7d7;
     border-top: 1px solid $Third;
   }
 }
@@ -22,13 +19,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
   align-content: center;
   width: 80%;
   padding: 1.5rem;
   margin-left: 5%;
-
-  height: 22rem;
+  height: 20rem;
   border-radius: 20px;
   border: 2px solid $Primary;
 
@@ -37,7 +32,6 @@ body {
     height: 5rem;
     width: 5rem;
     background-position: cover;
-    margin-bottom: 0.5rem;
     margin-left: 30%;
   }
 }
@@ -50,21 +44,18 @@ body {
   width: 100%;
 }
 #create-post {
+  
   display: flex;
   justify-content: center;
   align-items: center;
   color: $fourth;
   width: 7rem;
   height: 2rem;
-  margin-top: 0.8rem;
   border-radius: 20px;
   box-shadow: 5px 5px 12px 5px $Third;
-  background-color: white;
-  margin-left: 25%;
   border: none;
   cursor: pointer;
   list-style: none;
-
   &:hover {
     transform: scale(1.1);
   }
@@ -72,11 +63,10 @@ body {
 #comment-input,
 #post {
   display: flex;
-
   padding: 0.5rem;
   overflow-wrap: break-word;
-  height: 80px;
-  margin-top: 1rem;
+  height: 60px;
+  margin-top: 0.5rem;
   width: 100%;
   border: #a5a6aa 1px solid;
   box-shadow: 2px 2px 8px 2px $Third;
@@ -88,11 +78,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
   border: none;
   width: 12rem;
   height: 2.5rem;
   margin-top: 1.5rem;
+  margin-left: 5%;
   border-radius: 20px;
   box-shadow: 5px 5px 15px 5px $Third;
   background-color: white;
@@ -130,14 +120,13 @@ label {
     transform: scale(1.1);
   }
 }
-.input-file:focus + label,
-.input-file + label:hover {
-  // border-bottom: 1px solid $Third;
-}
 
 .account-container {
+  //background-color: #fd2d01;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  justify-items: center;
   align-items: center;
   padding: 1rem 0 1rem 0;
   height: auto;
@@ -148,10 +137,23 @@ label {
     height: 5rem;
     width: 5rem;
   }
+  p{
+    margin-left: 5%;
+  }
 }
 
 form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin-top: 2rem;
+  label{
+   
+   width: auto;
+   padding-bottom: 0.5rem; 
+  }
 }
 
 .post-container {
@@ -199,7 +201,6 @@ form {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  //align-items: center;
 }
 .post-option {
   display: flex;
@@ -223,7 +224,7 @@ form {
     color: $fourth;
     &:hover {
       cursor: pointer;
-      animation: border1 2s forwards;
+      animation: border1 1s forwards;
       border: none;
       box-shadow: none;
     }
@@ -238,7 +239,7 @@ form {
 
     &:hover {
       cursor: pointer;
-      animation: border1 2s forwards;
+      animation: border1 1s forwards;
     }
   }
 }
@@ -262,7 +263,7 @@ form {
 
   &:hover {
     cursor: pointer;
-    animation: border1 2s forwards;
+    animation: border1 1s forwards;
   }
 }
 #show-post {
@@ -275,7 +276,6 @@ form {
 }
 
 #update-post {
-  //margin-bottom:  2rem;
   border-bottom: none;
 }
 
@@ -288,7 +288,6 @@ form {
   margin-top: 0.5rem;
   &:hover {
     transform: scale(1.1);
-
     background-color: $Primary;
     border-radius: 20px;
   }
@@ -304,7 +303,6 @@ form {
 #create-comment {
   max-width: 35%;
   margin-top: 1rem;
-  margin-left: 30%;
 }
 
 #get-user-account {
@@ -321,7 +319,7 @@ form {
 
   &:hover {
     cursor: pointer;
-    animation: border1 2s forwards;
+    animation: border1 1s forwards;
   }
 }
 
@@ -335,7 +333,6 @@ form {
   word-wrap: break-word;
   background-color: #ebecee;
 }
-
 
 #search-button {
   width: 1.5rem;
@@ -376,12 +373,10 @@ form {
   padding: 0.5rem;
   color: $fourth;
   font-size: 0.9rem;
-  // margin-bottom: 1rem;
 }
 .text {
   padding: 0.5rem;
   font-size: 0.9rem;
-  // background-color: #fd2d01;
 }
 
 .user-search {
@@ -396,31 +391,29 @@ form {
   border-radius: 20px;
   margin-bottom: 2rem;
   text-decoration: none;
-
+  padding: 0.5rem;
+  p{
+    color: black;
+  }
   &:hover {
-    //transform: scale(1.1);
     box-shadow: 5px 5px 12px 5px $Primary;
   }
-
   .info-user {
     display: flex;
     flex-direction: column;
   }
   img {
-
     height: 5rem;
     border-radius: 17px;
   }
 }
 .modify-delete-line {
-  // background-color: #fd2d01;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5%;
   justify-self: center;
   align-items: center;
-  //position: relative;
   textarea{
     width: 80%;
     height: auto;
@@ -429,9 +422,6 @@ form {
   #change-post{
     margin-top: 1rem;
   }
-  
-  
-  
 }
 
 
@@ -439,14 +429,11 @@ form {
 
 @media screen and (min-width: 768px) {
   // tablette et plus
-  .log-container {
-    width: 50%;
+  .home-container{
+    margin-left: 7%;
   }
-  #image-post2 {
-    justify-self: center;
-    align-self: center;
-    max-width: 25rem;
-    max-height: 25rem;
-    margin-bottom: 1rem;
+  .user-search {
+    margin-left: 32.5%;
+    width:35%
   }
 }
