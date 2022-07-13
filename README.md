@@ -1,35 +1,38 @@
-GROUPOMANIA
+## **GROUPOMANIA**
 
 Groupomania is the last project of the developper web formation by Openclassrooms.
 It is a social Network for fictional company.
 
 
-.First make sure to have:
-  NodeJs on is latest stable version 
+### ***Backend***
 
-.Install the Backend via this command in the backend terminal: 
+Backend was created with Node.js, express.js and MySql.
 
-npm install
+  **.Install the Backend via this commands in the backend terminal:** 
+
+    npm install
+    npm start
+    
+ Should start Backend Server on port 3500
 
 
-.Install the Frontend via this command in front terminal: 
+### ***Frontend***
 
-npm install
+Frontend was created with React.
+
+**.Install the Frontend via this command in a separate front terminal:** 
+
+    npm install
+    npm start
+ 
+ Should start Frontend dev mode on port 3000 
+ 
+
 
 .Make sure to install the SQL file in your Database software manager
 
-.Usage:
-Launch the front and back in 2 separate terminals
 
 
-.On the backend terminal:
-run npm start. 
-
-Should start Backend Server on port 3500
-
-.On the frontend terminal:
- run npm start. 
  
- Should start Frontend dev mode on port 3000 
 
 Enjoy your visit on groupomania!
