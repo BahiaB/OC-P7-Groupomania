@@ -18,7 +18,7 @@ function Comments({commentId, commentUserId, comment, firstName , admin, getComm
             getComments();
            
             if (res.data.error) {
-                console.log("ici222", res.data.errors)
+                console.log(res.data.error)
 
             }
         })

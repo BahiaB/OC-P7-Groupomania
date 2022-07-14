@@ -390,10 +390,11 @@ form {
   height: 8rem;
   border-radius: 20px;
   margin-bottom: 2rem;
-  text-decoration: none;
+  //text-decoration: none;
   padding: 0.5rem;
   p{
-    color: black;
+    text-decoration: underline $Third;
+    color: $fourth;
   }
   &:hover {
     box-shadow: 5px 5px 12px 5px $Primary;

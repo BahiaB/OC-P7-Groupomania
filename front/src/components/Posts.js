@@ -35,11 +35,10 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
                 authorization: `Bearer ${token}`
             }
         }).then((res) => {
-            console.log(res);
             setNewComment(res.data.message)
             getComments();
             if (res.data.error) {
-                console.log(res.data.errors)
+                console.log(res.data.error)
             }
         })
             .catch((err) => {
@@ -58,11 +57,10 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
                 authorization: `Bearer ${token}`
             }
         }).then((res) => {
-            console.log("res", res);
             setPosts(res.data);
             window.location.reload(false);
             if (res.data.error) {
-                console.log(res.data.errors)
+                console.log(res.data.error)
 
             }
         })
@@ -78,13 +76,9 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
             method: "GET",
             url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
         }).then((res) => {
-            //console.log("res", res);
-            //console.log("test", postId)
             setComments(res.data);
-           // console.log(res.data);
-
             if (res.data.error) {
-                //console.log("ici222", res.data.errors)
+                console.log(res.data.error)
 
             }
         })
@@ -124,7 +118,7 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
             console.log(res);
             navigate(`/account/${postUserId}`)
             if (res.data.error) {
-                console.log("ici", res.data.errors)
+                console.log(res.data.error)
             }
         })
             .catch((err) => {

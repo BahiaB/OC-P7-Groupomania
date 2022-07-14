@@ -14,7 +14,6 @@ const UserSearch = () => {
         const token = JSON.parse(localStorage.token)
         let id = document.URL.replace('http://localhost:3000/UserSearch/', '')
 
-        console.log("id usersearch params", id)
         axios.get(`${process.env.REACT_APP_API_URL}api/auth/`, {
             params: {
                 user: id
@@ -24,7 +23,7 @@ const UserSearch = () => {
             }
         }).then((res) => {
             if (res.data.error) {
-                console.log(res.data.errors)
+                console.log(res.data.error)
             }
             else {
                 setResult(res.data)

@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {emailValidation} from "../../Utils/utils"
-//import dotenv from "dotenv";
 
 function SignInForm() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const[emailError, setEmailError] = useState("");
-    const [conectError, setConnectError ]= useState("")
 
 
 
@@ -34,7 +32,6 @@ function SignInForm() {
             
             if (res.data.error) {
                 console.log("ici")
-                //setConnectError(res.data.errors)
                 alert(res.data.error);
                 
                
@@ -42,10 +39,7 @@ function SignInForm() {
                 console.log("login data", res.data)
                 localStorage.token = JSON.stringify(res.data.token);
                 localStorage.userId = JSON.stringify(res.data.userId)
-                //localStorage.admin = (res.data.admin)
-                console.log("tetdeydtweuydtew", localStorage)
                 window.location = "/home" //useNavigate
-                console.log("login data", res.data)
                 window.location = "/home" //useNavigate
             }
           })

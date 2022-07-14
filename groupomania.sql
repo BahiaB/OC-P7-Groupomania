@@ -30,7 +30,7 @@ CREATE TABLE  IF NOT EXISTS `comments` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `like_post`
+-- Structure de la table `like`
 --
 
 CREATE TABLE IF NOT EXISTS`likes` (
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur`
+-- Structure de la table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (

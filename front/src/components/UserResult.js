@@ -7,7 +7,7 @@ function UserResult({ fname, name, mail, pic, UID }) {
         <NavLink to={`/account/${UID}`}>
             <div className='user-search' id="user-search-">
                 <div className='image-container'>
-                    <img src={pic} id="image" alt="photo-profil" />
+                    <img src={pic} id="image" alt="profil" />
                 </div>
                 <div className='info-user'>
                     <p> nom: {name}</p>

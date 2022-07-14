@@ -22,22 +22,17 @@ function Poster({ getAllPosts }, posterName) {
                 authorization: `Bearer ${token}`
             }
         }).then((res) => {
-            console.log("poster", res.data);
             setLastName(res.data.lastName);
             setFirstName(res.data.firstName);
             setImageProfile(res.data.imageProfile)
-            console.log(firstName)
             if (res.data.error) {
-                console.log("ici222", res.data.errors)
+                console.log(res.data.error)
             }
         })
             .catch((err) => {
                 console.log(err);
             });
     };
-
-
-
 
     const createPost = (e) => {
         e.preventDefault();

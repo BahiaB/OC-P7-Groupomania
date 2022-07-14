@@ -16,7 +16,6 @@ const Account = () => {
 	const [email, setEmail] = useState('');
 	const [imageProfile, setImageProfile] = useState();
 	const [admin, setAdmin] = useState(0);
-	const [profile, setProfile] = useState([]);
 	const [post, setPost] = useState([]);
 	const [profilModal, setProfilModal] = useState(false);
 	let { id } = useParams();
@@ -28,8 +27,6 @@ const Account = () => {
 	}
 
 	const getUser = () => {
-
-		console.log("edef")
 		axios({
 			method: "GET",
 			url: `${process.env.REACT_APP_API_URL}api/auth/${id} `,
@@ -38,7 +35,6 @@ const Account = () => {
 				authorization: `Bearer ${token}`
 			}
 		}).then((res) => {
-			console.log(res.data);
 			if (res.data.lastName)
 				setLastName(res.data.lastName);
 			if (res.data.firstName)
@@ -50,18 +46,15 @@ const Account = () => {
 			getAdmin();
 
 			if (res.data.error) {
-				console.log(res.data.errors)
-
+				console.log(res.data.error)
 			}
 		})
 			.catch((err) => {
 				console.log(err);
 			});
-
 	};
 
 	const getAdmin = () => {
-		//console.log("edef")
 		axios({
 			method: "GET",
 			url: `${process.env.REACT_APP_API_URL}api/auth/${userId} `,
@@ -70,11 +63,9 @@ const Account = () => {
 				authorization: `Bearer ${token}`
 			}
 		}).then((res) => {
-			console.log(res.data);
 			setAdmin(res.data.admin);
-			console.log("admin account getuser2 ", admin)
 			if (res.data.error) {
-				console.log("ici", res.data.errors)
+				console.log(res.data.error)
 			}
 		})
 			.catch((err) => {
@@ -111,11 +102,10 @@ const Account = () => {
 			}
 		}).then((res) => {
 			if (res.data.error) {
-				console.log("ici", res.data.errors)
+				console.log(res.data.error)
 
 			}
 			else {
-				console.log("test1", res.data)
 				setPost(res.data)
 			}
 		})

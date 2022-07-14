@@ -12,7 +12,6 @@ function UpdatePost({ postId, getAllPosts }) {
         const form = new FormData()
         form.append('message', message)
         form.append('image', imagePost[0])
-        console.log(postId)
 
         axios
             .put(`${process.env.REACT_APP_API_URL}api/post/modifypost/${postId} `, form, {
@@ -26,7 +25,6 @@ function UpdatePost({ postId, getAllPosts }) {
                     console.log("Aucune modification n'à été apporté")
                 getAllPosts()
                 window.location = 'http://localhost:3000/home'
-                console.log(res)
             })
     }
 

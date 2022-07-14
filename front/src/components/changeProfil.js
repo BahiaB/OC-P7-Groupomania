@@ -54,7 +54,7 @@ function ChangeProfil(userId, admin) {
 
 
                 if (res.data.error) {
-                    console.log("ici222", res.data.errors)
+                    console.log(res.data.error)
                 }
             })
             .catch((err) => {

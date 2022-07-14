@@ -30,9 +30,7 @@ const Home = () => {
                 authorization: `Bearer ${token}`
             }
         }).then((res) => {
-            console.log("res", res.data);
             setPosts(res.data);
-            console.log("posts", posts)
             if (res.data.error) {
                 console.log(res.data.error)
             }
@@ -51,11 +49,10 @@ const Home = () => {
                 authorization: `Bearer ${token}`
             }
         }).then((res) => {
-            console.log(res);
             setUser(res.data);
 
             if (res.data.error) {
-                console.log("ici", res.data.errors)
+                console.log(res.data.errors)
             }
         })
             .catch((err) => {

@@ -527,12 +527,13 @@ form label {
   height: 8rem;
   border-radius: 20px;
   margin-bottom: 2rem;
-  text-decoration: none;
   padding: 0.5rem;
 }
 
 .user-search p {
-  color: black;
+  -webkit-text-decoration: underline #a5a6aa;
+          text-decoration: underline #a5a6aa;
+  color: #4e5166;
 }
 
 .user-search:hover {

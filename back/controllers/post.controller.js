@@ -6,7 +6,7 @@ const dbc = require("../db");
 const db = dbc.getDB();
 
 
-
+//Create a new post.
 exports.createPost = (req, res, next) => {
 
     let newPost = {}
@@ -31,6 +31,7 @@ exports.createPost = (req, res, next) => {
     });
 }
 
+/* get all the posts of the database*/
 exports.getAllPosts = (req, res, next) => {
 
     const sql = `SELECT post.id AS post_id, post.imageurl, user.imageProfile AS post_imageurl, post.message, post.datecreation, post.user_id AS post_user_id, user.firstName, COUNT(likes.post_id) AS total_like FROM post JOIN user ON post.user_id = user.UID  LEFT JOIN likes ON post.id = likes.post_id GROUP BY post.id ORDER BY datecreation DESC;`;
@@ -43,7 +44,7 @@ exports.getAllPosts = (req, res, next) => {
     });
 };
 
-
+/* Recupere tout les postes d'une personne */ 
 exports.getPostsFromUser = (req, res, next) => {
     const user = req.params.id
 
@@ -58,6 +59,7 @@ exports.getPostsFromUser = (req, res, next) => {
     })
 }
 
+/*delete one of the user posts / or any posts if the user is the admin*/
 exports.deletePost = (req, res, next) => {
     const postId = req.params.id;
     const userId = req.auth.userId;
@@ -165,7 +167,7 @@ exports.deleteComment = (req, res, next) => {
     )
 }
 
-
+/* Add or remove a like / get the number of likes for a post */
 exports.addLike = (req, res, next) => {
     console.log("req body addlike", req.body)
     userId = req.body.user_id;
@@ -202,6 +204,7 @@ exports.addLike = (req, res, next) => {
     })
 }
 
+/* Update  "message" and "imageUrl" in a post */ 
 exports.modifyPost = async (req, res, next) => {
     const userId = req.auth.userId
     const postId = req.params.id

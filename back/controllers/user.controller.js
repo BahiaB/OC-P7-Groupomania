@@ -8,8 +8,8 @@ const { userInfo } = require("os");
 const db = dbc.getDB();
 
 
+
 exports.signup = (req, res, next) => {
-	//console.log("req body", req.body);
 	const pwd = req.body.password;
 	const email = req.body.email;
 	const sql = `SELECT email FROM user WHERE email=?`;
@@ -47,6 +47,7 @@ exports.signup = (req, res, next) => {
 	});
 };
 
+/* login verification => get a token */
 exports.login = (req, res, next) => {
 	const email = req.body.email;
 	const sql = `SELECT * FROM user WHERE email=?`;
@@ -76,6 +77,7 @@ exports.login = (req, res, next) => {
 	})
 }
 
+/*get all the info for a user */
 exports.userInfo = (req, res, next) => {
 	const userId = req.params.id;
 	const sql = `SELECT * FROM user WHERE UID=?;`;
@@ -94,7 +96,6 @@ exports.userInfo = (req, res, next) => {
 }
 
 exports.updateUser = (req, res, next) => {
-
 	const userId = req.auth.userId
 	const pageId = req.params.id;
 	const lastName = req.body.lastName;
@@ -102,10 +103,8 @@ exports.updateUser = (req, res, next) => {
 	const email = req.body.email;
 	const file = req.body.file;
 	const new_profil_image_url = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-	//const sqlCheck = "SELECT admin, UID from user WHERE UID = ?"
 	const SqlOldFile = "SELECT imageProfile, admin, UID FROM user WHERE UID =?;"
 
-	//console.log("req file", req.file)
 	if (req.file) {
 		console.log("req file", req.file)
 		db.query(SqlOldFile, userId, async (err, result) => {
@@ -187,7 +186,7 @@ exports.deleteUser = (req, res, next) => {
 }
 
 
-
+/* Search for a user, using the firstName or the lastName*/
 exports.searchUser = (req, res, next) => {
 	console.log("par ici search user")
 	console.log("req params", req.query)
