@@ -33,7 +33,7 @@ body {
       align-content: center;
   width: 80%;
   padding: 1.5rem;
-  margin-left: 5%;
+  margin-left: 3%;
   height: 20rem;
   border-radius: 20px;
   border: 2px solid #fd2d01;
@@ -147,10 +147,6 @@ label {
   z-index: 1;
   color: white;
   display: inline-block;
-}
-
-label:hover {
-  border-bottom: 1px solid #fd2d01;
 }
 
 #image-icon {
@@ -553,6 +549,7 @@ form label {
 
 .user-search img {
   height: 5rem;
+  width: 5rem;
   border-radius: 17px;
 }
 
