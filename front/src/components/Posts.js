@@ -9,7 +9,6 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
 
     const token = JSON.parse(localStorage.token)
     const userId = JSON.parse(localStorage.userId)
-    const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const [postModal, setPostModal] = useState(false)
@@ -23,6 +22,9 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
     const createComment = (e) => {
 
         e.preventDefault();
+        if(!newComment){
+            return;
+        }
         axios({
             method: "POST",
             url: `${process.env.REACT_APP_API_URL}api/post/comment`,
@@ -35,7 +37,7 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
                 authorization: `Bearer ${token}`
             }
         }).then((res) => {
-            setNewComment(res.data.message)
+            setNewComment("")
             getComments();
             if (res.data.error) {
                 console.log(res.data.error)
@@ -57,7 +59,6 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
                 authorization: `Bearer ${token}`
             }
         }).then((res) => {
-            setPosts(res.data);
             window.location.reload(false);
             if (res.data.error) {
                 console.log(res.data.error)

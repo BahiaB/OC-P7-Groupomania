@@ -23,14 +23,14 @@ function ChangeProfil(userId, admin) {
     const handleProfile = (e) => {
 
         e.preventDefault();
-        if (emailValidation(email) === false) {
+        if ( email && emailValidation(email) === false ) {
             setEmailError("Veuillez entrez un email valide")
         }
-        if (nameValidation(lastName) === false) {
+        if (lastName && nameValidation(lastName) === false) {
             setLastNameError("Veuillez entrez un nom valide")
         }
 
-        if (firstNameValidation(firstName) === false) {
+        if (firstName && firstNameValidation(firstName) === false) {
             setFirstNameError("Veuillez entrez un prenom valide")
         }
 

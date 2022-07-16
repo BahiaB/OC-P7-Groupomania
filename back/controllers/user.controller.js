@@ -77,7 +77,7 @@ exports.login = (req, res, next) => {
 	})
 }
 
-/*get all the info for a user */
+/*get all the infos for a user */
 exports.userInfo = (req, res, next) => {
 	const userId = req.params.id;
 	const sql = `SELECT * FROM user WHERE UID=?;`;
@@ -101,33 +101,38 @@ exports.updateUser = (req, res, next) => {
 	const lastName = req.body.lastName;
 	const firstName = req.body.firstName;
 	const email = req.body.email;
-	const file = req.body.file;
-	const new_profil_image_url = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+	
+	
 	const SqlOldFile = "SELECT imageProfile, admin, UID FROM user WHERE UID =?;"
 
+	let updated = {}
+	if (req.body.lastName)
+		updated = { ...updated, lastName: lastName };
+	if (req.body.firstName)
+		updated = { ...updated, firstName: firstName };
+	if (req.body.email)
+		updated = { ...updated, email: email };
+
+	if (!firstName && !lastName && !email && !req.file)
+		return (res.status(400).json({ error: "Aucun Element à modifier	s" }))
 	if (req.file) {
 		console.log("req file", req.file)
 		db.query(SqlOldFile, userId, async (err, result) => {
 			if (userId === result[0].UID || result[0].admin === 1) {
 				const oldFileName = result[0].imageProfile.split("/images/")[1];
-				console.log("delete file result", oldFileName)
 				if (oldFileName !== "avatar.png") {
 					fs.unlink(`images/${oldFileName}`, () => {
-						if (err) console.log("err delete image ", err);
+						if (err)
+							console.log("err delete image ", err);
 						else {
 							console.log("Ancienne image de profile supprimée");
 						}
 					})
 				}
-				const newInfoUser = {
-					firstName: firstName,
-					lastName: lastName,
-					email: email,
-					imageProfile: new_profil_image_url
-				}
-				console.log("new profil img url", new_profil_image_url)
+				const new_profil_image_url = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+				updated = { ...updated, imageProfile: new_profil_image_url }
 				const sql = `UPDATE user SET ? WHERE UID= ? `
-				db.query(sql, [newInfoUser, userId], async (err, result) => {
+				db.query(sql, [updated, userId], async (err, result) => {
 					if (err) {
 						res.status(500).json({
 							error: "Erreur lors de la modification de l'utilisateur",
@@ -138,13 +143,24 @@ exports.updateUser = (req, res, next) => {
 						res.status(200).json(result)
 				})
 			}
-			else{
-				return(res.status(400).json({error:"Utilisateur non autorisé"}))
+			else {
+				return (res.status(400).json({ error: "Utilisateur non autorisé" }))
 			}
 		})
-
 	}
-
+	else {
+		const sql = `UPDATE user SET ? WHERE UID= ? `
+		db.query(sql, [updated, userId], async (err, result) => {
+			if (err) {
+				res.status(500).json({
+					error: "Erreur lors de la modification de l'utilisateur",
+				});
+				throw err
+			}
+			else
+				res.status(200).json(result)
+		})
+	}
 }
 
 exports.deleteUser = (req, res, next) => {
@@ -153,7 +169,7 @@ exports.deleteUser = (req, res, next) => {
 	const userId = req.auth.userId;
 
 	db.query(sqlCheck, userId, async (err, result) => {
-		if (result[0].UID === req.params.id || result[0].admin === 1) {
+		if (result[0].UID === req.params.id ||result[0].admin === 1 ) {
 			console.log("result admin:", result[0])
 			db.query(sqlFile, req.params.id, async (err, result) => {
 				if (result[0].imageProfile) {

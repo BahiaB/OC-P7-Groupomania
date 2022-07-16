@@ -4,7 +4,6 @@ import SignInForm from './SignInForm';
 //console.log("ici1");
 
 function Log() {
-    //console.log("ici2");
     localStorage.clear();
     const[signUpModal, setSignUpModal] = useState(false);
     const[signInModal, setSignInModal] = useState(true);

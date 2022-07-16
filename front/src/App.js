@@ -21,7 +21,6 @@ function App() {
           <Route path="/UserSearch/:id" element={<UserSearch />} />
           <Route path="/UserSearch/" element={<UserSearch />} />
 
-
         </Routes>}
 
       </BrowserRouter>

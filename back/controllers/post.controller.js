@@ -24,7 +24,6 @@ exports.createPost = (req, res, next) => {
     const sql = "INSERT INTO post SET ?";
     db.query(sql, newPost, async (err, result) => {
         if (err) {
-            //console.log(err);
             throw (err);
         }
         res.status(200).json()
@@ -44,7 +43,7 @@ exports.getAllPosts = (req, res, next) => {
     });
 };
 
-/* Recupere tout les postes d'une personne */ 
+/* Recupere tout les postes d'une personne */
 exports.getPostsFromUser = (req, res, next) => {
     const user = req.params.id
 
@@ -108,7 +107,7 @@ exports.deletePost = (req, res, next) => {
 
 exports.getComments = (req, res, next) => {
     postId = req.params.id;
-    const sql = `SELECT comments.id, comments.user_id, comments.post_id, comments.comment, user.firstName FROM comments JOIN user ON comments.user_id = user.UID WHERE post_id =?;`;
+    const sql = `SELECT comments.id, comments.user_id, comments.post_id, comments.comment, user.firstName FROM comments JOIN user ON comments.user_id = user.UID WHERE post_id =? ORDER by datecreation_comm ASC ;`;
     db.query(sql, postId, (err, result) => {
         if (err) {
             res.status(404).json({ err });
@@ -144,7 +143,6 @@ exports.createComment = (req, res, next) => {
 exports.deleteComment = (req, res, next) => {
     const commentId = req.params.id;
     const userId = req.auth.userId;
-    console.log("par ici")
     const sqlCheck = "SELECT admin, UID FROM user WHERE UID =?"
     const sql = `DELETE  FROM comments WHERE comments.id =?;`;
     db.query(sqlCheck, userId, (err, result) => {
@@ -204,7 +202,7 @@ exports.addLike = (req, res, next) => {
     })
 }
 
-/* Update  "message" and "imageUrl" in a post */ 
+/* Update  "message" and "imageUrl" in a post */
 exports.modifyPost = async (req, res, next) => {
     const userId = req.auth.userId
     const postId = req.params.id
@@ -229,8 +227,6 @@ exports.modifyPost = async (req, res, next) => {
         if (err)
             throw err;
         const admin = result[0].admin;
-
-        console.log("admin", admin)
         if (req.file) {
             db.query(SqlOldFile, postId, async (err, result) => {
                 if (err) {
@@ -239,7 +235,6 @@ exports.modifyPost = async (req, res, next) => {
                 if (result[0].imageurl) {
                     const oldFileName = result[0].imageurl.split("/images/")[1];
                     if (oldFileName) {
-                        console.log("delete file result", oldFileName)
                         fs.unlink(`images/${oldFileName}`, () => {
                             if (err)
                                 console.log("err delete image ", err);
@@ -252,7 +247,6 @@ exports.modifyPost = async (req, res, next) => {
             })
         }
         db.query(sqlUser, req.params.id, async (err, result) => {
-            console.log("result 0 userid", result[0].user_id)
             if (admin === 1 || userId === result[0].user_id) {
                 const sql = `UPDATE post SET ? WHERE ID=?`
                 db.query(sql, [updated, req.params.id], async (err, result) => {

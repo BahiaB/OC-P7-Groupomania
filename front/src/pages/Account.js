@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ChangeProfil from '../components/changeProfil';
 import Posts from '../components/Posts';
 
@@ -18,9 +18,11 @@ const Account = () => {
 	const [admin, setAdmin] = useState(0);
 	const [post, setPost] = useState([]);
 	const [profilModal, setProfilModal] = useState(false);
+	const [adminId, setAdminId] = useState();
 	let { id } = useParams();
 	const userId = JSON.parse(localStorage.userId);
 	const token = JSON.parse(localStorage.token);
+	const navigate = useNavigate()
 
 	const handleProfil = (e) => {
 		setProfilModal(true)
@@ -64,6 +66,9 @@ const Account = () => {
 			}
 		}).then((res) => {
 			setAdmin(res.data.admin);
+			setAdminId(res.data.UID)
+			
+
 			if (res.data.error) {
 				console.log(res.data.error)
 			}
@@ -75,6 +80,7 @@ const Account = () => {
 	};
 
 	const deleteProfile = () => {
+		
 		if (window.confirm("atention cette action est ireversible")) {
 			axios({
 				method: "DELETE",
@@ -84,7 +90,10 @@ const Account = () => {
 					authorization: `Bearer ${token}`
 				}
 			}).then((res) => {
-				window.location = "/";
+				if (admin === 1)
+					navigate("/home")
+				else
+				navigate("/")
 			})
 				.catch((err) => {
 					console.log(err);
@@ -129,11 +138,11 @@ const Account = () => {
 							admin={admin}
 						/>}
 
-						{userId === id || admin === 1 ? (
+						{(userId === id && admin !== 1) ||  (admin === 1 && id !== adminId)  ? (
 							<li onClick={deleteProfile} id="delete_profile" className='active-btn'>Supprimer ce profile</li>
 						)
 							: ("")
-						}
+						} 
 						<br />
 					</div>
 				) : (
