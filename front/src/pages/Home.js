@@ -7,6 +7,11 @@ import Search from '../image/icons/search.svg';
 
 const Home = () => {
 
+
+    if (localStorage.token === undefined) {
+        window.location = ("/");
+    };
+
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -69,6 +74,7 @@ const Home = () => {
     }
 
     return (
+
         <main>
             <div className='search-bar' >
                 <input type="text" name="search-bar" id='search-bar' placeholder="recherche" onChange={(e) => setSearch

@@ -11,6 +11,7 @@ function Poster({ getAllPosts }, posterName) {
     const [imageProfile, setImageProfile] = useState()
 
 
+
     const getUser = () => {
         axios({
             method: "GET",

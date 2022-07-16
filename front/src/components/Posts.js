@@ -181,7 +181,7 @@ const Posts = ({ message, date, posterName, postId, postUserId, like, getAllPost
                         <li onClick={handlePost} id="update-post" className="active-btn">Modifier ce post</li>)
                         : ("")}
                     {postModal && <UpdatePost postId={postId} getAllPosts={getAllPosts} />}
-
+                
             {postUserId === userId || admin === 1 ? (
                 <li onClick={deletePost} id="delete_post" className='active-btn'>Supprimer ce post</li>
             )

@@ -265,3 +265,18 @@ exports.modifyPost = async (req, res, next) => {
 }
 
 
+exports.getLastPost = async (req, res, next) => {
+    const sql= "SELECT message FROM post WHERE post.id =?;"
+
+    db.query(sql, req.params.id, async (err, result) =>{
+        if (err) {
+            res.status(404).json({ err });
+            throw err;
+        }
+        else {
+            console.log(result)
+            return res.status(200).json(result);
+        }
+
+    })
+}

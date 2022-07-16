@@ -9,13 +9,14 @@ import UserSearch from "./pages/UserSearch"
 import './styles/index.css';
 
 function App() {
-
+    
   return (
     <div className="Router">
       <BrowserRouter>
         <Navbar />
         {<Routes>
           <Route path="/" element={<Login />} />
+
           <Route path="/home" element={<Home />} />
           <Route path="/account/:id" element={<Account />} />
           <Route path="/UserSearch/:id" element={<UserSearch />} />
