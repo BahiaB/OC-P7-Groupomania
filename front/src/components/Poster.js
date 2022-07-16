@@ -4,8 +4,6 @@ import imageIcon from "../image/icons/img.svg"
 
 function Poster({ getAllPosts }, posterName) {
 
-   // const [lastName, setLastName] = useState('');
-   // const [firstName, setFirstName] = useState('');
     const [message, setMessage] = useState('');
     const [imagePost, setImagePost] = useState();
     const userId = JSON.parse(localStorage.userId)
@@ -22,8 +20,6 @@ function Poster({ getAllPosts }, posterName) {
                 authorization: `Bearer ${token}`
             }
         }).then((res) => {
-            //setLastName(res.data.lastName);
-            //setFirstName(res.data.firstName);
             setImageProfile(res.data.imageProfile)
             if (res.data.error) {
                 console.log(res.data.error)
